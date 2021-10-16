@@ -1,0 +1,29 @@
+import Vue from 'vue-native-core'
+import Vuex from 'vuex'
+import * as mutations from './mutations'
+
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  state: {
+    tasks: [],
+    tasksForCategory: [],
+    loading: false,
+    users: {},
+    emptyTask: false,
+    totalTasK: 0,
+    doneTask: 0,
+    tasksCategory: [],
+    selectCategory: {
+      id: '',
+      name_category: '',
+      color: '',
+    },
+    toggleDropdown: false,
+    selectCategoryID: '',
+  },
+
+  mutations,
+})
+
+export default store

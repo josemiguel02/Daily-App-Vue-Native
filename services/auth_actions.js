@@ -32,8 +32,8 @@ export async function registerUser (email, password, newName) {
       uid: user.uid,
       name: user.displayName,
       email: user.email,
-      phone: user.phoneNumber,
-      photo: user.photoURL,
+      phone: null,
+      photo: null,
       createAt: fire.firestore.Timestamp.fromDate(new Date())
     }
 
@@ -95,7 +95,7 @@ export async function loginWithGoogle () {
         name: user.name,
         email: user.email,
         phone: null,
-        photo: null,
+        photo: user.photoUrl,
         createAt: fire.firestore.Timestamp.fromDate(new Date())
       }
 

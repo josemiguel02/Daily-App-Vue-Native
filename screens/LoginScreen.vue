@@ -1,6 +1,5 @@
 <script>
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import Snackbar from '../components/Snackbar.vue'
 import {
   loginEmailPassword,
   loginWithGoogle,
@@ -8,6 +7,7 @@ import {
 import store from '../store'
 // SafeAreaView
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { ToastAndroid } from 'react-native'
 
 export default {
   props: {
@@ -19,16 +19,10 @@ export default {
     password: '',
     showPassword: true,
     loadingBtn: false,
-    snackbar: {
-      visible: false,
-      message: '',
-      color: '',
-    }
   }),
 
   components: {
     Icon,
-    Snackbar,
     SafeAreaView,
   },
 
@@ -42,14 +36,7 @@ export default {
         )
 
         if (!statusResponse) {
-          this.snackbar = {
-            visible: true,
-            message: error,
-            color: '#E41A43',
-          }
-
-          setTimeout(() => (this.snackbar.visible = false), 3000)
-
+          ToastAndroid.show(error, ToastAndroid.SHORT, ToastAndroid.CENTER)
           this.loadingBtn = false
           return
         }
@@ -57,13 +44,11 @@ export default {
         store.commit('clearTasksAndCategorySelect')
         this.doLogin()
       } else {
-        this.snackbar = {
-          visible: true,
-          message: 'Fields required',
-          color: '#E41A43',
-        }
-
-        setTimeout(() => (this.snackbar.visible = false), 3000)
+        ToastAndroid.show(
+          'Fields required', 
+          ToastAndroid.SHORT, 
+          ToastAndroid.CENTER
+        )
       }
     },
 
@@ -72,6 +57,7 @@ export default {
       const { statusResponse, error } = await loginWithGoogle()
       if (!statusResponse) {
         this.loadingBtn = false
+        ToastAndroid.show(error, ToastAndroid.SHORT, ToastAndroid.CENTER)
       } else {
         store.commit('clearTasksAndCategorySelect')
         this.doLogin()
@@ -149,18 +135,14 @@ export default {
                 :style="{ width: 28, height: 28 }"
                 :source="require('../assets/googleLogo.png')"
               />
-              <text :style="{ marginLeft: 10, fontWeight: 'bold' }">Continue with Google</text>
+              <text :style="{ marginLeft: 10, fontWeight: 'bold' }"
+                >Continue with Google</text
+              >
             </mb-button>
           </view>
         </view>
       </view>
     </view>
-
-    <snackbar
-      :showSnackbar="snackbar.visible"
-      :message="snackbar.message"
-      :color="snackbar.color"
-    />
   </view>
 </template>
 

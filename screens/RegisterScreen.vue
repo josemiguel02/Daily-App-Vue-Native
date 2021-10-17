@@ -4,7 +4,7 @@ import { registerUser } from '../services/auth_actions.js'
 import Snackbar from '../components/Snackbar.vue'
 // SafeAreaView
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { KeyboardAvoidingView } from 'react-native'
+import { ToastAndroid } from 'react-native'
 
 export default {
   data: () => ({
@@ -15,14 +15,9 @@ export default {
       password: '',
     },
     showPassword: true,
-    snackbar: {
-      visible: false,
-      message: '',
-      color: '',
-    },
   }),
 
-  components: { Icon, Snackbar, SafeAreaView, KeyboardAvoidingView },
+  components: { Icon, SafeAreaView },
 
   methods: {
     async _registerUser() {
@@ -33,13 +28,8 @@ export default {
         const result = await registerUser(email, password, name)
 
         if (!result.statusResponse) {
-          this.snackbar = {
-            visible: true,
-            message: result.error,
-            color: 'red',
-          }
+          ToastAndroid.show(error, ToastAndroid.SHORT, ToastAndroid.CENTER)
           this.loadingBtn = false
-          setTimeout(() => (this.snackbar.visible = false), 4000)
           return
         }
 
@@ -47,20 +37,18 @@ export default {
         this.newUser.email = ''
         this.newUser.password = ''
 
-        this.snackbar = {
-          visible: true,
-          message: 'User Register successfuly',
-          color: '#17E179',
-        }
+        ToastAndroid.show(
+          'User Register successfuly',
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER
+        )
         this.loadingBtn = false
-        setTimeout(() => (this.snackbar.visible = false), 4000)
       } else {
-        this.snackbar = {
-          visible: true,
-          message: 'Fields required',
-          color: '#E41A43',
-        }
-        setTimeout(() => (this.snackbar.visible = false), 4000)
+        ToastAndroid.show(
+          'Fields required',
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER
+        )
       }
     },
   },
@@ -99,26 +87,24 @@ export default {
             />
           </view>
 
-          <KeyboardAvoidingView>
-            <view class="form-input">
-              <icon name="lock" :style="{ marginRight: 10 }" :size="15" />
-              <text-input
-                :defaultValue="newUser.password"
-                :onChangeText="input => (newUser.password = input)"
-                autoCompleteType="password"
-                :secureTextEntry="showPassword"
-                class="input"
-                placeholder="example12345"
-              />
-              <ripple
-                :onPress="() => (showPassword = !showPassword)"
-                :rippleContainerBorderRadius="20"
-                class="ripple"
-              >
-                <icon :name="[showPassword ? 'eye' : 'eye-slash']" :size="15" />
-              </ripple>
-            </view>
-          </KeyboardAvoidingView>
+          <view class="form-input">
+            <icon name="lock" :style="{ marginRight: 10 }" :size="15" />
+            <text-input
+              :defaultValue="newUser.password"
+              :onChangeText="input => (newUser.password = input)"
+              autoCompleteType="password"
+              :secureTextEntry="showPassword"
+              class="input"
+              placeholder="example12345"
+            />
+            <ripple
+              :onPress="() => (showPassword = !showPassword)"
+              :rippleContainerBorderRadius="20"
+              class="ripple"
+            >
+              <icon :name="[showPassword ? 'eye' : 'eye-slash']" :size="15" />
+            </ripple>
+          </view>
 
           <!-- Register Button -->
           <view :style="{ marginTop: 26 }">
@@ -137,12 +123,6 @@ export default {
         </view>
       </view>
     </view>
-
-    <snackbar
-      :showSnackbar="snackbar.visible"
-      :message="snackbar.message"
-      :color="snackbar.color"
-    />
   </view>
 </template>
 

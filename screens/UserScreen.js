@@ -31,7 +31,7 @@ export default function UserScreen ({ navigation, doLogin }) {
           backgroundColor: '#f7f6ff'
         }}
       >
-        <View>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={[styles.header, { marginTop: windowHeight }]}>
             <Image
               source={require('../assets/todo-list-icon.png')}
@@ -93,7 +93,7 @@ export default function UserScreen ({ navigation, doLogin }) {
           </View>
 
           {tabs ? <RegisterScreen /> : <LoginScreen doLogin={doLogin} />}
-        </View>
+        </ScrollView>
       </SafeAreaView>
     </>
   )

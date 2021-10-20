@@ -1,24 +1,24 @@
 import firebase from './firebase.js'
+import auth from '@react-native-firebase/auth'
 import * as Google from 'expo-google-app-auth'
 import { saveUserLogIn } from './auth_persistent'
 import { config } from '../utils/auth_config.js'
 
-const fire = firebase.firebase
-
-const { dbCategories, dbUsers } = firebase
+const { dbCategories, dbUsers, firestore } = firebase
 
 // Register User
-export async function registerUser (email, password, newName) {
+export async function registerUser(email, password, newName) {
   const result = { statusResponse: true, error: null }
 
   try {
-    const createUser = await fire
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
+    const createUser = await auth().createUserWithEmailAndPassword(
+      email,
+      password
+    )
 
     // Update name of user
     await createUser.user.updateProfile({
-      displayName: newName
+      displayName: newName,
     })
 
     // Get User register
@@ -34,7 +34,7 @@ export async function registerUser (email, password, newName) {
       email: user.email,
       phone: null,
       photo: null,
-      createAt: fire.firestore.Timestamp.fromDate(new Date())
+      createAt: firestore.Timestamp.fromDate(new Date()),
     }
 
     // Save User Data in Firestore
@@ -44,7 +44,7 @@ export async function registerUser (email, password, newName) {
       userID,
       name_category: 'Predetermined',
       color: '#4385f5',
-      emoji: '🚀'
+      emoji: '🚀',
     })
   } catch (error) {
     console.log(error.message)
@@ -56,16 +56,16 @@ export async function registerUser (email, password, newName) {
 }
 
 // Get Current User
-export function getCurrentUser () {
-  return fire.auth().currentUser
+export function getCurrentUser() {
+  return auth().currentUser
 }
 
 // Login with email and password
-export async function loginEmailPassword (email, password) {
+export async function loginEmailPassword(email, password) {
   const result = { user: null, statusResponse: true, error: null }
 
   try {
-    await fire.auth().signInWithEmailAndPassword(email, password)
+    await auth().signInWithEmailAndPassword(email, password)
     const usuario = getCurrentUser()
     // Save Crendetials in Async Storage
     saveUserLogIn(usuario)
@@ -79,7 +79,7 @@ export async function loginEmailPassword (email, password) {
 }
 
 // Login with Google
-export async function loginWithGoogle () {
+export async function loginWithGoogle() {
   const result = { usuario: null, statusResponse: true, error: null }
 
   try {
@@ -96,7 +96,7 @@ export async function loginWithGoogle () {
         email: user.email,
         phone: null,
         photo: user.photoUrl,
-        createAt: fire.firestore.Timestamp.fromDate(new Date())
+        createAt: firestore.Timestamp.fromDate(new Date()),
       }
 
       const docRef = await dbUsers.doc(user.id).get()
@@ -110,7 +110,7 @@ export async function loginWithGoogle () {
           userID: user.id,
           name_category: 'Predetermined',
           color: '#4385f5',
-          emoji: '🚀'
+          emoji: '🚀',
         })
       }
 

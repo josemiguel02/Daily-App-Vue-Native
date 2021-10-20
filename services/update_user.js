@@ -1,10 +1,10 @@
 import firebase from './firebase.js'
 
-const userColletion = firebase.dbUsers
+const { dbUsers } = firebase
 
 export const updateUserProfile = (userId, dataUpdate) => {
   try {
-    userColletion.doc(userId).update(dataUpdate).then(() => {})
+    dbUsers.doc(userId).update(dataUpdate).then(() => {})
   } catch (error) {
     console.log(error)
   }

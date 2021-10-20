@@ -52,6 +52,7 @@ function MyNavigator () {
   useEffect(() => {
     setAuth()
     console.log(isLogin)
+    getUsers()
   }, [isLogin])
 
   const doLoginAndLogout = useCallback(() => {

@@ -1,10 +1,8 @@
 import firebase from '../services/firebase'
 import { getAuthUid } from '../services/auth_getUid'
 
-// Reference Firestore
-const fire = firebase.firebase.firestore()
 // All DB
-const { dbTodoList, dbCategories, dbUsers } = firebase
+const { dbTodoList, dbCategories, dbUsers, firestore } = firebase
 
 
 export const setTasks = async (state) => {
@@ -65,7 +63,7 @@ export const createTask = async (state, addParams) => {
     categoryID
   } = addParams
 
-  const categRef  = fire.doc(`/categories-list/${categoryRef}`)
+  const categRef  = firestore().doc(`categories-list/${categoryRef}`)
 
   try {
     await dbTodoList.add({
@@ -77,7 +75,7 @@ export const createTask = async (state, addParams) => {
       categoryID
     })
   
-    const increment = firebase.firebase.firestore.FieldValue.increment(1)
+    const increment = firestore.FieldValue.increment(1)
   
     await dbCategories.doc(categoryID).update({
       countTasks: increment
@@ -101,7 +99,7 @@ export async function editTask(state, editParams) {
 export const deleteTask = async (state, deleteParams) => {
   const { id, categoryID } = deleteParams
 
-  const decrement = firebase.firebase.firestore.FieldValue.increment(-1)
+  const decrement = firestore.FieldValue.increment(-1)
 
   try {
     await dbTodoList.doc(id).delete()

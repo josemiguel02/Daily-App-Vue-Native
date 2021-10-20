@@ -3,7 +3,7 @@ import firebase from './firebase.js'
 // All DB
 const { dbTodoList, dbCategories } = firebase
 
-export const deleteCategory = async categoryID => {
+export const deleteCategory = async (categoryID) => {
   await dbCategories.doc(categoryID).delete()
 
   // Delete task with category

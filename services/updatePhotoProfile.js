@@ -1,12 +1,10 @@
 /* eslint-disable no-undef */
+import storage from '@react-native-firebase/storage'
 import * as ImagePicker from 'expo-image-picker'
 import {
   getMediaLibraryPermissions,
-  getCameraPermissions
+  getCameraPermissions,
 } from '../utils/user_permissions.js'
-import firebase from './firebase.js'
-
-const fire = firebase.firebase
 
 export const getPhotoOfLibrary = async () => {
   const response = { imgUri: null, res: null }
@@ -16,7 +14,7 @@ export const getPhotoOfLibrary = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 4]
+      aspect: [4, 4],
     })
 
     if (!result.cancelled) {
@@ -41,7 +39,7 @@ export const takePhotoFromCamera = async () => {
     const photo = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 4]
+      aspect: [4, 4],
     })
 
     if (!photo.cancelled) {
@@ -71,11 +69,13 @@ export const uploadPhotoProfile = async (uriImg, userID) => {
     const extension = formatExtensionImg(uriImg)
     const response = await fetch(uriImg)
     const imgBlob = await response.blob()
-    const storageRef = fire.storage().ref(`/photos/IMG_${userID}.${extension}`)
+    const storageRef = storage().ref(`/photos/IMG_${userID}.${extension}`)
     const uploadImg = storageRef.put(imgBlob)
 
     uploadImg.on('state_changed', snapshot => {
-      console.log(Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+      console.log(
+        Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      )
     })
 
     await uploadImg

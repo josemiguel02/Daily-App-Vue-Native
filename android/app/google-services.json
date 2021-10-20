@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "867803263886",
+    "project_id": "vue-tasks-crud",
+    "storage_bucket": "vue-tasks-crud.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:867803263886:android:f2221d4dcb9ae7b864aadf",
+        "android_client_info": {
+          "package_name": "com.daily.app.new"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "867803263886-gqje1f3d44ln6sicc7hghck6htq6qd9s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHUg7x90_QnE0wLk0V2MRZodFqzgFB658"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "867803263886-gqje1f3d44ln6sicc7hghck6htq6qd9s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

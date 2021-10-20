@@ -20,10 +20,6 @@ import * as Font from 'expo-font'
 import LottieView from 'lottie-react-native'
 import { View } from 'react-native'
 
-import firestore from '@react-native-firebase/firestore';
-
-const usersCollection = firestore().collection('users');
-
 const Stack = createStackNavigator()
 
 function MyNavigator () {
@@ -34,25 +30,11 @@ function MyNavigator () {
     setTimeout(() => {
       setIsLogin(res)
     }, 2000)
-  }
-
-
-  const getUsers = () => {
-    usersCollection.onSnapshot(query => {
-      const usersData = query.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }))
-
-      console.log(usersData)
-    })
-  }
-  
+  } 
 
   useEffect(() => {
     setAuth()
     console.log(isLogin)
-    getUsers()
   }, [isLogin])
 
   const doLoginAndLogout = useCallback(() => {

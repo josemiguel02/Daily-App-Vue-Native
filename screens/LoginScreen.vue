@@ -122,7 +122,7 @@ export default {
           </view>
 
           <!-- Login With Google -->
-          <view :style="{ marginTop: 22 }">
+          <!-- <view :style="{ marginTop: 22 }">
             <mb-button
               :onPress="_loginWithGoogle"
               :style="{ height: 42, elevation: 0.3 }"
@@ -139,7 +139,7 @@ export default {
                 >Continue with Google</text
               >
             </mb-button>
-          </view>
+          </view> -->
         </view>
       </view>
     </view>

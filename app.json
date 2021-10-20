@@ -22,7 +22,7 @@
     "android": {
       "googleServicesFile": "./google-services.json",
       "jsEngine": "hermes",
-      "package": "com.daily.app.new",
+      "package": "com.daily.app.nueva",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

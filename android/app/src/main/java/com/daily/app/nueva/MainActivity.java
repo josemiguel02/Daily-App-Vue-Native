@@ -1,4 +1,4 @@
-package com.daily.app.new;
+package com.daily.app.nueva;
 import android.content.res.Configuration;
 import android.content.Intent;
 

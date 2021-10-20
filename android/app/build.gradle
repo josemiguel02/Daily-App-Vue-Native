@@ -133,7 +133,7 @@ android {
 
     defaultConfig {
         manifestPlaceholders = [appAuthRedirectScheme: 'dev.expo.app']
-        applicationId 'com.daily.app.new'
+        applicationId 'com.daily.app.nueva'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

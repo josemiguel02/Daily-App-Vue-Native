@@ -23,13 +23,18 @@
       "googleServicesFile": "./google-services.json",
       "jsEngine": "hermes",
       "package": "com.daily.app.nueva",
+      "config": {
+        "googleSignIn": {
+          "certificateHash": "5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25"
+        }
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "plugins": [
-      "@react-native-firebase/app"
+      "@react-native-firebase/app",
     ],
     "web": {
       "favicon": "./assets/favicon.png"

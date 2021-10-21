@@ -1,8 +1,6 @@
 import firebase from './firebase.js'
 import auth from '@react-native-firebase/auth'
-import * as Google from 'expo-google-app-auth'
 import { saveUserLogIn } from './auth_persistent'
-import { config } from '../utils/auth_config.js'
 
 const { dbCategories, dbUsers, firestore } = firebase
 
@@ -73,55 +71,6 @@ export async function loginEmailPassword(email, password) {
   } catch (error) {
     result.statusResponse = false
     result.error = error.message
-  }
-
-  return result
-}
-
-// Login with Google
-export async function loginWithGoogle() {
-  const result = { usuario: null, statusResponse: true, error: null }
-
-  try {
-    const { type, user } = await Google.logInAsync(config)
-
-    if (type === 'success') {
-      // Save Crendetials in Async Storage
-      saveUserLogIn(user)
-
-      // Get User Data
-      const userGoogleData = {
-        uid: user.id,
-        name: user.name,
-        email: user.email,
-        phone: null,
-        photo: user.photoUrl,
-        createAt: firestore.Timestamp.fromDate(new Date()),
-      }
-
-      const docRef = await dbUsers.doc(user.id).get()
-
-      if (!docRef.exists) {
-        // Save User Data in Firestore
-        dbUsers.doc(user.id).set(userGoogleData)
-
-        // Add Catefory Default
-        dbCategories.add({
-          userID: user.id,
-          name_category: 'Predetermined',
-          color: '#4385f5',
-          emoji: '🚀',
-        })
-      }
-
-      result.usuario = user
-    } else {
-      console.log('Google SignIn Cancel')
-      result.statusResponse = false // clave
-    }
-  } catch (error) {
-    result.statusResponse = false
-    result.error = error
   }
 
   return result

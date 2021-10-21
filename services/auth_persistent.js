@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import auth from '@react-native-firebase/auth'
+import { isGoogleUser } from './is_google_user'
+import { GoogleSignin } from '@react-native-google-signin/google-signin'
 
 const AUTH_KEY = 'auth_user'
 
@@ -40,9 +42,16 @@ export async function getUserDataLoggedIn() {
 
 // User LogOut Session
 export async function logoutSession() {
+  const { isUserGoogle } = await isGoogleUser()
+
   try {
     await AsyncStorage.clear()
-    await auth().signOut()
+
+    if (isUserGoogle === 'google user') {
+      await GoogleSignin.signOut()
+    } else {
+      await auth().signOut()
+    }
   } catch (error) {
     console.log(error)
   }

@@ -1,13 +1,12 @@
 <script>
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import {
-  loginEmailPassword,
-  loginWithGoogle,
-} from '../services/auth_actions.js'
+import { loginEmailPassword } from '../services/auth_actions.js'
 import store from '../store'
 // SafeAreaView
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ToastAndroid } from 'react-native'
+
+import { loginWithGoogle } from '../services/google_auth'
 
 export default {
   props: {
@@ -45,8 +44,8 @@ export default {
         this.doLogin()
       } else {
         ToastAndroid.show(
-          'Fields required', 
-          ToastAndroid.SHORT, 
+          'Fields required',
+          ToastAndroid.SHORT,
           ToastAndroid.CENTER
         )
       }
@@ -54,10 +53,15 @@ export default {
 
     async _loginWithGoogle() {
       this.loadingBtn = true
-      const { statusResponse, error } = await loginWithGoogle()
+      const { statusResponse } = await loginWithGoogle()
+
       if (!statusResponse) {
         this.loadingBtn = false
-        ToastAndroid.show(error, ToastAndroid.SHORT, ToastAndroid.CENTER)
+        ToastAndroid.show(
+          error, 
+          ToastAndroid.SHORT, 
+          ToastAndroid.CENTER
+        )
       } else {
         store.commit('clearTasksAndCategorySelect')
         this.doLogin()
@@ -122,7 +126,7 @@ export default {
           </view>
 
           <!-- Login With Google -->
-          <!-- <view :style="{ marginTop: 22 }">
+          <view :style="{ marginTop: 22 }">
             <mb-button
               :onPress="_loginWithGoogle"
               :style="{ height: 42, elevation: 0.3 }"
@@ -139,7 +143,7 @@ export default {
                 >Continue with Google</text
               >
             </mb-button>
-          </view> -->
+          </view>
         </view>
       </view>
     </view>

@@ -1,8 +1,6 @@
 <script>
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { registerUser } from '../services/auth_actions.js'
-import Snackbar from '../components/Snackbar.vue'
-// SafeAreaView
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ToastAndroid } from 'react-native'
 

@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import {
-  NavigationContainer
-} from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import 'react-native-gesture-handler'
 // Screens
@@ -14,15 +12,14 @@ import { getIsUserLogin } from '../services/auth_persistent.js'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 // Drawer Navigation
 import DrawerNavigation from './DrawerNavigation'
-// Expo Font
-import * as Font from 'expo-font'
 // Lottie
 import LottieView from 'lottie-react-native'
-import { View } from 'react-native'
+import { StatusBar } from 'expo-status-bar'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Stack = createStackNavigator()
 
-function MyNavigator () {
+function MyNavigator() {
   const [isLogin, setIsLogin] = useState(null)
 
   const setAuth = async () => {
@@ -30,7 +27,7 @@ function MyNavigator () {
     setTimeout(() => {
       setIsLogin(res)
     }, 2000)
-  } 
+  }
 
   useEffect(() => {
     setAuth()
@@ -38,57 +35,58 @@ function MyNavigator () {
   }, [isLogin])
 
   const doLoginAndLogout = useCallback(() => {
-    setTimeout(() => setIsLogin(value => !value), 2000)
+    setTimeout(() => setIsLogin(value => !value), 1000)
   }, [])
 
   if (isLogin == null) {
     return (
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#F7F6FF'
-        }}
-      >
-        <LottieView
-          source={require('../animations/successful.json')}
-          style={{ width: '80%', aspectRatio: 1 }}
-          autoPlay
-          loop
-        />
-      </View>
+      <>
+        <StatusBar backgroundColor='transparent' style='dark' />
+        <SafeAreaView
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#F7F6FF',
+          }}
+        >
+          <LottieView
+            source={require('../animations/successful.json')}
+            style={{ width: '80%', aspectRatio: 1 }}
+            autoPlay
+            loop
+          />
+        </SafeAreaView>
+      </>
     )
   }
 
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false
+        headerShown: false,
       }}
     >
-      {isLogin
-        ? (
-          <>
-            <Stack.Screen name='DrawerNavigation'>
-              {props => (
-                <DrawerNavigation {...props} doLogout={doLoginAndLogout} />
-              )}
-            </Stack.Screen>
-            <Stack.Screen name='DetailScreen' component={DetailScreen} />
-            <Stack.Screen
-              name='AddCategoryScreen'
-              component={AddCategoryScreen}
-            />
-          </>
-          )
-        : (
-          <>
-            <Stack.Screen name='UserScreen'>
-              {props => <UserScreen {...props} doLogin={doLoginAndLogout} />}
-            </Stack.Screen>
-          </>
-          )}
+      {isLogin ? (
+        <>
+          <Stack.Screen name='DrawerNavigation'>
+            {props => (
+              <DrawerNavigation {...props} doLogout={doLoginAndLogout} />
+            )}
+          </Stack.Screen>
+          <Stack.Screen name='DetailScreen' component={DetailScreen} />
+          <Stack.Screen
+            name='AddCategoryScreen'
+            component={AddCategoryScreen}
+          />
+        </>
+      ) : (
+        <>
+          <Stack.Screen name='UserScreen'>
+            {props => <UserScreen {...props} doLogin={doLoginAndLogout} />}
+          </Stack.Screen>
+        </>
+      )}
     </Stack.Navigator>
   )
 }

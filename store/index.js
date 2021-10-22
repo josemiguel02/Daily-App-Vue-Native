@@ -17,13 +17,13 @@ const store = new Vuex.Store({
     selectCategory: {
       id: '',
       name_category: '',
-      color: '',
+      color: ''
     },
     toggleDropdown: false,
-    selectCategoryID: '',
+    selectCategoryID: ''
   },
 
-  mutations,
+  mutations
 })
 
 export default store

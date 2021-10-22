@@ -11,7 +11,7 @@ const dbCategories = firestore().collection('categories-list')
 // DB of Users
 const dbUsers = firestore().collection('users')
 
-export default {
+export {
   firestore,
   dbTodoList,
   dbUsers,

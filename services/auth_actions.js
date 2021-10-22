@@ -1,8 +1,6 @@
-import firebase from './firebase.js'
+import { dbCategories, dbUsers, firestore } from './firebase'
 import auth from '@react-native-firebase/auth'
 import { saveUserLogIn } from './auth_persistent'
-
-const { dbCategories, dbUsers, firestore } = firebase
 
 // Register User
 export async function registerUser(email, password, newName) {
@@ -36,9 +34,9 @@ export async function registerUser(email, password, newName) {
     }
 
     // Save User Data in Firestore
-    dbUsers.doc(userID).set(userData)
-    // Add Catefory Default
-    dbCategories.add({
+    await dbUsers.doc(userID).set(userData)
+    // Add Category Default
+    await dbCategories.add({
       userID,
       name_category: 'Predetermined',
       color: '#4385f5',

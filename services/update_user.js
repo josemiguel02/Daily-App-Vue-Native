@@ -1,6 +1,4 @@
-import firebase from './firebase.js'
-
-const { dbUsers } = firebase
+import { dbUsers } from './firebase.js'
 
 export const updateUserProfile = (userId, dataUpdate) => {
   try {

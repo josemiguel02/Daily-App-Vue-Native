@@ -1,4 +1,4 @@
-import firebase from './firebase.js'
+import { dbCategories, dbUsers, firestore } from './firebase.js'
 import { saveUserLogIn } from './auth_persistent'
 import auth from '@react-native-firebase/auth'
 import {
@@ -6,8 +6,6 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin'
 import { config } from '../utils/auth_google_config'
-
-const { dbCategories, dbUsers, firestore } = firebase
 
 GoogleSignin.configure(config)
 

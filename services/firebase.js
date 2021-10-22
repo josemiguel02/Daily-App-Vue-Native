@@ -1,7 +1,5 @@
 import firestore from '@react-native-firebase/firestore'
 
-export const testDB = firestore().collection('prueba')
-
 // DB of Tasks
 const dbTodoList = firestore().collection('todo-list')
 
@@ -15,5 +13,5 @@ export {
   firestore,
   dbTodoList,
   dbUsers,
-  dbCategories,
+  dbCategories
 }

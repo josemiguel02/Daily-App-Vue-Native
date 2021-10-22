@@ -1,15 +1,16 @@
+/* eslint-disable camelcase */
 import {
   dbTodoList,
   dbCategories,
   dbUsers,
-  firestore,
+  firestore
 } from '../services/firebase'
 import { getAuthUid } from '../services/auth_getUid'
 
 export const setTasks = async state => {
   // Cleaning tasks
   state.tasks = []
-  //Set Loading
+  // Set Loading
   state.loading = true
 
   const { id } = await getAuthUid()
@@ -29,7 +30,7 @@ export const setTasks = async state => {
             userID,
             done,
             categoryID: categoryData.id,
-            ...categoryData.data(),
+            ...categoryData.data()
           }
         })
       )
@@ -38,7 +39,7 @@ export const setTasks = async state => {
       state.loading = false
 
       // Get Completed Task
-      let taskDone = state.tasks.filter(x => x.done == true)
+      const taskDone = state.tasks.filter(x => x.done === true)
       state.doneTask = taskDone.length
 
       // Get Total Tasks
@@ -68,25 +69,25 @@ export const createTask = async (state, addParams) => {
       description,
       done,
       userID,
-      categoryID,
+      categoryID
     })
 
     const increment = firestore.FieldValue.increment(1)
 
     await dbCategories.doc(categoryID).update({
-      countTasks: increment,
+      countTasks: increment
     })
   } catch (error) {
     console.log(error)
   }
 }
 
-export async function editTask(state, editParams) {
+export async function editTask (state, editParams) {
   const { id, title, description } = editParams
 
   await dbTodoList.doc(id).update({
     title,
-    description,
+    description
   })
 }
 
@@ -99,7 +100,7 @@ export const deleteTask = async (state, deleteParams) => {
     await dbTodoList.doc(id).delete()
 
     await dbCategories.doc(categoryID).update({
-      countTasks: decrement,
+      countTasks: decrement
     })
   } catch (error) {
     console.log(error)
@@ -110,7 +111,7 @@ export const makeDone = async (state, doneParams) => {
   const { id, itsDone } = doneParams
 
   await dbTodoList.doc(id).update({
-    done: itsDone,
+    done: itsDone
   })
 }
 
@@ -148,7 +149,7 @@ export const getTasksCategories = async state => {
         // Set Categories
         state.tasksCategory = query.docs.map(doc => ({
           id: doc.id,
-          ...doc.data(),
+          ...doc.data()
         }))
       },
       error => console.log(error)
@@ -168,7 +169,7 @@ export const clearCategorySelect = state => {
   state.selectCategory = {
     id: '',
     name_category: '',
-    color: '',
+    color: ''
   }
 }
 
@@ -177,7 +178,7 @@ export const setSelect = (state, select) => {
   state.selectCategory = {
     id,
     name_category,
-    color,
+    color
   }
 }
 
@@ -191,11 +192,11 @@ export const clearTasksAndCategorySelect = state => {
   state.selectCategory = {
     id: '',
     name_category: '',
-    color: '',
+    color: ''
   }
 }
 
-//SingleTasksForCategory
+// SingleTasksForCategory
 export const getSingleTasksForCategory = async (state, categoryID) => {
   state.tasksForCategory = []
 
@@ -206,7 +207,6 @@ export const getSingleTasksForCategory = async (state, categoryID) => {
         query.docs.map(async doc => {
           const { title, description, userID, done, categoryRef } = doc.data()
           const categoryData = await categoryRef.get()
-
           return {
             id: doc.id,
             title,
@@ -214,7 +214,7 @@ export const getSingleTasksForCategory = async (state, categoryID) => {
             userID,
             done,
             categoryID: categoryData.id,
-            ...categoryData.data(),
+            ...categoryData.data()
           }
         })
       )

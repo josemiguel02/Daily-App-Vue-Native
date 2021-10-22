@@ -10,17 +10,16 @@ import EditCategoryScreen from '../screens/EditCategoryScreen.vue'
 // Authentication
 import { getIsUserLogin } from '../services/auth_persistent.js'
 // SafeArea Provider
-import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 // Drawer Navigation
 import DrawerNavigation from './DrawerNavigation'
 // Lottie
 import LottieView from 'lottie-react-native'
 import { StatusBar } from 'expo-status-bar'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Stack = createStackNavigator()
 
-function MyNavigator() {
+function MyNavigator () {
   const [isLogin, setIsLogin] = useState(null)
 
   const setAuth = async () => {
@@ -48,7 +47,7 @@ function MyNavigator() {
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#F7F6FF',
+            backgroundColor: '#F7F6FF'
           }}
         >
           <LottieView
@@ -65,33 +64,35 @@ function MyNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: false
       }}
     >
-      {isLogin ? (
-        <>
-          <Stack.Screen name='DrawerNavigation'>
-            {props => (
-              <DrawerNavigation {...props} doLogout={doLoginAndLogout} />
-            )}
-          </Stack.Screen>
-          <Stack.Screen name='DetailScreen' component={DetailScreen} />
-          <Stack.Screen
-            name='AddCategoryScreen'
-            component={AddCategoryScreen}
-          />
-          <Stack.Screen
-            name='EditCategoryScreen'
-            component={EditCategoryScreen}
-          />
-        </>
-      ) : (
-        <>
-          <Stack.Screen name='UserScreen'>
-            {props => <UserScreen {...props} doLogin={doLoginAndLogout} />}
-          </Stack.Screen>
-        </>
-      )}
+      {isLogin
+        ? (
+          <>
+            <Stack.Screen name='DrawerNavigation'>
+              {props => (
+                <DrawerNavigation {...props} doLogout={doLoginAndLogout} />
+              )}
+            </Stack.Screen>
+            <Stack.Screen name='DetailScreen' component={DetailScreen} />
+            <Stack.Screen
+              name='AddCategoryScreen'
+              component={AddCategoryScreen}
+            />
+            <Stack.Screen
+              name='EditCategoryScreen'
+              component={EditCategoryScreen}
+            />
+          </>
+          )
+        : (
+          <>
+            <Stack.Screen name='UserScreen'>
+              {props => <UserScreen {...props} doLogin={doLoginAndLogout} />}
+            </Stack.Screen>
+          </>
+          )}
     </Stack.Navigator>
   )
 }

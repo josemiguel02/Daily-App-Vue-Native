@@ -3,7 +3,7 @@ import auth from '@react-native-firebase/auth'
 import { saveUserLogIn } from './auth_persistent'
 
 // Register User
-export async function registerUser(email, password, newName) {
+export async function registerUser (email, password, newName) {
   const result = { statusResponse: true, error: null }
 
   try {
@@ -14,7 +14,7 @@ export async function registerUser(email, password, newName) {
 
     // Update name of user
     await createUser.user.updateProfile({
-      displayName: newName,
+      displayName: newName
     })
 
     // Get User register
@@ -30,7 +30,7 @@ export async function registerUser(email, password, newName) {
       email: user.email,
       phone: null,
       photo: null,
-      createAt: firestore.Timestamp.fromDate(new Date()),
+      createAt: firestore.Timestamp.fromDate(new Date())
     }
 
     // Save User Data in Firestore
@@ -53,12 +53,12 @@ export async function registerUser(email, password, newName) {
 }
 
 // Get Current User
-export function getCurrentUser() {
+export function getCurrentUser () {
   return auth().currentUser
 }
 
 // Login with email and password
-export async function loginEmailPassword(email, password) {
+export async function loginEmailPassword (email, password) {
   const result = { user: null, statusResponse: true, error: null }
 
   try {

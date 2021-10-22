@@ -3,7 +3,6 @@ import { StatusBar } from 'expo-status-bar'
 import {
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
   Image,
   ScrollView,
@@ -13,13 +12,10 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import LoginScreen from './LoginScreen.vue'
 import RegisterScreen from './RegisterScreen.vue'
 import Ripple from 'react-native-material-ripple'
-import LottieView from 'lottie-react-native'
 
 export default function UserScreen ({ navigation, doLogin }) {
   const [tabs, setTabs] = useState(false)
-
   const { height } = useWindowDimensions()
-
   const windowHeight = (height * 6) / 100
 
   return (
@@ -37,12 +33,6 @@ export default function UserScreen ({ navigation, doLogin }) {
               source={require('../assets/todo-list-icon.png')}
               style={styles.headerImage}
             />
-            {/*  <LottieView
-              source={require('../animations/successful.json')}
-              style={styles.headerImage}
-              autoPlay
-              loop
-            /> */}
             <Text style={styles.headerTitle}>Welcome to ToDo App!</Text>
           </View>
 
@@ -57,7 +47,6 @@ export default function UserScreen ({ navigation, doLogin }) {
                   styles.tabText,
                   {
                     color: !tabs ? '#4385f5' : 'black',
-                    /* marginTop: !tabs ? 2 : 0, */
                     fontWeight: !tabs ? 'bold' : 'normal',
                     marginBottom: 7
                   }
@@ -79,7 +68,6 @@ export default function UserScreen ({ navigation, doLogin }) {
                   styles.tabText,
                   {
                     color: tabs ? '#4385f5' : 'black',
-                    /* marginTop: tabs ? 2 : 0, */
                     fontWeight: tabs ? 'bold' : 'normal',
                     marginBottom: 7
                   }

@@ -3,7 +3,7 @@ import storage from '@react-native-firebase/storage'
 import * as ImagePicker from 'expo-image-picker'
 import {
   getMediaLibraryPermissions,
-  getCameraPermissions,
+  getCameraPermissions
 } from '../utils/user_permissions.js'
 
 export const getPhotoOfLibrary = async () => {
@@ -14,7 +14,7 @@ export const getPhotoOfLibrary = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 4],
+      aspect: [4, 4]
     })
 
     if (!result.cancelled) {
@@ -39,7 +39,7 @@ export const takePhotoFromCamera = async () => {
     const photo = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 4],
+      aspect: [4, 4]
     })
 
     if (!photo.cancelled) {

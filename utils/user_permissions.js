@@ -7,7 +7,7 @@ export const getMediaLibraryPermissions = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
 
     if (status !== 'granted') {
-      Alert.alert('Warning', 'Necesitas activar los permisos...')
+      Alert.alert('Warning', 'You need to activate the permissions...')
     }
   }
 }
@@ -17,7 +17,7 @@ export const getCameraPermissions = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync()
 
     if (status !== 'granted') {
-      Alert.alert('Warning', 'Necesitas activar los permisos...')
+      Alert.alert('Warning', 'You need to activate the permissions...')
     }
   }
 }

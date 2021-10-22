@@ -3,7 +3,7 @@ import { saveUserLogIn } from './auth_persistent'
 import auth from '@react-native-firebase/auth'
 import {
   GoogleSignin,
-  statusCodes,
+  statusCodes
 } from '@react-native-google-signin/google-signin'
 import { config } from '../utils/auth_google_config'
 
@@ -29,7 +29,7 @@ export const loginWithGoogle = async () => {
       email: user.email,
       phone: null,
       photo: user.photo,
-      createAt: firestore.Timestamp.fromDate(new Date()),
+      createAt: firestore.Timestamp.fromDate(new Date())
     }
 
     const docRef = await dbUsers.doc(user.id).get()

@@ -5,7 +5,7 @@ import auth from '@react-native-firebase/auth'
 const AUTH_KEY = 'auth_user'
 
 // Get Current User Logged In
-export async function getIsUserLogin() {
+export async function getIsUserLogin () {
   const user = await AsyncStorage.getItem(AUTH_KEY)
   const parsed = JSON.parse(user)
   if (parsed == null) {
@@ -16,14 +16,14 @@ export async function getIsUserLogin() {
 }
 
 // Save Credentials
-export function saveUserLogIn(data) {
+export function saveUserLogIn (data) {
   AsyncStorage.setItem(AUTH_KEY, JSON.stringify(data))
     .then(() => {})
     .catch(error => console.log(error))
 }
 
 // Get User Data Logged In
-export async function getUserDataLoggedIn() {
+export async function getUserDataLoggedIn () {
   const result = { userData: null, statusResponse: null, error: null }
   try {
     const user = await AsyncStorage.getItem(AUTH_KEY)
@@ -39,8 +39,8 @@ export async function getUserDataLoggedIn() {
   return result
 }
 
-// User LogOut Session
-export async function logoutSession() {
+// User Logout Session
+export async function logoutSession () {
   const { userData } = await getUserDataLoggedIn()
 
   try {

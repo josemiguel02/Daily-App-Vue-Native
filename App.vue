@@ -1,6 +1,5 @@
 <script>
 import Vue from 'vue-native-core'
-// Material Bread Ui Kit
 import { VueMaterialBread } from 'material-bread'
 import AppNavigation from './navigation'
 import Ripple from 'react-native-material-ripple'

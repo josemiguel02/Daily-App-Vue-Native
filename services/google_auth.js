@@ -20,7 +20,7 @@ export const loginWithGoogle = async () => {
     const { idToken, user } = await GoogleSignin.signIn()
     const googleCredential = auth.GoogleAuthProvider.credential(idToken)
 
-    auth().signInWithCredential(googleCredential)
+    await auth().signInWithCredential(googleCredential)
 
     saveUserLogIn(user)
 
@@ -38,10 +38,10 @@ export const loginWithGoogle = async () => {
 
     if (!docRef.exists) {
       // Save User Data in Firestore
-      dbUsers.doc(user.id).set(userGoogleData)
+      await dbUsers.doc(user.id).set(userGoogleData)
 
-      // Add Catefory Default
-      dbCategories.add({
+      // Add Category Default
+      await dbCategories.add({
         userID: user.id,
         name_category: 'Predetermined',
         color: '#4385f5',

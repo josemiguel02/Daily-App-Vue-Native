@@ -4,7 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import HomeScreen from '../screens/HomeScreen.vue'
 import ProfileScreen from '../screens/ProfileScreen.vue'
 import CategoriesScreen from '../screens/CategoriesScreen.vue'
-import ListCategory from '../screens/ListCategory.vue'
+import ListCategoryScreen from '../screens/ListCategoryScreen.vue'
 // CustomDrawer
 import DrawerContent from '../components/DrawerContent.vue'
 
@@ -21,7 +21,7 @@ export default function DrawerNavigation ({ doLogout }) {
         {props => <ProfileScreen {...props} doLogout={doLogout} />}
       </Drawer.Screen>
       <Drawer.Screen name='CategoriesScreen' component={CategoriesScreen} />
-      <Drawer.Screen name='ListCategory' component={ListCategory} />
+      <Drawer.Screen name='ListCategoryScreen' component={ListCategoryScreen} />
     </Drawer.Navigator>
   )
 }

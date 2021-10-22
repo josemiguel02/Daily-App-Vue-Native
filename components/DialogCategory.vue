@@ -6,12 +6,12 @@ export default {
   props: {
     visible: Boolean,
     closeDialog: Function,
-    sendIdCategory: String,
+    categoryData: Object,
   },
 
   methods: {
     handlerDelete() {
-      deleteCategory(this.sendIdCategory)
+      deleteCategory(this.categoryData.id)
       this.visible = !this.visible
       store.commit('clearCategorySelect')
     }

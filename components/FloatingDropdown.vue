@@ -1,11 +1,14 @@
 <script>
 import store from '../store'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 export default {
   props: {
     visible: Boolean,
     closeSheet: Function,
   },
+
+  components: { Icon },
 
   computed: {
     categories: () => store.state.tasksCategory,
@@ -29,7 +32,14 @@ export default {
     :backdropOpacity="0"
     backButtonClose
   >
-    <scroll-view :showsVerticalScrollIndicator="true"
+    <!-- Categories Empty -->
+    <view class="categories-empty" v-if="!categories.length">
+      <icon name="tag-multiple" :size="40" :style="{ color: '#4385f5' }" />
+      <text class="categories-empty_text">You don't have new categories</text>
+    </view>
+
+    <scroll-view
+      :showsVerticalScrollIndicator="true"
       :style="{ marginBottom: 5 }"
     >
       <ripple
@@ -62,6 +72,18 @@ export default {
   padding: 12;
   width: 95%;
   margin-bottom: 0;
+}
+
+.categories-empty {
+  position: absolute;
+  align-self: center;
+  align-items: center;
+}
+
+.categories-empty_text {
+  margin-top: 15;
+  font-size: 17;
+  font-style: italic;
 }
 
 .dropdown-container {

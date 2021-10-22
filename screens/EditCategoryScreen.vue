@@ -1,15 +1,16 @@
 <script>
-// SafeAreaView
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ColorPalette from '../components/ColorPalette.vue'
-import store from '../store'
-import { getAuthUid } from '../services/auth_getUid'
+import { ToastAndroid } from 'react-native'
 import EmojiPicker from 'rn-emoji-keyboard'
+import { editCategory } from '../services/categories_actions'
+import store from '../store'
 
 export default {
   props: {
     navigation: Object,
+    route: Object,
   },
 
   data: () => ({
@@ -28,51 +29,69 @@ export default {
       '#48C9B0',
     ],
 
-    newCategory: {
+    edit: {
       name: '',
-      color: '#17E179',
-      emoji: '🚀'
     },
     showColorPalette: false,
-    selectColor: '',
     showEmoji: false,
+    btnDisabled: true,
   }),
 
   components: { SafeAreaView, Icon, ColorPalette, EmojiPicker },
 
+  computed: {
+    category() {
+      const { id, name_category, color, emoji } = this.route.params
+      return { id, name_category, color, emoji }
+    },
+  },
+
   methods: {
-    async _addCategory() {
-      let { name, color, emoji } = this.newCategory
+    async _editCategory() {
+      const { name } = this.edit
+      const { id, color, emoji } = this.category
 
       if (name !== '') {
-        const { id } = await getAuthUid()
-        store.commit('addCategory', {
-          userID: id,
+        editCategory(id, {
           name_category: name,
           color,
           emoji,
-          countTasks: 0,
         })
 
-        this.newCategory.name = ''
-        this.newCategory.color = '#17E179'
         this.navigation.goBack()
+        store.commit('setTasks')
+      } else if (color !== '' || emoji !== '') {
+        editCategory(id, {
+          color,
+          emoji,
+        })
+
+        this.navigation.goBack()
+        store.commit('setTasks')
       } else {
-        alert('Agregue una categoria')
+        ToastAndroid.show(
+          'Edit a category',
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER
+        )
       }
-    }
+    },
+  },
+
+  created() {
+    this.edit.name = this.category.name_category
   },
 }
 </script>
 
 <template>
   <SafeAreaView class="container">
-    <status-bar 
+    <status-bar
       background-color="transparent"
       barStyle="dark-content"
       translucent
     />
-    
+
     <view class="header">
       <ripple
         :rippleContainerBorderRadius="50"
@@ -83,7 +102,7 @@ export default {
       </ripple>
 
       <view class="header-title">
-        <text class="header-title_text"> Add Category </text>
+        <text class="header-title_text">Edit Category</text>
       </view>
     </view>
 
@@ -91,20 +110,21 @@ export default {
     <view class="add-category-container">
       <view class="add-category-container_horizontal">
         <icon name="tag" :size="30" :style="{ color: '#4385f5' }" />
-        <text-input 
-          :defaultValue="newCategory.name"
-          :onChangeText="txt => (newCategory.name = txt)"
-          placeholder="Category name" 
-          class="input" 
+        <text-input
+          class="input"
+          placeholder="Category name"
+          :defaultValue="category.name_category"
+          :onChangeText="txt => edit.name = txt"
         />
       </view>
 
-      <view class="add-category-container_horizontal"
+      <view
+        class="add-category-container_horizontal"
         :style="{ marginTop: 16 }"
       >
-        <icon name="water" :size="30" :style="{ color: newCategory.color  }" />
+        <icon name="water" :size="30" :style="{ color: category.color }" />
         <ripple
-          :onPress="() => showColorPalette = !showColorPalette"
+          :onPress="() => (showColorPalette = !showColorPalette)"
           :style="{ marginLeft: 10, flex: 1, padding: 10 }"
           :rippleContainerBorderRadius="15"
         >
@@ -112,15 +132,15 @@ export default {
         </ripple>
       </view>
 
-
-      <view class="add-category-container_horizontal"
+      <view
+        class="add-category-container_horizontal"
         :style="{ marginTop: 16 }"
       >
         <text :style="{ fontSize: 22 }">
-          {{ newCategory.emoji }}
+          {{ category.emoji }}
         </text>
         <ripple
-          :onPress="() => showEmoji = !showEmoji"
+          :onPress="() => (showEmoji = !showEmoji)"
           :style="{ marginLeft: 14, flex: 1, padding: 10 }"
           :rippleContainerBorderRadius="15"
         >
@@ -128,17 +148,17 @@ export default {
         </ripple>
       </view>
     </view>
-
+    
     <view class="add-category-btn">
-      <mb-button 
-        :onPress="_addCategory"
-        text="Create Category"
+      <mb-button
+        :onPress="_editCategory"
+        text="Edit Category"
         type="flat"
         fullWidth
         :radius="20"
-        :color="newCategory.color"
+        :color="category.color"
         useInputCasing
-        :disabled="!newCategory.name"
+        :disabled="!edit.name"
       />
     </view>
 
@@ -153,18 +173,18 @@ export default {
           :key="index"
           :style="{ backgroundColor: item }"
           :onPress="() => {
-            newCategory.color = item
+            category.color = item
             showColorPalette = false
           }"
         />
       </view>
     </ColorPalette>
 
-    <EmojiPicker 
+    <EmojiPicker
       :open="showEmoji"
-      :onClose="() => showEmoji = false"
-      :onEmojiSelected="e => newCategory.emoji = e.emoji"
+      :onClose="() => (showEmoji = false)"
       categoryPosition="top"
+      :onEmojiSelected="e => category.emoji = e.emoji"
     />
   </SafeAreaView>
 </template>

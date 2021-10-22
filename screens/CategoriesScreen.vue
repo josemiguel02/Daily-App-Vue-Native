@@ -1,10 +1,8 @@
 <script>
 import store from '../store'
-//SafeAreaView
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import DialogCategory from '../components/DialogCategory.vue'
-import EditCategory from '../components/EditCategory.vue'
 
 export default {
   props: {
@@ -13,22 +11,14 @@ export default {
 
   data: () => ({
     showDialogCategory: false,
-    showEditCategory: false,
-    sendIdCategory: null,
-    categoryData: {
-      id: '',
-      value: '',
-    },
-
-    materialDialog: false,
+    categoryData: null,
   }),
 
-  components: { SafeAreaView, Icon, DialogCategory, EditCategory },
+  components: { SafeAreaView, Icon, DialogCategory },
 
   computed: {
     getCategories: () => store.state.tasksCategory,
   },
-
 }
 </script>
 
@@ -65,17 +55,20 @@ export default {
         <icon name="tag-plus" :size="30" :style="{ color: '#4385f5' }" />
       </ripple>
     </view>
-    
+
+    <!-- Categories Empty -->
+    <view class="categories-empty" v-if="!getCategories.length">
+      <icon name="tag-multiple" :size="80" :style="{ color: '#4385f5' }" />
+      <text class="categories-empty_text">You don't have new categories</text>
+    </view>
+
     <scroll-view :showsVerticalScrollIndicator="false">
       <view :style="{ marginLeft: 25, marginTop: 22 }">
         <text :style="{ fontSize: 25, fontWeight: 'bold' }">Categories</text>
       </view>
+
       <view class="list-container">
-        <ripple :onPress="() => {
-            showDialogCategory = !showDialogCategory
-            sendIdCategory = item.id
-            categoryData = item
-          }"
+        <ripple
           :rippleContainerBorderRadius="15"
           class="list-item"
           v-for="(item, index) in getCategories"
@@ -83,22 +76,24 @@ export default {
           :style="{
             backgroundColor: `${item.color}15`,
             borderWidth: 0.5,
-            borderColor: item.color
+            borderColor: item.color,
+          }"
+          :onPress="() => {
+            showDialogCategory = !showDialogCategory
+            categoryData = item
           }"
         >
+          <text :style="{ fontSize: 28 }">{{ item.emoji }}</text>
           <text
-            :style="{ fontSize: 28 }"
-          >{{ item.emoji }}</text>
-          <text 
             :numberOfLines="1"
-            class="list-item-text" 
+            class="list-item-text"
             :style="{ color: item.color, fontWeight: 'bold' }"
           >
             {{ item.name_category }}
           </text>
-          <text
-            :style="{ fontSize: 18, color: item.color }"
-          >{{ item.countTasks }} tasks</text>
+          <text :style="{ fontSize: 18, color: item.color }"
+            >{{ item.countTasks }} tasks</text
+          >
         </ripple>
       </view>
     </scroll-view>
@@ -106,9 +101,9 @@ export default {
     <dialog-category
       :visible="showDialogCategory"
       :closeDialog="() => showDialogCategory = false"
-      :sendIdCategory="sendIdCategory"
+      :categoryData="categoryData"
     >
-      <mb-button 
+      <mb-button
         text="Edit Category"
         type="flat"
         fullWidth
@@ -117,16 +112,10 @@ export default {
         color="#4385f5"
         :onPress="() => {
           showDialogCategory = !showDialogCategory
-          showEditCategory = !showEditCategory
+          navigation.navigate('EditCategoryScreen', categoryData)
         }"
       />
     </dialog-category>
-
-    <edit-category 
-      :visible="showEditCategory"
-      :closeDialog="() => showEditCategory = false"
-      :categoryData="categoryData"
-    /> 
   </SafeAreaView>
 </template>
 
@@ -148,6 +137,19 @@ export default {
   height: 44;
   align-items: center;
   justify-content: center;
+}
+
+.categories-empty {
+  position: absolute;
+  align-self: center;
+  align-items: center;
+  top: 50%;
+}
+
+.categories-empty_text {
+  margin-top: 15;
+  font-size: 22;
+  font-style: italic;
 }
 
 .list-container {

@@ -159,7 +159,7 @@ export default {
 }
 
 .tasks-empty_text {
-  margin-top: 10;
+  margin-top: 15;
   font-size: 22;
   font-style: italic;
 }

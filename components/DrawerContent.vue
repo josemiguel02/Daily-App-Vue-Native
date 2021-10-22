@@ -33,7 +33,7 @@ export default {
     handlerListCategory(item, index) {
       const { id } = item
       store.commit('setCategoryID', id)
-      this.navigation.navigate('ListCategory', item)
+      this.navigation.navigate('ListCategoryScreen', item)
       store.commit('getSingleTasksForCategory')
       this.selectIndex = index + 3
     }
@@ -71,7 +71,7 @@ export default {
       </view>
       
       <mb-divider
-        :style="{ borderWidth: 0.5, borderColor: '#bbb' }"
+        :style="{ borderWidth: 0.5, borderColor: '#bbb', marginTop: 15 }"
       />
       
       <view class="drawer-section-container">
@@ -105,6 +105,7 @@ export default {
       </view>
       
       <mb-divider
+        v-if="categories.length"
         :style="{ borderWidth: 0.5, borderColor: '#bbb' }"
       />
 

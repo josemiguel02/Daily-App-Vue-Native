@@ -142,7 +142,6 @@ export default {
           </text>
         </view>
         <view :style="{ borderColor: item.color }" class="circle" />
-        <!-- <text>{{ item.name_category }}</text> -->
       </pressable>
     </swipeable>
   </view>

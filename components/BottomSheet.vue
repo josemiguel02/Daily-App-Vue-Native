@@ -1,6 +1,6 @@
 <script>
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { Dimensions, Alert, ToastAndroid } from 'react-native'
+import { Dimensions, ToastAndroid } from 'react-native'
 import store from '../store'
 import { getAuthUid } from '../services/auth_getUid'
 

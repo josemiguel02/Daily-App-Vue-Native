@@ -41,6 +41,7 @@ export async function registerUser(email, password, newName) {
       name_category: 'Predetermined',
       color: '#4385f5',
       emoji: '🚀',
+      countTasks: 0
     })
   } catch (error) {
     console.log(error.message)

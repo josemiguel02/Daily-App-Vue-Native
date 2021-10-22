@@ -3,9 +3,10 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import 'react-native-gesture-handler'
 // Screens
+import UserScreen from '../screens/UserScreen'
 import DetailScreen from '../screens/DetailScreen.vue'
 import AddCategoryScreen from '../screens/AddCategoryScreen.vue'
-import UserScreen from '../screens/UserScreen'
+import EditCategoryScreen from '../screens/EditCategoryScreen.vue'
 // Authentication
 import { getIsUserLogin } from '../services/auth_persistent.js'
 // SafeArea Provider
@@ -78,6 +79,10 @@ function MyNavigator() {
           <Stack.Screen
             name='AddCategoryScreen'
             component={AddCategoryScreen}
+          />
+          <Stack.Screen
+            name='EditCategoryScreen'
+            component={EditCategoryScreen}
           />
         </>
       ) : (

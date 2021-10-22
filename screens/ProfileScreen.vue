@@ -1,6 +1,6 @@
 <script>
 import React from 'react'
-import { Alert } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import F5Icon from 'react-native-vector-icons/FontAwesome5'
@@ -15,8 +15,6 @@ import {
 import { updateUserProfile } from '../services/update_user'
 import DialogEditProfile from '../components/DialogEditProfile.vue'
 import { logoutSession } from '../services/auth_persistent'
-//SafeAreaView
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default {
   props: {
@@ -68,7 +66,6 @@ export default {
           updateUserProfile(uid, {
             photo: getUrlImg,
           })
-          //Alert.alert('Successfully', 'Your profile picture has been updated successfully')
         }
       } catch (error) {
         console.log(error)

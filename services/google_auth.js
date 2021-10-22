@@ -44,6 +44,7 @@ export const loginWithGoogle = async () => {
         name_category: 'Predetermined',
         color: '#4385f5',
         emoji: '🚀',
+        countTasks: 0
       })
     }
 

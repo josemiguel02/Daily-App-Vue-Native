@@ -115,6 +115,7 @@ export default {
               color="#4385f5"
               :radius="17"
               useInputCasing
+              :textStyle="{ fontFamily: 'raleway' }"
               :style="{ height: 42 }"
             />
           </view>
@@ -133,7 +134,7 @@ export default {
                 :style="{ width: 28, height: 28 }"
                 :source="require('../assets/googleLogo.png')"
               />
-              <text :style="{ marginLeft: 10, fontWeight: 'bold' }">
+              <text :style="{ marginLeft: 10, fontFamily: 'ralewaySemiBold'}">
                 Continue with Google
               </text>
             </mb-button>
@@ -162,6 +163,7 @@ export default {
 
 .input {
   flex: 1;
+  font-family: ralewayMedium;
 }
 
 .ripple {

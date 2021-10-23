@@ -57,7 +57,7 @@ export default {
 
 <style>
 .listview {
-  margin-top: 35;
+  margin-top: 25;
   padding-horizontal: 20;
 }
 
@@ -75,7 +75,7 @@ export default {
 .listview-item_text {
   margin-left: 10;
   font-size: 16;
-  letter-spacing: 2;
   max-width: 90%;
+  font-family: ralewayMedium;
 }
 </style>

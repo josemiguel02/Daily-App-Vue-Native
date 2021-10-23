@@ -148,6 +148,7 @@ export default {
 
 .header-title_text {
   font-size: 22;
+  font-family: ralewaySemiBold;
 }
 
 .check {
@@ -174,5 +175,6 @@ export default {
   padding-horizontal: 10;
   font-size: 16;
   border-radius: 20;
+  font-family: ralewayMedium;
 }
 </style>

@@ -4,7 +4,6 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 import store from '../store'
 
 export default {
-  
   data: () => ({
     dateTime: '',
     greeting: '',
@@ -52,11 +51,6 @@ export default {
     <text class="header-title">{{ greeting }}</text>
     <text class="header-name">{{ !user.name ? 'User' : user.name }}</text>
     <text class="header-datetime">{{ dateTime }}</text>
-    <!-- <view class="header-datetime">     
-      <text :style="{ color: 'gray', fontSize: 15, letterSpacing: 2, color: '#1d1d1d' }">2021.</text>
-      <text :style="{ color: '#063970', fontSize: 15, fontWeight: 'bold', letterSpacing: 2 }">09.</text>
-      <text :style="{ color: '#063970', fontSize: 15, fontWeight: 'bold', letterSpacing: 2  }">20</text>
-    </view> -->
     </view> 
 </template>
 
@@ -67,24 +61,22 @@ export default {
 }
 
 .header-title {
+  font-family: ralewaySemiBold;
   font-size: 26;
-  font-weight: bold;
-  letter-spacing: 2;
   color: #1d1d1d;
-  /* font-family: raleway-extraLight; */
 }
 
 .header-name {
   font-size: 19;
   margin-top: 4;
-  letter-spacing: 2;
   color: #1d1d1d;
+  font-family: ralewaySemiBold;
 }
 
 .header-datetime {
   margin-top: 4;
-  letter-spacing: 0.5;
-  color: #063970;
+  color: #074486;
   font-size: 18;
+  font-family: ralewayMedium;
 }
 </style>

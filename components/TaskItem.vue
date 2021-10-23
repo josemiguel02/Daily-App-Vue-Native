@@ -179,12 +179,14 @@ export default {
 .item-text {
   font-size: 15;
   color: black;
+  font-family: ralewayMedium;
 }
 
 .task-done {
   font-size: 15;
   text-decoration-line: line-through;
   color: #bbb;
+  font-family: ralewayMedium;
 }
 
 .circle {

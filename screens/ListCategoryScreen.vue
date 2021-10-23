@@ -120,9 +120,10 @@ export default {
 }
 
 .header {
-  margin-top: 25;
+  margin-top: 12;
   align-items: center;
   flex-direction: row;
+  padding-vertical: 15;
 }
 
 .drawer {
@@ -144,6 +145,7 @@ export default {
 .header-title_text {
   font-size: 20;
   max-width: 60%;
+  font-family: ralewaySemiBold;
 }
 
 .header-emoji {
@@ -161,11 +163,11 @@ export default {
 .tasks-empty_text {
   margin-top: 15;
   font-size: 22;
-  font-style: italic;
+  font-family: ralewaySemiBold;
 }
 
 .task-container {
   padding-horizontal: 20;
-  margin-top: 40;
+  margin-top: 30;
 }
 </style>

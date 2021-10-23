@@ -40,6 +40,7 @@ export default {
         :style="{ marginTop: 17 }"
         useInputCasing
         :onPress="handlerDelete"
+        :textStyle="{ fontFamily: 'ralewayMedium' }"
       />
     </view>
   </modal>

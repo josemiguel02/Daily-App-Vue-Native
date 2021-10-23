@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "expo start",
+    "start": "npx react-native start",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
@@ -45,7 +45,8 @@
     "rn-emoji-keyboard": "0.4.0",
     "vue-native-core": "0.3.1",
     "vue-native-helper": "0.3.1",
-    "vuex": "3.6.2"
+    "vuex": "3.6.2",
+    "expo-font": "~9.2.1"
   },
   "devDependencies": {
     "@babel/core": "7.0.0",

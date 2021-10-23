@@ -47,7 +47,7 @@ export default function UserScreen ({ navigation, doLogin }) {
                   styles.tabText,
                   {
                     color: !tabs ? '#4385f5' : 'black',
-                    fontWeight: !tabs ? 'bold' : 'normal',
+                    fontFamily: !tabs ? 'ralewayMedium' : 'raleway',
                     marginBottom: 7
                   }
                 ]}
@@ -68,7 +68,7 @@ export default function UserScreen ({ navigation, doLogin }) {
                   styles.tabText,
                   {
                     color: tabs ? '#4385f5' : 'black',
-                    fontWeight: tabs ? 'bold' : 'normal',
+                    fontFamily: tabs ? 'ralewayMedium' : 'raleway',
                     marginBottom: 7
                   }
                 ]}
@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: '800',
     letterSpacing: 1,
-    marginTop: 15
+    marginTop: 15,
+    fontFamily: 'ralewayMedium'
   },
   tabContainer: {
     flexDirection: 'row',
@@ -114,7 +115,8 @@ const styles = StyleSheet.create({
     width: 90
   },
   tabText: {
-    fontSize: 22
+    fontSize: 22,
+    fontFamily: 'raleway'
   },
 
   tabNot: {

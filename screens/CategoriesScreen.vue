@@ -64,7 +64,9 @@ export default {
 
     <scroll-view :showsVerticalScrollIndicator="false">
       <view :style="{ marginLeft: 25, marginTop: 22 }">
-        <text :style="{ fontSize: 25, fontWeight: 'bold' }">Categories</text>
+        <text :style="{ fontSize: 25, fontFamily: 'ralewaySemiBold' }">
+          Categories
+        </text>
       </view>
 
       <view class="list-container">
@@ -87,11 +89,11 @@ export default {
           <text
             :numberOfLines="1"
             class="list-item-text"
-            :style="{ color: item.color, fontWeight: 'bold' }"
+            :style="{ color: item.color }"
           >
             {{ item.name_category }}
           </text>
-          <text :style="{ fontSize: 18, color: item.color }"
+          <text :style="{ fontSize: 18, color: item.color, fontFamily: 'raleway' }"
             >{{ item.countTasks }} tasks</text
           >
         </ripple>
@@ -110,6 +112,7 @@ export default {
         :radius="20"
         useInputCasing
         color="#4385f5"
+        :textStyle="{ fontFamily: 'raleway' }"
         :onPress="() => {
           showDialogCategory = !showDialogCategory
           navigation.navigate('EditCategoryScreen', categoryData)
@@ -149,7 +152,7 @@ export default {
 .categories-empty_text {
   margin-top: 15;
   font-size: 22;
-  font-style: italic;
+  font-family: ralewaySemiBold;
 }
 
 .list-container {
@@ -181,5 +184,6 @@ export default {
 
 .list-item-text {
   font-size: 18;
+  font-family: ralewaySemiBold;
 }
 </style>

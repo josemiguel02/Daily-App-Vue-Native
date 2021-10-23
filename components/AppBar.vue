@@ -32,7 +32,7 @@ export default {
 
       <!-- Logo -->
       <view class="logo-container">
-        <text :style="{ fontSize: 19, color: '#1d1d1d', letterSpacing: 1 }">Js.Do App</text>
+        <text :style="{ fontSize: 19, color: '#1d1d1d', letterSpacing: 1, fontFamily: 'ralewaySemiBold' }">Js.Do App</text>
       </view>
 
       <!-- User Img -->

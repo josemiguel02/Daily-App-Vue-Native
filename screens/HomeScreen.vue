@@ -89,7 +89,7 @@ export default {
       <categories :navigation="navigation" />
 
       <view class="tasks" :style="{ marginBottom: 20 }">
-        <text :style="{ fontSize: 18, marginBottom: 10, fontWeight: 'bold' }">
+        <text :style="{ fontSize: 18, marginBottom: 10, fontFamily: 'ralewaySemiBold' }">
           All your tasks for today
         </text>
 
@@ -167,7 +167,7 @@ export default {
 .tasks-empty_text {
   margin-top: 10;
   font-size: 22;
-  font-style: italic;
+  font-family: ralewaySemiBold;
 }
 
 .tasks-items {

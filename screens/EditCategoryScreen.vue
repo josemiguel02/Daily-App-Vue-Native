@@ -128,7 +128,7 @@ export default {
           :style="{ marginLeft: 10, flex: 1, padding: 10 }"
           :rippleContainerBorderRadius="15"
         >
-          <text>Select the color.</text>
+          <text :style="{ fontFamily: 'ralewayMedium'}">Select the color</text>
         </ripple>
       </view>
 
@@ -144,7 +144,7 @@ export default {
           :style="{ marginLeft: 14, flex: 1, padding: 10 }"
           :rippleContainerBorderRadius="15"
         >
-          <text>Select the emoji.</text>
+          <text :style="{ fontFamily: 'ralewayMedium' }">Select the emoji</text>
         </ripple>
       </view>
     </view>
@@ -159,6 +159,7 @@ export default {
         :color="category.color"
         useInputCasing
         :disabled="!edit.name"
+        :textStyle="{ fontFamily: 'ralewayMedium' }"
       />
     </view>
 
@@ -222,6 +223,7 @@ export default {
 
 .header-title_text {
   font-size: 20;
+  font-family: ralewaySemiBold;
 }
 
 .add-category-container {
@@ -243,6 +245,7 @@ export default {
   flex: 1;
   border-width: 0.2;
   border-color: #bbbbbb3d;
+  font-family: ralewayMedium;
 }
 
 .add-category-btn {

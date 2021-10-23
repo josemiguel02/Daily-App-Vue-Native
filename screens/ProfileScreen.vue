@@ -163,7 +163,7 @@ export default {
         </ripple>
       </view>
 
-      <view :style="{ alignItems: 'center', marginTop: 15 }">
+      <view :style="{ alignItems: 'center' }">
         <text class="profile-name" :numberOfLines="1">
           {{ user.name }}
         </text>
@@ -197,6 +197,7 @@ export default {
           useInputCasing
           :style="{ marginRight: 20 }"
           :icon="renderIcon('setting')"
+          :textStyle="{ fontFamily: 'raleway' }"
         />
         <mb-button
           :onPress="_logout"
@@ -207,7 +208,8 @@ export default {
           textColor="red"
           useInputCasing
           :icon="renderIcon()"
-          :style="{ borderWidth: 1 }"
+          :borderSize="1"
+          :textStyle="{ fontFamily: 'raleway' }"
         />
       </view>
 
@@ -216,12 +218,12 @@ export default {
           class="profile-detail_box"
           :style="{ borderRightWidth: 1, borderColor: '#bbb' }"
         >
-          <text :style="{ fontSize: 15 }">Total Tasks:</text>
-          <text :style="{ fontSize: 15 }">{{ totalTasK }}</text>
+          <text :style="{ fontSize: 15, fontFamily: 'ralewayMedium' }">Total Tasks:</text>
+          <text :style="{ fontSize: 15, fontFamily: 'ralewayMedium' }">{{ totalTasK }}</text>
         </view>
         <view class="profile-detail_box">
-          <text :style="{ fontSize: 15 }">Task Completed:</text>
-          <text :style="{ fontSize: 15 }">{{ doneTask }}</text>
+          <text :style="{ fontSize: 15, fontFamily: 'ralewayMedium' }">Task Completed:</text>
+          <text :style="{ fontSize: 15, fontFamily: 'ralewayMedium' }">{{ doneTask }}</text>
         </view>
       </mb-card>
 
@@ -246,6 +248,7 @@ export default {
         useInputCasing
         :style="{ marginTop: 5 }"
         :icon="iconChoosePhoto('images')"
+        :textStyle="{ fontFamily: 'raleway' }"
       />
       <mb-button
         :onPress="takePhoto"
@@ -256,6 +259,7 @@ export default {
         textColor="#a240fd"
         useInputCasing
         :icon="iconChoosePhoto('camera')"
+        :textStyle="{ fontFamily: 'raleway' }"
       />
     </modal-image-picker>
   </SafeAreaView>
@@ -335,7 +339,7 @@ export default {
 .profile-detail {
   flex-direction: row;
   border-radius: 10;
-  height: 50;
+  height: 60;
   margin-top: 25;
   align-self: center;
 }
@@ -350,9 +354,9 @@ export default {
 .profile-name {
   font-size: 22;
   margin-top: -20;
-  font-weight: 300;
   letter-spacing: 2;
   max-width: 80%;
+  font-family: ralewayMedium;
 }
 
 .profile-email {

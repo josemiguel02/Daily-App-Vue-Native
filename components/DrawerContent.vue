@@ -97,6 +97,7 @@ export default {
               marginLeft: 10, 
               fontSize: 14,
               color: selectIndex == index ? '#1e88e5' : 'black', 
+              fontFamily: 'ralewayMedium'
             }]"
           >
             {{ item.label }}
@@ -127,7 +128,8 @@ export default {
               :numberOfLines="1"
               :style="[{
                 color: selectIndex == index + 3 ? item.color : 'black',
-                maxWidth: '80%'
+                maxWidth: '80%',
+                fontFamily: 'ralewayMedium'
               }]"
             >
               {{ item.name_category }}
@@ -137,10 +139,9 @@ export default {
           <text
             :style="[{
                 color: selectIndex == index + 3 ? item.color : 'black',
+                fontFamily: 'ralewayMedium'
               }]"
           >{{ item.countTasks }}</text>
-
-          <!-- <mb-badge :size="20" :content="item.countTasks" /> -->
         </view>
       </ripple>
     </scroll-view>
@@ -180,12 +181,14 @@ export default {
 
 .user-name {
   margin-top: 13;
-  font-weight: bold;
   font-size: 19;
+  font-family: ralewaySemiBold;
+  max-width: 95%;
 }
 
 .user-email {
   font-size: 17;
+  font-family: ralewayMedium;
 }
 
 .user-id {

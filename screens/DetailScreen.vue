@@ -1,8 +1,6 @@
 <script>
 import store from '../store'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { ToastAndroid } from 'react-native'
-// SafeAreaView
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default {
@@ -36,24 +34,7 @@ export default {
         title,
         description,
       })
-
       this.navigation.goBack()
-
-      /* const { title, description } = this.edit
-
-      store.commit('editTask', {
-        id,
-        edit: {
-          title: title == '' ? this.item.title : title,
-          done: this.item.done,
-          description: description == '' ? this.item.description : description,
-        },
-      })
-
-      this.navigation.goBack() */
-
-      /* if (title !== '' || description !== '') {
-      } */
     },
   },
 }
@@ -96,25 +77,25 @@ export default {
       <view class="edit">
         <text-input
           :defaultValue="item.title"
-          :onChangeText="txt => (edit.title = txt)"
+          :onChangeText="txt => edit.title = txt"
           class="edit-input"
           placeholder="Title"
         />
 
         <text-input
           :defaultValue="item.description"
-          :onChangeText="txt => (edit.description = txt)"
+          :onChangeText="txt => edit.description = txt"
           multiline
-          :style="{ marginTop: 12 }"
           class="edit-input"
           placeholder="Description"
+          :style="{ marginTop: 12 }"
         />
       </view>
     </scroll-view>
   </SafeAreaView>
 </template>
 
-<style scoped>
+<style>
 .container {
   background-color: #f7f6ff;
   flex: 1;

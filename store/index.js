@@ -10,10 +10,10 @@ const store = new Vuex.Store({
     tasksForCategory: [],
     loading: false,
     users: {},
-    emptyTask: false,
     totalTasK: 0,
     doneTask: 0,
     tasksCategory: [],
+    loadingTaskCateg: false,
     selectCategory: {
       id: '',
       name_category: '',

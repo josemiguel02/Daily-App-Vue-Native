@@ -1,5 +1,4 @@
 <script>
-import { Dimensions } from 'react-native'
 import AppBar from '../components/AppBar.vue'
 import TaskItem from '../components/TaskItem.vue'
 import store from '../store'
@@ -9,14 +8,11 @@ import BottomSheet from '../components/BottomSheet.vue'
 import Categories from '../components/Categories.vue'
 import Header from '../components/Header.vue'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import FloatingInput from '../components/FloatingInput.vue'
 import FloatingDropdown from '../components/FloatingDropdown.vue'
 
 export default {
   props: {
     navigation: Object,
-    openMyDrawer: Function,
-    goMyCategoriesScreen: Function,
   },
 
   components: {
@@ -27,7 +23,6 @@ export default {
     BottomSheet,
     Categories,
     SafeAreaView,
-    FloatingInput,
     FloatingDropdown,
     Header,
   },
@@ -35,17 +30,12 @@ export default {
   data: () => ({
     myDrawer: null,
     sheetVisible: false,
-    showFab: true,
-    height: (Dimensions.get('window').height * 50) / 100,
-    heightTask: (Dimensions.get('window').height * 32) / 100,
-    showInput: false,
+    showFab: true
   }),
 
   computed: {
     getTask: () => store.state.tasks,
     isLoading: () => store.state.loading,
-    emptyTask: () => store.state.emptyTask,
-    doneTask: () => store.state.doneTask,
     toggleDropdown: () => store.state.toggleDropdown,
   },
 
@@ -81,7 +71,7 @@ export default {
     <app-bar :navigation="navigation" />
 
     <view v-if="isLoading" class="spinner-wrapper">
-      <mb-progress-circle class="spinner" color="#4385f5" :size="60" />
+      <mb-progress-circle color="#4385f5" :size="60" />
     </view>
 
     <scroll-view :showsVerticalScrollIndicator="false" class="tasks-container">
@@ -93,7 +83,7 @@ export default {
           All your tasks for today
         </text>
 
-        <view class="tasks-empty" v-if="emptyTask">
+        <view class="tasks-empty" v-if="!getTask.length && !isLoading">
           <icon name="check-circle" :size="80" :style="{ color: '#17E179' }" />
           <text class="tasks-empty_text"> You don't have new tasks </text>
         </view>
@@ -111,12 +101,10 @@ export default {
 
     <bottom-sheet
       :visible="sheetVisible"
-      :closeSheet="
-        () => {
-          showFab = !showFab
-          sheetVisible = false
-        }
-      "
+      :closeSheet="() => {
+        showFab = !showFab
+        sheetVisible = false
+      }"
     />
 
     <floating-dropdown
@@ -129,15 +117,13 @@ export default {
       <mb-fab
         animated
         :visible="showFab"
-        :onPress="
-          () => {
-            showFab = !showFab
-            sheetVisible = !sheetVisible
-          }
-        "
         backgroundColor="#4385f5"
         icon="add"
         :style="{ elevation: 2 }"
+        :onPress="() => {
+          showFab = !showFab
+          sheetVisible = !sheetVisible
+        }"
       />
     </view>
   </SafeAreaView>
@@ -150,7 +136,7 @@ export default {
 }
 
 .tasks {
-  padding-horizontal: 20;
+  padding-horizontal: 20
 }
 
 .spinner-wrapper {
@@ -168,21 +154,5 @@ export default {
   margin-top: 10;
   font-size: 22;
   font-family: ralewaySemiBold;
-}
-
-.tasks-items {
-  margin-top: 8;
-}
-
-.text {
-  background-color: #fff;
-  padding-horizontal: 15;
-  height: 40;
-  border-radius: 15;
-  margin-left: 10;
-  border-width: 0.2;
-  border-color: #bbbbbb3d;
-  font-size: 18;
-  /* color: #bbb; */
 }
 </style>

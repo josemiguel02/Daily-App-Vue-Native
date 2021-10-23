@@ -44,13 +44,6 @@ export const setTasks = async state => {
 
       // Get Total Tasks
       state.totalTasK = query.docs.length
-
-      // Set Empty Tasks
-      if (!query.docs.length) {
-        state.emptyTask = true
-      } else {
-        state.emptyTask = false
-      }
     },
     error => console.log(error)
   )
@@ -197,8 +190,9 @@ export const clearTasksAndCategorySelect = state => {
 }
 
 // SingleTasksForCategory
-export const getSingleTasksForCategory = async (state, categoryID) => {
+export const getSingleTasksForCategory = async state => {
   state.tasksForCategory = []
+  state.loadingTaskCateg = true
 
   dbTodoList
     .where('categoryID', '==', state.selectCategoryID)
@@ -218,6 +212,7 @@ export const getSingleTasksForCategory = async (state, categoryID) => {
           }
         })
       )
+      state.loadingTaskCateg = false
     })
 }
 

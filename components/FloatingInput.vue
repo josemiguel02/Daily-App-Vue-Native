@@ -63,10 +63,11 @@ export default {
     <view class="form-container">
       <text-input
         :defaultValue="newTask"
-        :onChangeText="txt => (newTask = txt)"
+        :onChangeText="txt => newTask = txt"
         placeholder="Write new taks for today..."
         returnKeyType="next"
         :onSubmitEditing="_addTask"
+        :style="{ fontFamily: 'ralewayMedium' }"
       />
     </view>
   </modal>

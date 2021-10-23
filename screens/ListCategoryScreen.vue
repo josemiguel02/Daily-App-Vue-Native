@@ -27,6 +27,8 @@ export default {
   computed: {
     tasksForCategory: () => store.state.tasksForCategory,
     toggleDropdown: () => store.state.toggleDropdown,
+    loading: () => store.state.loadingTaskCateg,
+    emptyTask: () => store.state.emptyTaskCateg
   },
 
   methods: {
@@ -68,8 +70,12 @@ export default {
       </view>
     </view>
 
+    <view v-if="loading" class="spinner-wrapper">
+      <mb-progress-circle :color="route.params.color" :size="60" />
+    </view>
+
     <!-- Tasks Empty -->
-    <view class="tasks-empty" v-if="!tasksForCategory.length">
+    <view class="tasks-empty" v-if="!tasksForCategory.length && !loading">
       <icon
         name="check-circle"
         :size="80"
@@ -151,6 +157,13 @@ export default {
 .header-emoji {
   font-size: 20;
   margin-left: 5;
+}
+
+.spinner-wrapper {
+  position: absolute;
+  align-self: center;
+  align-items: center;
+  top: 50%;
 }
 
 .tasks-empty {

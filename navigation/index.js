@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import 'react-native-gesture-handler'
 // Screens
 import UserScreen from '../screens/UserScreen'
 import DetailScreen from '../screens/DetailScreen.vue'
@@ -35,7 +34,7 @@ function MyNavigator () {
   }, [isLogin])
 
   const doLoginAndLogout = useCallback(() => {
-    setTimeout(() => setIsLogin(value => !value), 1000)
+    setTimeout(() => setIsLogin(value => !value), 1500)
   }, [])
 
   if (isLogin == null) {

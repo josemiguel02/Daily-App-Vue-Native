@@ -7,26 +7,17 @@ export async function registerUser (email, password, newName) {
   const result = { statusResponse: true, error: null }
 
   try {
-    const createUser = await auth().createUserWithEmailAndPassword(
+    const { user } = await auth().createUserWithEmailAndPassword(
       email,
       password
     )
-
-    // Update name of user
-    await createUser.user.updateProfile({
-      displayName: newName
-    })
-
-    // Get User register
-    const user = createUser.user
-
     // Get User ID
     const userID = user.uid
 
     // Get User Data
     const userData = {
-      uid: user.uid,
-      name: user.displayName,
+      uid: userID,
+      name: newName,
       email: user.email,
       phone: null,
       photo: null,
@@ -43,10 +34,10 @@ export async function registerUser (email, password, newName) {
       emoji: '🚀',
       countTasks: 0
     })
-  } catch (error) {
-    console.log(error.message)
+  } catch ({ message }) {
+    console.log(message)
     result.statusResponse = false
-    result.error = error.message
+    result.error = message
   }
 
   return result
@@ -67,9 +58,10 @@ export async function loginEmailPassword (email, password) {
     // Save Crendetials in Async Storage
     saveUserLogIn(usuario)
     result.user = usuario
-  } catch (error) {
+  } catch ({ message }) {
+    console.log(message)
     result.statusResponse = false
-    result.error = error.message
+    result.error = message
   }
 
   return result

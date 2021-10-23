@@ -1,7 +1,6 @@
 <script>
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { registerUser } from '../services/auth_actions.js'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { ToastAndroid } from 'react-native'
 
 export default {
@@ -15,7 +14,7 @@ export default {
     showPassword: true,
   }),
 
-  components: { Icon, SafeAreaView },
+  components: { Icon },
 
   methods: {
     async _registerUser() {
@@ -23,9 +22,9 @@ export default {
 
       if (name && email && password) {
         this.loadingBtn = true
-        const result = await registerUser(email, password, name)
+        const { statusResponse, error} = await registerUser(email, password, name)
 
-        if (!result.statusResponse) {
+        if (!statusResponse) {
           ToastAndroid.show(error, ToastAndroid.SHORT, ToastAndroid.CENTER)
           this.loadingBtn = false
           return

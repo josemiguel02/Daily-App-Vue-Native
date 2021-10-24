@@ -49,6 +49,9 @@ export default {
     user: () => store.state.users,
     totalTasK: () => store.state.totalTasK,
     doneTask: () => store.state.doneTask,
+    letterAvatar(){
+      return this.user.name.substring(0, 1)
+    }
   },
 
   methods: {
@@ -144,13 +147,18 @@ export default {
     <scroll-view :showsVerticalScrollIndicator="false">
       <view class="profile">
         <view class="img-container">
+          <view class="profile-avatar" v-if="!user.photo">
+            <text class="profile-avatar-text">
+              {{ letterAvatar }}
+            </text>
+          </view>
+
           <image
+            v-else
             class="profile-img"
-            :source="userUpdate.avatar
-              ? { uri: userUpdate.avatar }
-              : user.photo
-              ? { uri: user.photo }
-              : require('../assets/user_profile.png')"
+            :source="!userUpdate.avatar
+              ? { uri: user.photo } 
+              : { uri: userUpdate.avatar }"
           />
         </view>
 
@@ -330,6 +338,24 @@ export default {
   height: 120;
   border-radius: 100;
   margin: 4;
+}
+
+.profile-avatar {
+  width: 120;
+  height: 120;
+  background-color: #4385f5;
+  border-radius: 100;
+  margin: 4;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar-text {
+  font-size: 35;
+  color: #fff;
+  font-family: balooBhai2Medium; 
+  letter-spacing: 0.6;
+  text-transform: uppercase;
 }
 
 .profile-icon_wapper {

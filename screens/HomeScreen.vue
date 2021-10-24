@@ -78,6 +78,8 @@ export default {
       <header />
       <categories :navigation="navigation" />
 
+      <text-input placeholder="Search..." :style="{ marginHorizontal: 20 }" />
+
       <view class="tasks" :style="{ marginBottom: 20 }">
         <text :style="{ fontSize: 18, marginBottom: 10, fontFamily: 'balooBhai2Medium' }">
           All your tasks for today

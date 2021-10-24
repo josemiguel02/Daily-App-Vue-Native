@@ -11,6 +11,9 @@ export default {
 
   computed: {
     user: () => store.state.users,
+    letterAvatar(){
+      return this.user.name.substring(0, 1)
+    }
   },
 }
 </script>
@@ -38,11 +41,16 @@ export default {
       <!-- User Img -->
       <view class="appbar-user">
         <view class="appbar-user-img">
+          <view class="profile-avatar" v-if="!user.photo">
+            <text class="profile-avatar-text">
+              {{ letterAvatar }}
+            </text>
+          </view>
+
           <image
+            v-else
             :style="{ width: 40, height: 40, borderRadius: 100, margin: 2 }"
-            :source="user.photo
-              ? { uri: user.photo }
-              : require('../assets/user_profile.png')"
+            :source="{ uri: user.photo }"
           />
         </view>
       </view>
@@ -72,7 +80,7 @@ export default {
 .logo-text {
   color: #1d1d1d;
   font-size: 22;
-  font-family: balooBhai2Medium;  
+  font-family: balooBhai2Medium;
   letter-spacing: 1.5;
 }
 
@@ -84,6 +92,24 @@ export default {
   border-width: 2;
   border-color: white;
   border-radius: 100;
+}
+
+.profile-avatar {
+  width: 40;
+  height: 40;
+  border-radius: 50;
+  margin: 2;
+  background-color: #4385f5;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar-text {
+  font-size: 16;
+  color: #fff;
+  font-family: balooBhai2Medium;
+  letter-spacing: 0.6;
+  text-transform: uppercase;
 }
 
 .appbar-drawer {

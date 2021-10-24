@@ -1,7 +1,6 @@
 <script>
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import store from '../store'
-// SafeAreaView
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default {
@@ -23,6 +22,9 @@ export default {
   computed: {
     user: () => store.state.users,
     categories: () => store.state.tasksCategory,
+    letterAvatar(){
+      return this.user.name.substring(0, 1)
+    }
   },
 
   methods: {
@@ -59,10 +61,16 @@ export default {
               selectIndex = 1
               navigation.navigate('ProfileScreen')
             }">
+
+            <view class="profile-avatar" v-if="!user.photo">
+              <text class="profile-avatar-text">
+                {{ letterAvatar }}
+              </text>
+            </view>
+
             <image class="user-img"
-              :source="user.photo
-                ? { uri: user.photo }
-                : require('../assets/user_profile.png')"
+              v-else
+              :source="{ uri: user.photo }"
             />
           </ripple>
         </view>
@@ -70,9 +78,7 @@ export default {
         <text class="user-email"> {{ user.email }} </text>
       </view>
       
-      <mb-divider
-        :style="{ borderWidth: 0.5, borderColor: '#bbb', marginTop: 15 }"
-      />
+      <mb-divider :style="{ borderWidth: 0.5, borderColor: '#bbb', marginTop: 15 }" />
       
       <view class="drawer-section-container">
         <ripple 
@@ -166,6 +172,24 @@ export default {
   border-width: 3;
   border-radius: 100;
   border-color: #4385f5;
+}
+
+.profile-avatar {
+  width: 75;
+  height: 75;
+  border-radius: 50;
+  margin-bottom: 14;
+  background-color: #4385f5;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar-text {
+  font-size: 35;
+  color: #fff;
+  font-family: balooBhai2Medium; 
+  letter-spacing: 0.6;
+  text-transform: uppercase;
 }
 
 .user-img {

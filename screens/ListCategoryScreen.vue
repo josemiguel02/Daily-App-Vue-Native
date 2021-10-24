@@ -1,5 +1,4 @@
 <script>
-// SafeAreaView
 import { SafeAreaView } from 'react-native-safe-area-context'
 import store from '../store'
 import TaskItem from '../components/TaskItem.vue'
@@ -151,7 +150,7 @@ export default {
 .header-title_text {
   font-size: 20;
   max-width: 60%;
-  font-family: ralewaySemiBold;
+  font-family: balooBhai2Medium;
 }
 
 .header-emoji {
@@ -176,7 +175,7 @@ export default {
 .tasks-empty_text {
   margin-top: 15;
   font-size: 22;
-  font-family: ralewaySemiBold;
+  font-family: balooBhai2Medium;
 }
 
 .task-container {

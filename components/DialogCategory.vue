@@ -36,11 +36,11 @@ export default {
         type="flat"
         fullWidth
         :radius="20"
-        color="red"
+        color="#ef4c4c"
         :style="{ marginTop: 17 }"
         useInputCasing
         :onPress="handlerDelete"
-        :textStyle="{ fontFamily: 'ralewayMedium' }"
+        :textStyle="{ fontFamily: 'balooBhai2' }"
       />
     </view>
   </modal>

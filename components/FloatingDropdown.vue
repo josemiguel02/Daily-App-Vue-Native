@@ -83,7 +83,8 @@ export default {
 .categories-empty_text {
   margin-top: 15;
   font-size: 17;
-  font-family: ralewaySemiBold;
+  font-family: balooBhai2Medium;
+  letter-spacing: 0.6;
 }
 
 .dropdown-container {
@@ -109,6 +110,6 @@ export default {
 
 .dropdown-item_text {
   font-size: 15;
-  font-family: ralewayMedium;
+  font-family: balooBhai2;
 }
 </style>

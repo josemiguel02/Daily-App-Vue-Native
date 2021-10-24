@@ -32,7 +32,7 @@ export default {
 
       <!-- Logo -->
       <view class="logo-container">
-        <text :style="{ fontSize: 19, color: '#1d1d1d', letterSpacing: 1, fontFamily: 'ralewaySemiBold' }">Js.Do App</text>
+        <text class="logo-text">Js.Do App</text>
       </view>
 
       <!-- User Img -->
@@ -67,6 +67,13 @@ export default {
 .logo-container {
   justify-content: center;
   align-items: center;
+}
+
+.logo-text {
+  color: #1d1d1d;
+  font-size: 22;
+  font-family: balooBhai2Medium;  
+  letter-spacing: 1.5;
 }
 
 .appbar-user {

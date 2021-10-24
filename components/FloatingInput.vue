@@ -67,7 +67,7 @@ export default {
         placeholder="Write new taks for today..."
         returnKeyType="next"
         :onSubmitEditing="_addTask"
-        :style="{ fontFamily: 'ralewayMedium' }"
+        :style="{ fontFamily: 'balooBhai2' }"
       />
     </view>
   </modal>

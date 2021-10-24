@@ -64,7 +64,7 @@ export default {
 
     <scroll-view :showsVerticalScrollIndicator="false">
       <view :style="{ marginLeft: 25, marginTop: 22 }">
-        <text :style="{ fontSize: 25, fontFamily: 'ralewaySemiBold' }">
+        <text :style="{ fontSize: 25, fontFamily: 'balooBhai2Medium' }">
           Categories
         </text>
       </view>
@@ -93,7 +93,7 @@ export default {
           >
             {{ item.name_category }}
           </text>
-          <text :style="{ fontSize: 18, color: item.color, fontFamily: 'raleway' }"
+          <text :style="{ fontSize: 18, color: item.color, fontFamily: 'balooBhai2' }"
             >{{ item.countTasks }} tasks</text
           >
         </ripple>
@@ -112,7 +112,7 @@ export default {
         :radius="20"
         useInputCasing
         color="#4385f5"
-        :textStyle="{ fontFamily: 'raleway' }"
+        :textStyle="{ fontFamily: 'balooBhai2' }"
         :onPress="() => {
           showDialogCategory = !showDialogCategory
           navigation.navigate('EditCategoryScreen', categoryData)
@@ -152,12 +152,13 @@ export default {
 .categories-empty_text {
   margin-top: 15;
   font-size: 22;
-  font-family: ralewaySemiBold;
+  font-family: balooBhai2Medium;
+  letter-spacing: 0.6;
 }
 
 .list-container {
   margin-horizontal: 25;
-  margin-top: 25;
+  margin-top: 18;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -170,7 +171,7 @@ export default {
   border-radius: 15;
   width: 47%;
   margin-bottom: 20;
-  height: 140;
+  height: 130;
   justify-content: space-between;
 }
 
@@ -184,6 +185,7 @@ export default {
 
 .list-item-text {
   font-size: 18;
-  font-family: ralewaySemiBold;
+  font-family: balooBhai2Medium;
+  letter-spacing: 0.6;
 }
 </style>

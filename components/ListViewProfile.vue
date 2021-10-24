@@ -76,6 +76,7 @@ export default {
   margin-left: 10;
   font-size: 16;
   max-width: 90%;
-  font-family: ralewayMedium;
+  font-family: balooBhai2;
+  letter-spacing: 0.6;
 }
 </style>

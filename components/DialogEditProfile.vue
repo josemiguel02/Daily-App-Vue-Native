@@ -92,7 +92,7 @@ export default {
           text="Cancel"
           class="profile-form_btn"
           useInputCasing
-          :textStyle="{ fontFamily: 'raleway' }"
+          :textStyle="{ fontFamily: 'balooBhai2' }"
           :style="{ marginRight: 12, borderWidth: 0.8 }"
           textColor="#a240fd"
         />
@@ -105,7 +105,7 @@ export default {
           class="profile-form_btn"
           useInputCasing
           color="#35bff1"
-          :textStyle="{ fontFamily: 'raleway' }"
+          :textStyle="{ fontFamily: 'balooBhai2' }"
           :disabled="(updateData.name || updateData.phone) == ''"
         />
       </view>
@@ -138,7 +138,7 @@ export default {
 
 .profile-form_input {
   border-bottom-width: 1.5;
-  font-family: ralewayMedium;
+  font-family: balooBhai2;
 }
 
 .profile-form_submit {

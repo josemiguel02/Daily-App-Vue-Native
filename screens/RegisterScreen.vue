@@ -115,7 +115,7 @@ export default {
               color="#4385f5"
               :style="{ height: 42 }"
               useInputCasing
-              :textStyle="{ fontFamily: 'raleway' }"
+              :textStyle="{ fontFamily: 'balooBhai2', fontSize: 16, letterSpacing: 0.6 }"
             />
           </view>
         </view>
@@ -142,7 +142,7 @@ export default {
 
 .input {
   flex: 1;
-  font-family: ralewayMedium;
+  font-family: balooBhai2;
 }
 
 .ripple {

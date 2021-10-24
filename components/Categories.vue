@@ -36,7 +36,7 @@ export default {
 <template>
   <view class="categories-container">
     <text
-      :style="{ fontSize: 18, marginBottom: 10, fontFamily: 'ralewaySemiBold' }"
+      :style="{ fontSize: 21, marginBottom: 10, fontFamily: 'balooBhai2Medium' }"
     >
       Categories
     </text>
@@ -59,12 +59,12 @@ export default {
 
             <text
               :numberOfLines="1"
-              :style="{ color: item.color, fontSize: 16, marginTop: 5, fontFamily: 'ralewayMedium' }"
+              :style="{ color: item.color, fontSize: 16, marginTop: 5, fontFamily: 'balooBhai2Medium' }"
             >{{ item.name_category }}</text>
 
             <text
               :numberOfLines="1"
-              :style="{ marginTop: 4, color: item.color, fontFamily: 'raleway' }"
+              :style="{ marginTop: 4, color: item.color, fontFamily: 'balooBhai2' }"
             >{{ item.countTasks }} tasks</text>
           </view>
         </view>
@@ -94,14 +94,12 @@ export default {
 }
 
 .category-item {
-  /* background-color: white; */
   padding: 15;
   border-radius: 15;
   margin-right: 13; 
   justify-content: space-between;
-  height: 110;
+  height: 106;
   width: 115;
-  /* border-width: 2; */
 }
 
 .add-category {

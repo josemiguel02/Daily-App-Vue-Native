@@ -197,7 +197,7 @@ export default {
           useInputCasing
           :style="{ marginRight: 20 }"
           :icon="renderIcon('setting')"
-          :textStyle="{ fontFamily: 'raleway' }"
+          :textStyle="{ fontFamily: 'balooBhai2' }"
         />
         <mb-button
           :onPress="_logout"
@@ -209,7 +209,7 @@ export default {
           useInputCasing
           :icon="renderIcon()"
           :borderSize="1"
-          :textStyle="{ fontFamily: 'raleway' }"
+          :textStyle="{ fontFamily: 'balooBhai2' }"
         />
       </view>
 
@@ -218,12 +218,20 @@ export default {
           class="profile-detail_box"
           :style="{ borderRightWidth: 1, borderColor: '#bbb' }"
         >
-          <text :style="{ fontSize: 15, fontFamily: 'ralewayMedium' }">Total Tasks:</text>
-          <text :style="{ fontSize: 15, fontFamily: 'ralewayMedium' }">{{ totalTasK }}</text>
+          <text :style="{ fontSize: 15, fontFamily: 'balooBhai2Medium', letterSpacing: 0.6 }">
+            Total Tasks:
+          </text>
+          <text :style="{ fontSize: 15, fontFamily: 'balooBhai2' }">
+            {{ totalTasK }}
+          </text>
         </view>
         <view class="profile-detail_box">
-          <text :style="{ fontSize: 15, fontFamily: 'ralewayMedium' }">Task Completed:</text>
-          <text :style="{ fontSize: 15, fontFamily: 'ralewayMedium' }">{{ doneTask }}</text>
+          <text :style="{ fontSize: 15, fontFamily: 'balooBhai2Medium', letterSpacing: 0.6 }">
+            Task Completed:
+          </text>
+          <text :style="{ fontSize: 15, fontFamily: 'balooBhai2' }">
+            {{ doneTask }}
+          </text>
         </view>
       </mb-card>
 
@@ -248,7 +256,7 @@ export default {
         useInputCasing
         :style="{ marginTop: 5 }"
         :icon="iconChoosePhoto('images')"
-        :textStyle="{ fontFamily: 'raleway' }"
+        :textStyle="{ fontFamily: 'balooBhai2' }"
       />
       <mb-button
         :onPress="takePhoto"
@@ -259,7 +267,7 @@ export default {
         textColor="#a240fd"
         useInputCasing
         :icon="iconChoosePhoto('camera')"
-        :textStyle="{ fontFamily: 'raleway' }"
+        :textStyle="{ fontFamily: 'balooBhai2' }"
       />
     </modal-image-picker>
   </SafeAreaView>
@@ -352,14 +360,10 @@ export default {
 }
 
 .profile-name {
-  font-size: 22;
-  margin-top: -20;
-  letter-spacing: 2;
+  font-size: 25;
+  margin-top: -18;
+  letter-spacing: 1;
   max-width: 80%;
-  font-family: ralewayMedium;
-}
-
-.profile-email {
-  font-size: 20;
+  font-family: balooBhai2Medium;
 }
 </style>

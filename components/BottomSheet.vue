@@ -104,7 +104,7 @@ export default {
               }]"
               class="circle"
             />
-            <text :style="{ maxWidth: '80%', fontFamily: 'ralewayMedium'}"
+            <text :style="{ maxWidth: '80%', fontFamily: 'balooBhai2'}"
               :numberOfLines="1"
             >
               {{
@@ -169,7 +169,7 @@ export default {
   border-radius: 17;
   border-width: 0.2;
   border-color: #bbbbbb3d;
-  font-family: ralewayMedium;
+  font-family: balooBhai2;
 }
 
 .bottom-sheet_btn {

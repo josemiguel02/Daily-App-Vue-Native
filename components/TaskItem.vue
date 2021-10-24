@@ -179,14 +179,16 @@ export default {
 .item-text {
   font-size: 15;
   color: black;
-  font-family: ralewayMedium;
+  font-family: balooBhai2;
+  letter-spacing: 0.6;
 }
 
 .task-done {
   font-size: 15;
   text-decoration-line: line-through;
   color: #bbb;
-  font-family: ralewayMedium;
+  font-family: balooBhai2;
+  letter-spacing: 0.6;
 }
 
 .circle {

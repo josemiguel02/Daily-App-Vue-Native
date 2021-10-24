@@ -47,15 +47,16 @@ export default function UserScreen ({ navigation, doLogin }) {
                   styles.tabText,
                   {
                     color: !tabs ? '#4385f5' : 'black',
-                    fontFamily: !tabs ? 'ralewayMedium' : 'raleway',
-                    marginBottom: 7
+                    fontFamily: !tabs ? 'balooBhai2Medium' : 'balooBhai2',
+                    marginBottom: 7,
+                    letterSpacing: 0.6
                   }
                 ]}
               >
                 Login
               </Text>
 
-              {!tabs && <View style={styles.tabNot} />}
+              {!tabs && <View style={styles.tabDot} />}
             </Ripple>
 
             <Ripple
@@ -68,15 +69,16 @@ export default function UserScreen ({ navigation, doLogin }) {
                   styles.tabText,
                   {
                     color: tabs ? '#4385f5' : 'black',
-                    fontFamily: tabs ? 'ralewayMedium' : 'raleway',
-                    marginBottom: 7
+                    fontFamily: tabs ? 'balooBhai2Medium' : 'balooBhai2',
+                    marginBottom: 7,
+                    letterSpacing: 0.6
                   }
                 ]}
               >
                 Register
               </Text>
 
-              {tabs && <View style={styles.tabNot} />}
+              {tabs && <View style={styles.tabDot} />}
             </Ripple>
           </View>
 
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     letterSpacing: 1,
     marginTop: 15,
-    fontFamily: 'ralewayMedium'
+    fontFamily: 'balooBhai2'
   },
   tabContainer: {
     flexDirection: 'row',
@@ -116,10 +118,10 @@ const styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 22,
-    fontFamily: 'raleway'
+    fontFamily: 'balooBhai2'
   },
 
-  tabNot: {
+  tabDot: {
     width: 50,
     height: 4,
     backgroundColor: '#4385f5',

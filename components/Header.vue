@@ -12,7 +12,7 @@ export default {
   methods: {
     getDateTime() {
       dayjs.extend(localizedFormat)
-      let date = dayjs().format('ddd, MMM D YYYY')
+      let date = dayjs().format('dddd, MMM D YYYY')
       this.dateTime = date
     },
 
@@ -48,7 +48,7 @@ export default {
 
 <template>
     <view class="header">
-    <text class="header-title">{{ greeting }}</text>
+    <text class="header-greeting">{{ greeting }}</text>
     <text class="header-name">{{ !user.name ? 'User' : user.name }}</text>
     <text class="header-datetime">{{ dateTime }}</text>
     </view> 
@@ -60,23 +60,24 @@ export default {
   margin-top: 10;
 }
 
-.header-title {
-  font-family: ralewaySemiBold;
-  font-size: 26;
-  color: #1d1d1d;
+.header-greeting {
+  font-family: balooBhai2Medium;
+  font-size: 28;
+  color: #2c2c2c;
+  letter-spacing: 1.5;
 }
 
 .header-name {
-  font-size: 19;
-  margin-top: 4;
+  font-size: 22;
   color: #1d1d1d;
-  font-family: ralewaySemiBold;
+  font-family: balooBhai2Medium;
+  letter-spacing: 1.5;
 }
 
 .header-datetime {
   margin-top: 4;
   color: #074486;
   font-size: 18;
-  font-family: ralewayMedium;
+  font-family: balooBhai2;
 }
 </style>

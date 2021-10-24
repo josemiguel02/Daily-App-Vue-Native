@@ -97,7 +97,8 @@ export default {
               marginLeft: 10, 
               fontSize: 14,
               color: selectIndex == index ? '#1e88e5' : 'black', 
-              fontFamily: 'ralewayMedium'
+              fontFamily: 'balooBhai2', 
+              letterSpacing: 0.6
             }]"
           >
             {{ item.label }}
@@ -129,7 +130,8 @@ export default {
               :style="[{
                 color: selectIndex == index + 3 ? item.color : 'black',
                 maxWidth: '80%',
-                fontFamily: 'ralewayMedium'
+                fontFamily: 'balooBhai2',
+                letterSpacing: 0.6
               }]"
             >
               {{ item.name_category }}
@@ -139,7 +141,7 @@ export default {
           <text
             :style="[{
                 color: selectIndex == index + 3 ? item.color : 'black',
-                fontFamily: 'ralewayMedium'
+                fontFamily: 'balooBhai2'
               }]"
           >{{ item.countTasks }}</text>
         </view>
@@ -181,14 +183,15 @@ export default {
 
 .user-name {
   margin-top: 13;
-  font-size: 19;
-  font-family: ralewaySemiBold;
+  font-size: 22;
+  font-family: balooBhai2Medium;
   max-width: 95%;
+  letter-spacing: 0.6;
 }
 
 .user-email {
-  font-size: 17;
-  font-family: ralewayMedium;
+  font-size: 18;
+  font-family: balooBhai2;
 }
 
 .user-id {
@@ -198,7 +201,7 @@ export default {
 
 .drawer-section-container {
   padding: 2;
-  margin-horizontal: 10;
+  margin-horizontal: 7;
 }
 
 .drawer-section-item {
@@ -211,7 +214,7 @@ export default {
 }
 
 .category-container {
-  margin-horizontal: 10;
+  margin-horizontal: 7;
   padding-horizontal: 8;
   padding-vertical: 5;
   border-radius: 10;

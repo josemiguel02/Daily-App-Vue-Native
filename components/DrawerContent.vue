@@ -14,7 +14,7 @@ export default {
       { label: 'Home', icon: 'home', route: 'HomeScreen' },
       { label: 'Profile', icon: 'user-alt', route: 'ProfileScreen' },
       { label: 'Categories', icon: 'tags', route: 'CategoriesScreen' },
-    ]
+    ],
   }),
 
   components: { SafeAreaView, Icon },
@@ -22,8 +22,9 @@ export default {
   computed: {
     user: () => store.state.users,
     categories: () => store.state.tasksCategory,
-    letterAvatar(){
-      return this.user.name.substring(0, 1)
+    letterAvatar() {
+      const { name } = store.state.users
+      return name.substring(0, 1)
     }
   },
 
@@ -202,7 +203,7 @@ export default {
 .user-img-ripple {
   width: 75;
   height: 75;
-  margin: 2;
+  margin: 4;
 }
 
 .user-name {

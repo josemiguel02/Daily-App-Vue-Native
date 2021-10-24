@@ -11,8 +11,9 @@ export default {
 
   computed: {
     user: () => store.state.users,
-    letterAvatar(){
-      return this.user.name.substring(0, 1)
+    letterAvatar() {
+      let { name } = store.state.users
+      return name.substring(0, 1)
     }
   },
 }

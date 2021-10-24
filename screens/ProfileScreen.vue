@@ -49,8 +49,9 @@ export default {
     user: () => store.state.users,
     totalTasK: () => store.state.totalTasK,
     doneTask: () => store.state.doneTask,
-    letterAvatar(){
-      return this.user.name.substring(0, 1)
+    letterAvatar() {
+      const { name } = store.state.users
+      return name.substring(0, 1)
     }
   },
 

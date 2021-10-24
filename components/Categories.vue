@@ -98,7 +98,7 @@ export default {
   border-radius: 15;
   margin-right: 13; 
   justify-content: space-between;
-  height: 106;
+  height: 110;
   width: 115;
 }
 

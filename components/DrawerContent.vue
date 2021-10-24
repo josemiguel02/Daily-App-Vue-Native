@@ -22,10 +22,6 @@ export default {
   computed: {
     user: () => store.state.users,
     categories: () => store.state.tasksCategory,
-    letterAvatar() {
-      const { name } = store.state.users
-      return name.substring(0, 1)
-    }
   },
 
   methods: {
@@ -39,6 +35,12 @@ export default {
       this.navigation.navigate('ListCategoryScreen', item)
       store.commit('getSingleTasksForCategory')
       this.selectIndex = index + 3
+    }
+  },
+
+  filters: {
+    letterAvatar: function(value) {
+      return value.substring(0, 1)
     }
   },
 
@@ -65,7 +67,7 @@ export default {
 
             <view class="profile-avatar" v-if="!user.photo">
               <text class="profile-avatar-text">
-                {{ letterAvatar }}
+                {{ user.name | letterAvatar }}
               </text>
             </view>
 

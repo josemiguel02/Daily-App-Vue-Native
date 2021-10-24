@@ -49,9 +49,11 @@ export default {
     user: () => store.state.users,
     totalTasK: () => store.state.totalTasK,
     doneTask: () => store.state.doneTask,
-    letterAvatar() {
-      const { name } = store.state.users
-      return name.substring(0, 1)
+  },
+
+  filters: {
+    letterAvatar: function(value) {
+      return value.substring(0, 1)
     }
   },
 
@@ -150,7 +152,7 @@ export default {
         <view class="img-container">
           <view class="profile-avatar" v-if="!user.photo">
             <text class="profile-avatar-text">
-              {{ letterAvatar }}
+              {{ user.name | letterAvatar }}
             </text>
           </view>
 

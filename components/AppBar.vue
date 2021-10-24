@@ -11,11 +11,13 @@ export default {
 
   computed: {
     user: () => store.state.users,
-    letterAvatar() {
-      let { name } = store.state.users
-      return name.substring(0, 1)
-    }
   },
+
+  filters: {
+    letterAvatar: function(value) {
+      return value.substring(0, 1)
+    }
+  }
 }
 </script>
 
@@ -44,7 +46,7 @@ export default {
         <view class="appbar-user-img">
           <view class="profile-avatar" v-if="!user.photo">
             <text class="profile-avatar-text">
-              {{ letterAvatar }}
+              {{ user.name | letterAvatar }}
             </text>
           </view>
 

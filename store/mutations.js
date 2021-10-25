@@ -121,10 +121,12 @@ export const getUserDataOfFireStore = async state => {
 }
 
 // Users Data of Firestore Edit
-export const editDataUser = async (state, dataUpdate) => {
+export const editDataUser = async (state, editParams) => {
+  const { id, data } = editParams
+  const { uid } = id
+
   try {
-    const { id } = await getAuthUid()
-    await dbUsers.doc(id).update(dataUpdate)
+    await dbUsers.doc(uid).update(data)
   } catch (error) {
     console.log(error)
   }

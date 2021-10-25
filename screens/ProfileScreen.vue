@@ -57,7 +57,7 @@ export default {
     async chooseProfileImg() {
       const { imgUri, res } = await getPhotoOfLibrary()
       let { avatar } = this.userUpdate
-      let { uid } = this.user
+      const { uid } = this.user
 
       try {
         if (res) {
@@ -102,6 +102,15 @@ export default {
       this.btnLoading = true
       await logoutSession()
       this.doLogout()
+    },
+
+    deletePhoto() {
+      store.commit('editDataUser', {
+        id: { uid: this.user.uid },
+        data: { photo: null }
+      })
+
+      this.modalPicker = false
     },
 
     renderIcon: setting => (
@@ -184,10 +193,11 @@ export default {
         v-if="progressBar"
       >
         <mb-progress-bar
-          :visible="progressBar"
-          :height="5"
-          color="#a240fd"
+          visible
+          :height="6"
+          color="#84d69eef"
           :animationDuration="9000"
+          :indicatorStartPosition="10"
         />
       </view>
 
@@ -271,14 +281,29 @@ export default {
       <mb-button
         :onPress="takePhoto"
         text="Take a new photo"
-        type="outlined"
+        type="flat"
         :radius="15"
-        :style="{ marginTop: 15, borderWidth: 0.8 }"
-        textColor="#a240fd"
+        :style="{ marginTop: 15 }"
+        color="#a240fd"
         useInputCasing
         :icon="iconChoosePhoto('camera')"
         :textStyle="{ fontFamily: 'balooBhai2' }"
       />
+      <mb-button
+        :onPress="deletePhoto"
+        text="Delete photo"
+        type="outlined"
+        :radius="15"
+        :style="{ marginTop: 15 }"
+        :borderSize="1"
+        textColor="#ef4c4c"
+        useInputCasing
+        :textStyle="{ fontFamily: 'balooBhai2' }"
+      >
+        <view render-prop="icon">
+          <icon name="trash-can" :size="20" :style="{ color: '#ef4c4c'}"/>
+        </view>
+      </mb-button>
     </modal-image-picker>
   </SafeAreaView>
 </template>
@@ -324,7 +349,7 @@ export default {
 }
 
 .profile {
-  margin-top: 40;
+  margin-top: 20;
   align-items: center;
   height: 160;
 }
@@ -364,7 +389,7 @@ export default {
   top: -40;
   right: -45;
   border-radius: 50;
-  background-color: #84d69eef;
+  background-color: #3bd46b;
 }
 
 .profile-icon {

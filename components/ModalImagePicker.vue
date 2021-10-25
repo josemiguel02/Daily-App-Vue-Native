@@ -18,7 +18,7 @@ export default {
 
 <template>
   <modal
-    :style="{ width, height: 140 }"
+    :style="{ width, height: 'auto' }"
     :isOpen="visible"
     class="dialog"
     :animationDuration="220"

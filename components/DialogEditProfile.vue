@@ -33,8 +33,11 @@ export default {
       
       if (name !== '' || phone !== '') {
         store.commit('editDataUser', {
-          name: name == '' ? this.user.name : name,
-          phone: phone == '' ? this.user.phone : phone,
+          id: { uid: this.user.uid },
+          data: {
+            name: name == '' ? this.user.name : name,
+            phone: phone == '' ? this.user.phone : phone,
+          }
         })
       }
       this.visible = !this.visible
@@ -83,7 +86,6 @@ export default {
           borderColor: isFocused2 ? '#4385f5' : '#c7c7c7'
         }]"
       />
-
       <view class="profile-form_submit">
         <mb-button
           :onPress="() => visible = !visible"
@@ -96,7 +98,6 @@ export default {
           :style="{ marginRight: 12, borderWidth: 0.8 }"
           textColor="#a240fd"
         />
-        
         <mb-button
           :onPress="updateDataProfile"
           :radius="20"
@@ -106,7 +107,7 @@ export default {
           useInputCasing
           color="#35bff1"
           :textStyle="{ fontFamily: 'balooBhai2' }"
-          :disabled="(updateData.name || updateData.phone) == ''"
+          :disabled="!updateData.name"
         />
       </view>
     </view>

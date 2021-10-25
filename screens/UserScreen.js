@@ -30,10 +30,10 @@ export default function UserScreen ({ navigation, doLogin }) {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={[styles.header, { marginTop: windowHeight }]}>
             <Image
-              source={require('../assets/todo-list-icon.png')}
+              source={require('../assets/tasks-logo.png')}
               style={styles.headerImage}
             />
-            <Text style={styles.headerTitle}>Welcome to ToDo App!</Text>
+            <Text style={styles.headerTitle}>Welcome to JS.Do App!</Text>
           </View>
 
           <View style={styles.tabContainer}>

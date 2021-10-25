@@ -4,7 +4,7 @@
     "slug": "daily-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/tasks-logo.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

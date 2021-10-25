@@ -34,9 +34,10 @@ export default {
       <!-- Logo -->
       <view class="logo-container">
         <image
-          :source="require('../assets/cover-logo.png')"
-          :style="{ height: 50, width: 170, resizeMode:  'cover' }"
+          :source="require('../assets/tasks-logo.png')"
+          :style="{ height: 30, width: 30, resizeMode:  'cover' }"
         />
+        <text class="logo-text">JS.Do App</text>
       </view>
 
       <!-- User Img -->
@@ -80,6 +81,14 @@ export default {
 .logo-container {
   justify-content: center;
   align-items: center;
+  flex-direction: row;
+}
+
+.logo-text {
+  font-family: balooBhai2Medium;
+  font-size: 23;
+  margin-left: 8;
+  letter-spacing: 0.6;
 }
 
 .appbar-user {
@@ -100,14 +109,6 @@ export default {
   background-color: #4385f5;
   align-items: center;
   justify-content: center;
-}
-
-.profile-avatar-text {
-  font-size: 16;
-  color: #fff;
-  font-family: balooBhai2Medium;
-  letter-spacing: 0.6;
-  text-transform: uppercase;
 }
 
 .appbar-drawer {

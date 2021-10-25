@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     letterSpacing: 1,
     marginTop: 15,
-    fontFamily: 'balooBhai2'
+    fontFamily: 'balooBhai2Medium'
   },
   tabContainer: {
     flexDirection: 'row',

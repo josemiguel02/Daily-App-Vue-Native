@@ -2,6 +2,7 @@
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import store from '../store'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import TextAvatar from 'react-native-text-avatar'
 
 export default {
   props: {
@@ -17,7 +18,7 @@ export default {
     ],
   }),
 
-  components: { SafeAreaView, Icon },
+  components: { SafeAreaView, Icon, TextAvatar },
 
   computed: {
     user: () => store.state.users,
@@ -35,12 +36,6 @@ export default {
       this.navigation.navigate('ListCategoryScreen', item)
       store.commit('getSingleTasksForCategory')
       this.selectIndex = index + 3
-    }
-  },
-
-  filters: {
-    letterAvatar: function(value) {
-      return value.substring(0, 1)
     }
   },
 
@@ -64,12 +59,13 @@ export default {
               selectIndex = 1
               navigation.navigate('ProfileScreen')
             }">
-
-            <view class="profile-avatar" v-if="!user.photo">
-              <text class="profile-avatar-text">
-                {{ user.name | letterAvatar }}
-              </text>
-            </view>
+            <text-avatar v-if="!user.photo"
+              :size="75"
+              backgroundColor="#4385f5"
+              type="circle"
+            >
+              {{ user.name }}
+            </text-avatar>
 
             <image class="user-img"
               v-else

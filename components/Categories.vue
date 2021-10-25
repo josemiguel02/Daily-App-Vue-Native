@@ -36,7 +36,7 @@ export default {
 <template>
   <view class="categories-container">
     <text
-      :style="{ fontSize: 21, marginBottom: 10, fontFamily: 'balooBhai2Medium' }"
+      :style="{ fontSize: 21, fontFamily: 'balooBhai2Medium' }"
     >
       Categories
     </text>

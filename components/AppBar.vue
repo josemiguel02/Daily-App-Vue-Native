@@ -1,22 +1,17 @@
 <script>
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import store from '../store'
+import TextAvatar from 'react-native-text-avatar'
 
 export default {
   props: {
     navigation: Object,
   },
-
-  components: { Icon },
+  
+  components: { Icon, TextAvatar },
 
   computed: {
     user: () => store.state.users,
-  },
-
-  filters: {
-    letterAvatar: function(value) {
-      return value.substring(0, 1)
-    }
   }
 }
 </script>
@@ -38,17 +33,23 @@ export default {
 
       <!-- Logo -->
       <view class="logo-container">
-        <text class="logo-text">Js.Do App</text>
+        <image
+          :source="require('../assets/cover-logo.png')"
+          :style="{ height: 50, width: 170, resizeMode:  'cover' }"
+        />
       </view>
 
       <!-- User Img -->
       <view class="appbar-user">
         <view class="appbar-user-img">
-          <view class="profile-avatar" v-if="!user.photo">
-            <text class="profile-avatar-text">
-              {{ user.name | letterAvatar }}
-            </text>
-          </view>
+          <text-avatar
+            v-if="!user.photo"
+            :size="40"
+            backgroundColor="#4385f5"
+            type="circle"
+          >
+            {{ user.name }}
+          </text-avatar>
 
           <image
             v-else
@@ -73,18 +74,12 @@ export default {
   margin-horizontal: 12;
   padding-vertical: 2;
   margin-vertical: 4;
+  align-items: center;
 }
 
 .logo-container {
   justify-content: center;
   align-items: center;
-}
-
-.logo-text {
-  color: #1d1d1d;
-  font-size: 22;
-  font-family: balooBhai2Medium;
-  letter-spacing: 1.5;
 }
 
 .appbar-user {

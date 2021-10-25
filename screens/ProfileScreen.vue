@@ -15,6 +15,7 @@ import {
 import { updateUserProfile } from '../services/update_user'
 import DialogEditProfile from '../components/DialogEditProfile.vue'
 import { logoutSession } from '../services/auth_persistent'
+import TextAvatar from 'react-native-text-avatar'
 
 export default {
   props: {
@@ -28,6 +29,7 @@ export default {
     ModalImagePicker,
     ListViewProfile,
     SafeAreaView,
+    TextAvatar
   },
 
   data: () => ({
@@ -50,13 +52,7 @@ export default {
     totalTasK: () => store.state.totalTasK,
     doneTask: () => store.state.doneTask,
   },
-
-  filters: {
-    letterAvatar: function(value) {
-      return value.substring(0, 1)
-    }
-  },
-
+  
   methods: {
     async chooseProfileImg() {
       const { imgUri, res } = await getPhotoOfLibrary()
@@ -150,11 +146,14 @@ export default {
     <scroll-view :showsVerticalScrollIndicator="false">
       <view class="profile">
         <view class="img-container">
-          <view class="profile-avatar" v-if="!user.photo">
-            <text class="profile-avatar-text">
-              {{ user.name | letterAvatar }}
-            </text>
-          </view>
+          <text-avatar v-if="!user.photo"
+            :size="120"
+            backgroundColor="#4385f5"
+            :style="{ margin: 4 }"
+            type="circle"
+          >
+            {{ user.name }}
+          </text-avatar>
 
           <image
             v-else

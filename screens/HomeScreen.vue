@@ -1,4 +1,5 @@
 <script>
+import React from 'react'
 import AppBar from '../components/AppBar.vue'
 import TaskItem from '../components/TaskItem.vue'
 import store from '../store'
@@ -18,7 +19,6 @@ export default {
   components: {
     TaskItem,
     Icon,
-    RefreshControl,
     AppBar,
     BottomSheet,
     Categories,
@@ -30,7 +30,8 @@ export default {
   data: () => ({
     myDrawer: null,
     sheetVisible: false,
-    showFab: true
+    showFab: true,
+    refreshing: false,
   }),
 
   computed: {
@@ -52,6 +53,22 @@ export default {
     closeDropdown() {
       store.commit('switchToggleDropdown', false)
     },
+
+    onRefresh() {
+      this.refreshing = true
+      store.commit('setTasks')
+      this.refreshing = false
+    },
+
+    renderRefresh() {
+      return (
+        <RefreshControl 
+          refreshing={this.refreshing}
+          onRefresh={this.onRefresh}
+          colors={['green', 'red', 'blue', 'yellow']}
+        />
+      )
+    }
   },
 
   created() {
@@ -74,7 +91,11 @@ export default {
       <mb-progress-circle color="#4385f5" :size="60" />
     </view>
 
-    <scroll-view :showsVerticalScrollIndicator="false" class="tasks-container">
+    <scroll-view 
+      :showsVerticalScrollIndicator="false"
+      :refreshControl="renderRefresh()"
+    >
+
       <header />
       <categories :navigation="navigation" />
       

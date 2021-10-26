@@ -1,9 +1,11 @@
 <script>
+import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import store from '../store'
 import TaskItem from '../components/TaskItem.vue'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import FloatingInput from '../components/FloatingInput.vue'
+import { RefreshControl } from 'react-native'
 
 export default {
   props: {
@@ -14,6 +16,7 @@ export default {
   data: () => ({
     showFab: true,
     showInput: false,
+    refreshing: false,
   }),
 
   components: {
@@ -34,6 +37,22 @@ export default {
     closeDropdown() {
       store.commit('switchToggleDropdown', false)
     },
+
+    onRefresh() {
+      this.refreshing = true
+      store.commit('getSingleTasksForCategory')
+      this.refreshing = false
+    },
+
+    renderRefresh() {
+      return (
+        <RefreshControl 
+          refreshing={this.refreshing}
+          onRefresh={this.onRefresh}
+	        colors={[this.route.params.color, 'red', 'blue', 'yellow']}
+        />
+      )
+    }
   },
 }
 </script>
@@ -83,7 +102,10 @@ export default {
       <text class="tasks-empty_text"> You don't have new tasks </text>
     </view>
 
-    <scroll-view :showsVerticalScrollIndicator="false">
+    <scroll-view 
+      :showsVerticalScrollIndicator="false"
+      :refreshControl="renderRefresh()"
+    >
       <view class="task-container">
         <task-item
           v-for="(item, index) in tasksForCategory"

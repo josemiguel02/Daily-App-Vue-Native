@@ -38,7 +38,7 @@ export default {
           return
         }
 
-        store.commit('clearTasksAndCategorySelect')
+        store.commit('clearTasksAndCategory')
         this.doLogin()
       } else {
         ToastAndroid.show(
@@ -57,7 +57,7 @@ export default {
         this.loadingBtn = false
         ToastAndroid.show(error, ToastAndroid.SHORT, ToastAndroid.CENTER)
       } else {
-        store.commit('clearTasksAndCategorySelect')
+        store.commit('clearTasksAndCategory')
         this.doLogin()
       }
     },

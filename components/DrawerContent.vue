@@ -145,9 +145,9 @@ export default {
 
           <text
             :style="[{
-                color: selectIndex == index + 3 ? item.color : 'black',
-                fontFamily: 'balooBhai2'
-              }]"
+              color: selectIndex == index + 3 ? item.color : 'black',
+              fontFamily: 'balooBhai2'
+            }]"
           >{{ item.countTasks }}</text>
         </view>
       </ripple>

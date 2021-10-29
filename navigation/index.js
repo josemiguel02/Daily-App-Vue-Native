@@ -6,15 +6,13 @@ import UserScreen from '../screens/UserScreen'
 import DetailScreen from '../screens/DetailScreen.vue'
 import AddCategoryScreen from '../screens/AddCategoryScreen.vue'
 import EditCategoryScreen from '../screens/EditCategoryScreen.vue'
+import { SplashScreen } from '../screens/SplashScreen'
 // Authentication
-import { getCredentials, getIsUserLogin } from '../services/auth_persistent.js'
+import { getIsUserLogin } from '../services/auth_persistent.js'
 // SafeArea Provider
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 // Drawer Navigation
 import DrawerNavigation from './DrawerNavigation'
-// Lottie
-import LottieView from 'lottie-react-native'
-import { StatusBar } from 'expo-status-bar'
 
 const Stack = createStackNavigator()
 
@@ -27,7 +25,7 @@ function MyNavigator () {
   }
 
   useLayoutEffect(() => {
-    setAuth()
+    // setAuth()
     console.log(isLogin)
   }, [])
 
@@ -36,26 +34,7 @@ function MyNavigator () {
   }, [])
 
   if (isLogin == null) {
-    return (
-      <>
-        <StatusBar backgroundColor='transparent' style='dark' />
-        <SafeAreaView
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#F7F6FF'
-          }}
-        >
-          <LottieView
-            source={require('../animations/successful.json')}
-            style={{ width: '80%', aspectRatio: 1 }}
-            autoPlay
-            loop
-          />
-        </SafeAreaView>
-      </>
-    )
+    return <SplashScreen />
   }
 
   return (

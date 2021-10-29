@@ -26,10 +26,6 @@ export default {
   },
 
   methods: {
-    clearSelectCategory() {
-      store.commit('clearCategorySelect')
-    },
-
     handlerListCategory(item, index) {
       const { id } = item
       store.commit('setCategoryID', id)

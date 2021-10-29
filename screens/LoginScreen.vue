@@ -39,7 +39,7 @@ export default {
           return
         }
 
-        store.commit('clearTasksAndCategory')
+        store.commit('clearAllUserData')
         this.doLogin()
         setCredentials({
           email: this.email,
@@ -62,7 +62,7 @@ export default {
         this.loadingBtn = false
         ToastAndroid.show(error, ToastAndroid.SHORT, ToastAndroid.CENTER)
       } else {
-        store.commit('clearTasksAndCategory')
+        store.commit('clearAllUserData')
         this.doLogin()
       }
     },

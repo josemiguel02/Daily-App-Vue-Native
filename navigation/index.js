@@ -25,15 +25,15 @@ function MyNavigator () {
   }
 
   useLayoutEffect(() => {
-    // setAuth()
+    setAuth()
     console.log(isLogin)
   }, [])
 
   const doLoginAndLogout = useCallback(() => {
-    setTimeout(() => setIsLogin(value => !value), 1500)
+    setTimeout(() => setIsLogin(value => !value), 2000)
   }, [])
 
-  if (isLogin == null) {
+  if (isLogin === null) {
     return <SplashScreen />
   }
 

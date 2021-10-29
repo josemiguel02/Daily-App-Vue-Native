@@ -35,6 +35,7 @@ export default {
   },
 
   created() {
+    store.commit('getUserDataOfFireStore')
     this.getDateTime()
     this.getGreeting()
     setInterval(() => {

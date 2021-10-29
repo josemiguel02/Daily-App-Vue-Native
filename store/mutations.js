@@ -181,8 +181,9 @@ export const switchToggleDropdown = (state, status) => {
   state.toggleDropdown = status
 }
 
-// Cleanig Task for Loggin User
-export const clearTasksAndCategory = state => {
+// Cleanig All Data for Loggin User
+export const clearAllUserData = state => {
+  state.users = {}
   state.tasksCategory = []
   state.tasks = []
   state.selectCategory = {

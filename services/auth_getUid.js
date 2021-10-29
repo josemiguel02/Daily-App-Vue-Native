@@ -7,7 +7,7 @@ export const getAuthUid = async () => {
   if (statusResponse) {
     result.id = userData.uid ? userData.uid : userData.id
   } else {
-    console.log('No hay data de usuario logueado')
+    console.log('There is no user id logged in')
   }
 
   return result

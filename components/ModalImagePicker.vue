@@ -21,7 +21,7 @@ export default {
     :style="{ width, height: 'auto' }"
     :isOpen="visible"
     class="dialog"
-    :animationDuration="220"
+    :animationDuration="200"
     :onClosed="closeDialog"
   >
     <view class="line" />

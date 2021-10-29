@@ -23,7 +23,7 @@ export default {
   <modal 
     :isOpen="visible" 
     :onClosed="closeDialog" 
-    :animationDuration="220"
+    :animationDuration="200"
     class="modal"
   >
 

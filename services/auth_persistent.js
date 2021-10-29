@@ -15,7 +15,7 @@ export async function getIsUserLogin () {
   }
 }
 
-// Save Credentials
+// Save User LoggedIn
 export function saveUserLogIn (data) {
   AsyncStorage.setItem(AUTH_KEY, JSON.stringify(data))
     .then(() => {})
@@ -41,17 +41,33 @@ export async function getUserDataLoggedIn () {
 
 // User Logout Session
 export async function logoutSession () {
-  const { userData } = await getUserDataLoggedIn()
+  const user = auth().currentUser
+  const userProvider = user.providerData[0].providerId
 
   try {
-    await AsyncStorage.clear()
-
-    if (userData.id) {
+    if (userProvider === 'google.com') {
       await GoogleSignin.signOut()
     } else {
       await auth().signOut()
     }
+    await AsyncStorage.clear()
   } catch (error) {
     console.log(error)
+  }
+}
+
+// Save Credentials
+export const setCredentials = (credentials) => {
+  AsyncStorage.setItem('credentials', JSON.stringify(credentials))
+    .then(() => {})
+    .catch(error => console.log(error))
+}
+
+export const getCredentials = async () => {
+  try {
+    const value = await AsyncStorage.getItem('credentials')
+    return JSON.parse(value)
+  } catch (error) {
+    return console.log(error)
   }
 }

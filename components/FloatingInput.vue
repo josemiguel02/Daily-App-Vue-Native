@@ -1,4 +1,5 @@
 <script>
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { ToastAndroid } from 'react-native'
 import store from '../store'
 import { getAuthUid } from '../services/auth_getUid'
@@ -7,6 +8,11 @@ export default {
   props: {
     visible: Boolean,
     closeSheet: Function,
+    itemColor: String
+  },
+
+  components: {
+    Icon,
   },
 
   data: () => ({
@@ -63,12 +69,20 @@ export default {
     <view class="form-container">
       <text-input
         :defaultValue="newTask"
-        :onChangeText="txt => newTask = txt"
+        :onChangeText="txt => (newTask = txt)"
         placeholder="Write new taks for today..."
         returnKeyType="next"
         :onSubmitEditing="_addTask"
-        :style="{ fontFamily: 'balooBhai2' }"
+        :style="{ fontFamily: 'balooBhai2', flex: 1 }"
       />
+      <ripple 
+        :onPress="_addTask"
+        :rippleContainerBorderRadius="50"
+        :disabled="!newTask"
+        class="icon-container"
+      >
+        <icon name="send" :size="23"  :style="[{ color: !newTask ? '#c7c7c7' : itemColor }]" />
+      </ripple>
     </view>
   </modal>
 </template>
@@ -86,5 +100,14 @@ export default {
 
 .form-container {
   width: 90%;
+  flex-direction: row;
+  align-items: center;
+}
+
+.icon-container {
+  width: 40;
+  height: 40;
+  align-items: center;
+  justify-content: center;
 }
 </style>

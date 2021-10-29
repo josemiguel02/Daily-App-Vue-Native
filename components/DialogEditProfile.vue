@@ -35,8 +35,8 @@ export default {
         store.commit('editDataUser', {
           id: { uid: this.user.uid },
           data: {
-            name: name == '' ? this.user.name : name,
-            phone: phone == '' ? this.user.phone : phone,
+            name: !name ? this.user.name : name,
+            phone,
           }
         })
       }
@@ -51,7 +51,7 @@ export default {
     :style="{width, height: 190}"
     :isOpen="visible"
     class="dialog"
-    :animationDuration="220"
+    :animationDuration="200"
     :onClosed="() => {
       closeDialog()
       isFocused = false

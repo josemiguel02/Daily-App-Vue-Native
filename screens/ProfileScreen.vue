@@ -1,12 +1,11 @@
 <script>
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import MaterialCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import F5Icon from 'react-native-vector-icons/FontAwesome5'
+import MIcon from 'react-native-vector-icons/MaterialIcons'
 import store from '../store'
 import ModalImagePicker from '../components/ModalImagePicker.vue'
-import ListViewProfile from '../components/ListViewProfile.vue'
 import {
   getPhotoOfLibrary,
   takePhotoFromCamera,
@@ -16,6 +15,7 @@ import { updateUserProfile } from '../services/update_user'
 import DialogEditProfile from '../components/DialogEditProfile.vue'
 import { logoutSession } from '../services/auth_persistent'
 import TextAvatar from 'react-native-text-avatar'
+import DeleteAccount from '../components/DeleteAccount.vue'
 
 export default {
   props: {
@@ -24,12 +24,14 @@ export default {
   },
 
   components: {
-    Icon,
+    MaterialCIcon,
     DialogEditProfile,
     ModalImagePicker,
-    ListViewProfile,
     SafeAreaView,
-    TextAvatar
+    TextAvatar,
+    F5Icon,
+    MIcon,
+    DeleteAccount
   },
 
   data: () => ({
@@ -44,6 +46,7 @@ export default {
     dialogVisible: false,
     modalPicker: false,
     progressBar: false,
+    modalDeleteAccount: false,
   }),
 
   computed: {
@@ -52,7 +55,7 @@ export default {
     totalTasK: () => store.state.totalTasK,
     doneTask: () => store.state.doneTask,
   },
-  
+
   methods: {
     async chooseProfileImg() {
       const { imgUri, res } = await getPhotoOfLibrary()
@@ -107,15 +110,11 @@ export default {
     deletePhoto() {
       store.commit('editDataUser', {
         id: { uid: this.user.uid },
-        data: { photo: null }
+        data: { photo: null },
       })
 
       this.modalPicker = false
     },
-
-    renderIcon: setting => (
-      <AntDesign name={setting == 'setting' ? 'setting' : 'logout'} size={25} />
-    ),
 
     iconChoosePhoto: images => (
       <F5Icon name={images == 'images' ? 'images' : 'camera'} size={25} />
@@ -155,7 +154,8 @@ export default {
     <scroll-view :showsVerticalScrollIndicator="false">
       <view class="profile">
         <view class="img-container">
-          <text-avatar v-if="!user.photo"
+          <text-avatar
+            v-if="!user.photo"
             :size="120"
             backgroundColor="#4385f5"
             :style="{ margin: 4 }"
@@ -167,9 +167,11 @@ export default {
           <image
             v-else
             class="profile-img"
-            :source="!userUpdate.avatar
-              ? { uri: user.photo } 
-              : { uri: userUpdate.avatar }"
+            :source="
+              !userUpdate.avatar
+                ? { uri: user.photo }
+                : { uri: userUpdate.avatar }
+            "
           />
         </view>
 
@@ -178,13 +180,19 @@ export default {
           :rippleContainerBorderRadius="40"
           class="profile-icon_wapper"
         >
-          <icon class="profile-icon" name="circle-edit-outline" />
+          <material-c-icon class="profile-icon" name="circle-edit-outline" />
         </ripple>
       </view>
 
       <view :style="{ alignItems: 'center' }">
         <text class="profile-name" :numberOfLines="1">
           {{ user.name }}
+        </text>
+        <text class="profile-email" :numberOfLines="1">
+          {{ user.email }}
+        </text>
+        <text v-if="user.phone" class="profile-phone" :numberOfLines="1">
+          {{ user.phone }}
         </text>
       </view>
 
@@ -201,53 +209,33 @@ export default {
         />
       </view>
 
-      <view
-        :style="{
-          flexDirection: 'row',
-          marginTop: 15,
-          justifyContent: 'center',
-        }"
-      >
-        <mb-button
-          :onPress="() => (dialogVisible = !dialogVisible)"
-          text="Edit Profile"
-          type="flat"
-          :radius="12"
-          color="#4385f5"
-          useInputCasing
-          :style="{ marginRight: 20 }"
-          :icon="renderIcon('setting')"
-          :textStyle="{ fontFamily: 'balooBhai2' }"
-        />
-        <mb-button
-          :onPress="_logout"
-          text="Logout"
-          :loading="btnLoading"
-          type="outlined"
-          :radius="12"
-          textColor="red"
-          useInputCasing
-          :icon="renderIcon()"
-          :borderSize="1"
-          :textStyle="{ fontFamily: 'balooBhai2' }"
-        />
-      </view>
-
       <mb-card class="profile-detail">
         <view
           class="profile-detail_box"
           :style="{ borderRightWidth: 1, borderColor: '#bbb' }"
         >
-          <text :style="{ fontSize: 15, fontFamily: 'balooBhai2Medium', letterSpacing: 0.6 }">
-            Total Tasks:
+          <text
+            :style="{
+              fontSize: 15,
+              fontFamily: 'balooBhai2Medium',
+              letterSpacing: 0.6,
+            }"
+          >
+            Total Tasks
           </text>
           <text :style="{ fontSize: 15, fontFamily: 'balooBhai2' }">
             {{ totalTasK }}
           </text>
         </view>
         <view class="profile-detail_box">
-          <text :style="{ fontSize: 15, fontFamily: 'balooBhai2Medium', letterSpacing: 0.6 }">
-            Task Completed:
+          <text
+            :style="{
+              fontSize: 15,
+              fontFamily: 'balooBhai2Medium',
+              letterSpacing: 0.6,
+            }"
+          >
+            Task Completed
           </text>
           <text :style="{ fontSize: 15, fontFamily: 'balooBhai2' }">
             {{ doneTask }}
@@ -255,7 +243,54 @@ export default {
         </view>
       </mb-card>
 
-      <list-view-profile />
+      <view class="listview">
+        <ripple
+          class="listview-item"
+          :rippleContainerBorderRadius="20"
+          :onPress="() => (dialogVisible = !dialogVisible)"
+        >
+          <view class="icon-container">
+            <f5-icon name="user-edit" :size="20" color="#4385f5" />
+          </view>
+          <text class="listview-item_text" :numberOfLines="1">
+            Edit Profile
+          </text>
+        </ripple>
+
+        <ripple
+          class="listview-item"
+          :rippleContainerBorderRadius="20"
+          :onPress="_logout"
+        >
+          <view class="icon-container">
+            <mb-progress-circle :size="20" color="#4385f5" v-if="btnLoading" />
+            <m-icon name="logout" :size="23" color="#4385f5" v-else />
+          </view>
+          <text class="listview-item_text" :numberOfLines="1"> Logout </text>
+        </ripple>
+
+        <ripple class="listview-item" :rippleContainerBorderRadius="20">
+          <view class="icon-container">
+            <f5-icon name="info-circle" :size="20" color="#4385f5" />
+          </view>
+          <text class="listview-item_text" :numberOfLines="1">
+            Information to App
+          </text>
+        </ripple>
+
+        <ripple
+          class="listview-item"
+          :rippleContainerBorderRadius="20"
+          rippleColor="#ef4c4c"
+          :style="{ borderWidth: 0.5, borderColor: '#ef4c4c' }"
+          :onPress="() => (modalDeleteAccount = !modalDeleteAccount)"
+        >
+          <view class="icon-container">
+            <f5-icon name="trash" :size="20" color="#ef4c4c" />
+          </view>
+          <text class="listview-item_text">Delete Account</text>
+        </ripple>
+      </view>
     </scroll-view>
 
     <dialog-edit-profile
@@ -301,10 +336,16 @@ export default {
         :textStyle="{ fontFamily: 'balooBhai2' }"
       >
         <view render-prop="icon">
-          <icon name="trash-can" :size="20" :style="{ color: '#ef4c4c'}"/>
+          <f5-icon name="trash" :size="20" :style="{ color: '#ef4c4c' }" />
         </view>
       </mb-button>
     </modal-image-picker>
+
+    <delete-account
+      :visible="modalDeleteAccount"
+      :closeDialog="() => (modalDeleteAccount = false)"
+      :doLogout="doLogout"
+    />
   </SafeAreaView>
 </template>
 
@@ -367,24 +408,6 @@ export default {
   margin: 4;
 }
 
-.profile-avatar {
-  width: 120;
-  height: 120;
-  background-color: #4385f5;
-  border-radius: 100;
-  margin: 4;
-  align-items: center;
-  justify-content: center;
-}
-
-.profile-avatar-text {
-  font-size: 35;
-  color: #fff;
-  font-family: balooBhai2Medium; 
-  letter-spacing: 0.6;
-  text-transform: uppercase;
-}
-
 .profile-icon_wapper {
   top: -40;
   right: -45;
@@ -397,11 +420,34 @@ export default {
   color: #fff;
 }
 
+.profile-name {
+  font-size: 22;
+  margin-top: -15;
+  letter-spacing: 1;
+  max-width: 80%;
+  font-family: balooBhai2Medium;
+}
+
+.profile-email {
+  margin-top: -5;
+  font-size: 20;
+  letter-spacing: 1;
+  max-width: 80%;
+  font-family: balooBhai2;
+}
+
+.profile-phone {
+  font-size: 16;
+  letter-spacing: 1;
+  max-width: 80%;
+  font-family: balooBhai2;
+}
+
 .profile-detail {
   flex-direction: row;
   border-radius: 10;
   height: 60;
-  margin-top: 25;
+  margin-top: 17;
   align-self: center;
 }
 
@@ -412,11 +458,34 @@ export default {
   width: 35%;
 }
 
-.profile-name {
-  font-size: 25;
-  margin-top: -18;
-  letter-spacing: 1;
-  max-width: 80%;
-  font-family: balooBhai2Medium;
+.listview {
+  margin-top: 25;
+  padding-horizontal: 20;
+}
+
+.listview-item {
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+  padding: 15;
+  border-radius: 20;
+  margin-bottom: 14;
+  border-width: 0.5;
+  border-color: #c7c7c7c7;
+}
+
+.icon-container {
+  width: 25;
+  height: 25;
+  align-items: center;
+  justify-content: center;
+}
+
+.listview-item_text {
+  margin-left: 5;
+  font-size: 16;
+  max-width: 90%;
+  font-family: balooBhai2;
+  letter-spacing: 0.6;
 }
 </style>

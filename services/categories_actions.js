@@ -5,8 +5,8 @@ export const deleteCategory = async (categoryID) => {
 
   // Delete task with category
   const taskRef = await dbTodoList.where('categoryID', '==', categoryID).get()
-  taskRef.forEach(element => {
-    element.ref.delete()
+  taskRef.forEach(doc => {
+    doc.ref.delete()
   })
 }
 

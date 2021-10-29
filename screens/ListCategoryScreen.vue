@@ -122,6 +122,7 @@ export default {
         showFab = !showFab
         showInput = false
       }"
+      :itemColor="route.params.color"
     />
 
     <view :style="{ position: 'absolute', bottom: 20, right: 20 }">

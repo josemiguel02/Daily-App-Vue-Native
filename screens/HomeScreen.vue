@@ -65,13 +65,13 @@ export default {
         <RefreshControl 
           refreshing={this.refreshing}
           onRefresh={this.onRefresh}
-          colors={['green', 'red', 'blue', 'yellow']}
+          colors={['#17E179', 'red', 'blue', 'yellow']}
         />
       )
     }
   },
 
-  created() {
+  async created() {
     store.commit('setTasks')
   },
 }

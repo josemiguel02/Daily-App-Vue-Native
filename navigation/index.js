@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useLayoutEffect, useCallback } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 // Screens
@@ -7,7 +7,7 @@ import DetailScreen from '../screens/DetailScreen.vue'
 import AddCategoryScreen from '../screens/AddCategoryScreen.vue'
 import EditCategoryScreen from '../screens/EditCategoryScreen.vue'
 // Authentication
-import { getIsUserLogin } from '../services/auth_persistent.js'
+import { getCredentials, getIsUserLogin } from '../services/auth_persistent.js'
 // SafeArea Provider
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 // Drawer Navigation
@@ -23,15 +23,13 @@ function MyNavigator () {
 
   const setAuth = async () => {
     const res = await getIsUserLogin()
-    setTimeout(() => {
-      setIsLogin(res)
-    }, 2000)
+    setIsLogin(res)
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setAuth()
     console.log(isLogin)
-  }, [isLogin])
+  }, [])
 
   const doLoginAndLogout = useCallback(() => {
     setTimeout(() => setIsLogin(value => !value), 1500)

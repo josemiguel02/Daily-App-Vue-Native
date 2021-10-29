@@ -12,7 +12,7 @@ export default {
     :isOpen="visible"
     :onClosed="closeDialog"
     class="modal"
-    :animationDuration="220"
+    :animationDuration="200"
   >
     <view class="line" />
     

@@ -1,5 +1,6 @@
 <script>
 import React from 'react'
+import { BackHandler } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import MaterialCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import F5Icon from 'react-native-vector-icons/FontAwesome5'
@@ -123,6 +124,11 @@ export default {
 
   created() {
     store.commit('getUserDataOfFireStore')
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.navigation.navigate('HomeScreen')
+      store.commit('changeIndex', 0)
+      return true
+    })
   },
 }
 </script>

@@ -3,6 +3,7 @@ import store from '../store'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import DialogCategory from '../components/DialogCategory.vue'
+import { BackHandler } from 'react-native'
 
 export default {
   props: {
@@ -18,6 +19,14 @@ export default {
 
   computed: {
     getCategories: () => store.state.tasksCategory,
+  },
+
+  created() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.navigation.navigate('HomeScreen')
+      store.commit('changeIndex', 0)
+      return true
+    })
   },
 }
 </script>
@@ -80,10 +89,12 @@ export default {
             borderWidth: 0.5,
             borderColor: item.color,
           }"
-          :onPress="() => {
-            showDialogCategory = !showDialogCategory
-            categoryData = item
-          }"
+          :onPress="
+            () => {
+              showDialogCategory = !showDialogCategory
+              categoryData = item
+            }
+          "
         >
           <text :style="{ fontSize: 28 }">{{ item.emoji }}</text>
           <text
@@ -93,7 +104,12 @@ export default {
           >
             {{ item.name_category }}
           </text>
-          <text :style="{ fontSize: 18, color: item.color, fontFamily: 'balooBhai2' }"
+          <text
+            :style="{
+              fontSize: 18,
+              color: item.color,
+              fontFamily: 'balooBhai2',
+            }"
             >{{ item.countTasks }} tasks</text
           >
         </ripple>
@@ -102,7 +118,7 @@ export default {
 
     <dialog-category
       :visible="showDialogCategory"
-      :closeDialog="() => showDialogCategory = false"
+      :closeDialog="() => (showDialogCategory = false)"
       :categoryData="categoryData"
     >
       <mb-button

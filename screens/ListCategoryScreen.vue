@@ -5,7 +5,7 @@ import store from '../store'
 import TaskItem from '../components/TaskItem.vue'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import FloatingInput from '../components/FloatingInput.vue'
-import { RefreshControl } from 'react-native'
+import { BackHandler, RefreshControl } from 'react-native'
 
 export default {
   props: {
@@ -53,6 +53,14 @@ export default {
         />
       )
     }
+  },
+
+  created() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.navigation.navigate('HomeScreen')
+      store.commit('changeIndex', 0)
+      return true
+    })
   },
 }
 </script>

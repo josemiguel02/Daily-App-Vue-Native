@@ -7,20 +7,6 @@ export default {
     navigation: Object,
   },
 
-  data: () => ({
-    backgroundColors: [
-      '#17E179',
-      '#17E1DE',
-      '#177FE1',
-      '#171AE1',
-      '#7917E1',
-      '#DE17E1',
-      '#E1DE17',
-      '#E17917',
-      '#ff4000',
-    ],
-  }),
-
   components: { Icon },
 
   computed: {
@@ -69,12 +55,15 @@ export default {
           </view>
         </view>
         
-        <ripple class="add-category"
-          :onPress="() => navigation.navigate('AddCategoryScreen')"
-          :rippleContainerBorderRadius="50"
-        >
-          <icon name="plus" :size="24" :style="{ color: '#4385f5' }" />
-        </ripple>
+        <view class="add-container">
+          <ripple class="add-category"
+            :onPress="() => navigation.navigate('AddCategoryScreen')"
+            :rippleContainerBorderRadius="50"
+          >
+            <icon name="plus" :size="24" :style="{ color: '#4385f5' }" />
+          </ripple>
+          <text :style="{ marginTop: 12, fontFamily: 'balooBhai2' }">New category</text>
+        </view>
       </view>
     </scroll-view>
   </view>
@@ -100,6 +89,11 @@ export default {
   justify-content: space-between;
   height: 110;
   width: 115;
+}
+
+.add-container {
+  align-items: center;
+  margin-right: 10;
 }
 
 .add-category {

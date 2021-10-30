@@ -17,14 +17,14 @@ export default {
     backgroundColors: [
       '#17E179',
       '#17E1DE',
-      '#177FE1',
+      '#4385f5',
       '#171AE1',
-      '#7917E1',
-      '#DE17E1',
-      '#E1DE17',
-      '#E17917',
-      '#ef0a0a',
-      '#a83232',
+      '#791EE4',
+      '#E41E89',
+      '#F0E619',
+      '#E48C1E',
+      '#ef4c4c',
+      '#805D36',
       '#85929E',
       '#48C9B0',
     ],
@@ -186,6 +186,7 @@ export default {
       :onClose="() => (showEmoji = false)"
       categoryPosition="top"
       :onEmojiSelected="e => category.emoji = e.emoji"
+      :containerStyles="{ backgroundColor: '#F7F6FF' }"
     />
   </SafeAreaView>
 </template>

@@ -223,3 +223,7 @@ export const getSingleTasksForCategory = async state => {
 export const setCategoryID = (state, id) => {
   state.selectCategoryID = id
 }
+
+export const changeIndex = (state, index) => {
+  state.selectIndex = index
+}

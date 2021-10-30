@@ -10,7 +10,7 @@ export default {
   },
 
   data: () => ({
-    selectIndex: 0,
+    // selectIndex: 0,
     routes: [
       { label: 'Home', icon: 'home', route: 'HomeScreen' },
       { label: 'Profile', icon: 'user-alt', route: 'ProfileScreen' },
@@ -23,15 +23,19 @@ export default {
   computed: {
     user: () => store.state.users,
     categories: () => store.state.tasksCategory,
+    selectIndex: () => store.state.selectIndex,
   },
 
   methods: {
+    setIndex(index) {
+      store.commit('changeIndex', index)
+    },
     handlerListCategory(item, index) {
       const { id } = item
       store.commit('setCategoryID', id)
       this.navigation.navigate('ListCategoryScreen', item)
       store.commit('getSingleTasksForCategory')
-      this.selectIndex = index + 3
+      this.setIndex(index + 3)
     }
   },
 
@@ -52,7 +56,8 @@ export default {
             class="user-img-ripple"
             :rippleContainerBorderRadius="50"
             :onPress="() => {
-              selectIndex = 1
+              // selectIndex = 1
+              setIndex(1)
               navigation.navigate('ProfileScreen')
             }">
             <text-avatar v-if="!user.photo"
@@ -82,7 +87,8 @@ export default {
           class="drawer-section-item"
           :onPress="() => {
             navigation.navigate(item.route)
-            selectIndex = index
+            // selectIndex = index
+            setIndex(index)
           }"  
           :style="[{ 
             backgroundColor: selectIndex == index ? '#d2e7fa' : '#f7f6ff',

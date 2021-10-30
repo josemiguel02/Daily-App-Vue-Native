@@ -20,7 +20,8 @@ const store = new Vuex.Store({
       color: ''
     },
     toggleDropdown: false,
-    selectCategoryID: ''
+    selectCategoryID: '',
+    selectIndex: 0
   },
 
   mutations

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import {
   View,
@@ -14,9 +14,15 @@ import RegisterScreen from './RegisterScreen.vue'
 import Ripple from 'react-native-material-ripple'
 
 export default function UserScreen ({ navigation, doLogin }) {
-  const [tabs, setTabs] = useState(false)
-  const { height } = useWindowDimensions()
+  const [indexTab, setIndexTab] = useState(0)
+  const { height, width } = useWindowDimensions()
   const windowHeight = (height * 6) / 100
+  const scrollview = useRef()
+
+  const switchTab = (index) => {
+    setIndexTab(index)
+    scrollview.current.scrollTo({ x: index, animated: true })
+  }
 
   return (
     <>
@@ -27,7 +33,8 @@ export default function UserScreen ({ navigation, doLogin }) {
           backgroundColor: '#f7f6ff'
         }}
       >
-        <ScrollView showsVerticalScrollIndicator={false}>
+
+        <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
           <View style={[styles.header, { marginTop: windowHeight }]}>
             <Image
               source={require('../assets/tasks-logo.png')}
@@ -40,14 +47,14 @@ export default function UserScreen ({ navigation, doLogin }) {
             <Ripple
               style={styles.tabItem}
               rippleContainerBorderRadius={8}
-              onPress={() => setTabs(false)}
+              onPress={() => switchTab(0)}
             >
               <Text
                 style={[
                   styles.tabText,
                   {
-                    color: !tabs ? '#4385f5' : 'black',
-                    fontFamily: !tabs ? 'balooBhai2Medium' : 'balooBhai2',
+                    color: indexTab === 0 ? '#4385f5' : 'black',
+                    fontFamily: indexTab === 0 ? 'balooBhai2Medium' : 'balooBhai2',
                     marginBottom: 7,
                     letterSpacing: 0.6
                   }
@@ -56,33 +63,47 @@ export default function UserScreen ({ navigation, doLogin }) {
                 Login
               </Text>
 
-              {!tabs && <View style={styles.tabDot} />}
+              {indexTab === 0 && <View style={styles.tabDot} />}
             </Ripple>
 
             <Ripple
               style={[styles.tabItem, { marginLeft: 0 }]}
               rippleContainerBorderRadius={8}
-              onPress={() => setTabs(true)}
+              onPress={() => switchTab(width)}
             >
               <Text
                 style={[
                   styles.tabText,
                   {
-                    color: tabs ? '#4385f5' : 'black',
-                    fontFamily: tabs ? 'balooBhai2Medium' : 'balooBhai2',
+                    color: indexTab !== 0 ? '#4385f5' : 'black',
+                    fontFamily: indexTab !== 0 ? 'balooBhai2Medium' : 'balooBhai2',
                     marginBottom: 7,
                     letterSpacing: 0.6
                   }
                 ]}
               >
-                Register
+                Sign Up
               </Text>
-
-              {tabs && <View style={styles.tabDot} />}
+              {indexTab !== 0 && <View style={styles.tabDot} />}
             </Ripple>
           </View>
-
-          {tabs ? <RegisterScreen /> : <LoginScreen doLogin={doLogin} />}
+          <ScrollView
+            ref={scrollview}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            onScroll={({ nativeEvent }) => {
+              const { x } = nativeEvent.contentOffset
+              if (x === 0) {
+                setIndexTab(0)
+              } else if (x >= 360) {
+                setIndexTab(x)
+              }
+            }}
+          >
+            <LoginScreen style={{ width }} doLogin={doLogin} />
+            <RegisterScreen style={{ width }} />
+          </ScrollView>
         </ScrollView>
       </SafeAreaView>
     </>

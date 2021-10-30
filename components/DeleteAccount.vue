@@ -26,7 +26,7 @@ export default {
         await AsyncStorage.clear()
         setTimeout(() => {
           deleteDataOfUser()
-        }, 5000)
+        }, 8000)
       } else {
         ToastAndroid.show(error, ToastAndroid.SHORT, ToastAndroid.CENTER)
         console.log(error)
@@ -46,13 +46,11 @@ export default {
     :onClosed="closeDialog"
   >
     <view class="line" />
-
     <view class="container">
       <text class="title">Delete Account</text>
-
       <text class="text"
-        >Are you sure to delete your account and lose all your data?</text
-      >
+        >Are you sure to delete your account and lose all your data?
+      </text>
     </view>
     <view class="btn-container">
       <mb-button

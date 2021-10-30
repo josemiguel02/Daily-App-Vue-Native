@@ -69,7 +69,7 @@ export const uploadPhotoProfile = async (uriImg, userID) => {
     const extension = formatExtensionImg(uriImg)
     const response = await fetch(uriImg)
     const imgBlob = await response.blob()
-    const storageRef = storage().ref(`/photos/IMG_${userID}.${extension}`)
+    const storageRef = storage().ref(`/photos/${userID}/IMG_${userID}.${extension}`)
     const uploadImg = storageRef.put(imgBlob)
 
     uploadImg.on('state_changed', snapshot => {
@@ -79,8 +79,7 @@ export const uploadPhotoProfile = async (uriImg, userID) => {
     })
 
     await uploadImg
-    const urlImg = await storageRef.getDownloadURL()
-    result.getUrlImg = urlImg
+    result.getUrlImg = await storageRef.getDownloadURL()
   } catch (error) {
     console.log(error)
   }

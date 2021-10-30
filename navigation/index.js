@@ -21,7 +21,7 @@ function MyNavigator () {
 
   const setAuth = async () => {
     const res = await getIsUserLogin()
-    setIsLogin(res)
+    setTimeout(() => setIsLogin(res), 2000)
   }
 
   useLayoutEffect(() => {

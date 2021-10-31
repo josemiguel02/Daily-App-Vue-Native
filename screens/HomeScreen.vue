@@ -32,6 +32,7 @@ export default {
     sheetVisible: false,
     showFab: true,
     refreshing: false,
+    elevation: false
   }),
 
   computed: {
@@ -68,6 +69,12 @@ export default {
           colors={['#17E179', 'red', 'blue', 'yellow']}
         />
       )
+    },
+
+    handlerScroll({ nativeEvent }) {
+      const { contentOffset } = nativeEvent
+      let { y } = contentOffset
+      this.elevation = y > 0
     }
   },
 
@@ -85,7 +92,7 @@ export default {
       translucent
     />
 
-    <app-bar :navigation="navigation" />
+    <app-bar :navigation="navigation" :elevation="elevation" />
 
     <view v-if="isLoading" class="spinner-wrapper">
       <mb-progress-circle color="#4385f5" :size="60" />
@@ -94,6 +101,7 @@ export default {
     <scroll-view 
       :showsVerticalScrollIndicator="false"
       :refreshControl="renderRefresh()"
+      :onScroll="handlerScroll"
     >
 
       <header />

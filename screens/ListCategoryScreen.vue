@@ -17,6 +17,7 @@ export default {
     showFab: true,
     showInput: false,
     refreshing: false,
+    elevation: false
   }),
 
   components: {
@@ -42,6 +43,12 @@ export default {
       this.refreshing = true
       store.commit('getSingleTasksForCategory')
       this.refreshing = false
+    },
+
+    handlerScroll({ nativeEvent }) {
+      const { contentOffset } = nativeEvent
+      let { y } = contentOffset
+      this.elevation = y > 0
     },
 
     renderRefresh() {
@@ -73,7 +80,9 @@ export default {
       translucent
     />
 
-    <view class="header">
+    <view class="header"
+      :style="[{ borderBottomWidth: elevation ? 0.6 : 0, borderColor: '#bebebe' }]"
+    >
       <ripple
         :onPress="() => navigation.openDrawer()"
         class="drawer"
@@ -113,6 +122,7 @@ export default {
     <scroll-view 
       :showsVerticalScrollIndicator="false"
       :refreshControl="renderRefresh()"
+      :onScroll="handlerScroll"
     >
       <view class="task-container">
         <task-item
@@ -159,7 +169,7 @@ export default {
   margin-top: 12;
   align-items: center;
   flex-direction: row;
-  padding-vertical: 15;
+  padding-vertical: 17;
 }
 
 .drawer {
@@ -211,6 +221,6 @@ export default {
 
 .task-container {
   padding-horizontal: 20;
-  margin-top: 30;
+  margin-top: 18;
 }
 </style>

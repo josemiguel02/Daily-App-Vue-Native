@@ -13,12 +13,21 @@ export default {
   data: () => ({
     showDialogCategory: false,
     categoryData: null,
+    elevation: false
   }),
 
   components: { SafeAreaView, Icon, DialogCategory },
 
   computed: {
     getCategories: () => store.state.tasksCategory,
+  },
+
+  methods: {
+    handlerScroll({ nativeEvent }) {
+      const { contentOffset } = nativeEvent
+      let { y } = contentOffset
+      this.elevation = y > 0
+    }
   },
 
   created() {
@@ -39,7 +48,9 @@ export default {
       translucent
     />
 
-    <view class="header-horizontal">
+    <view class="header-horizontal"
+      :style="[{ borderBottomWidth: elevation ? 0.6 : 0, borderColor: '#bebebe' }]"
+    >
       <ripple
         :onPress="() => navigation.openDrawer()"
         class="drawer"
@@ -57,6 +68,7 @@ export default {
           justifyContent: 'center',
           width: 44,
           height: 44,
+          marginRight: 12
         }"
         :rippleContainerBorderRadius="50"
         :onPress="() => navigation.navigate('AddCategoryScreen')"
@@ -71,8 +83,8 @@ export default {
       <text class="categories-empty_text">You don't have new categories</text>
     </view>
 
-    <scroll-view :showsVerticalScrollIndicator="false">
-      <view :style="{ marginLeft: 25, marginTop: 22 }">
+    <scroll-view :showsVerticalScrollIndicator="false" :onScroll="handlerScroll">
+      <view :style="{ marginLeft: 25, marginTop: 10 }">
         <text :style="{ fontSize: 25, fontFamily: 'balooBhai2Medium' }">
           Categories
         </text>
@@ -89,12 +101,10 @@ export default {
             borderWidth: 0.5,
             borderColor: item.color,
           }"
-          :onPress="
-            () => {
-              showDialogCategory = !showDialogCategory
-              categoryData = item
-            }
-          "
+          :onPress="() => {
+            showDialogCategory = !showDialogCategory
+            categoryData = item
+          }"
         >
           <text :style="{ fontSize: 28 }">{{ item.emoji }}</text>
           <text
@@ -147,8 +157,8 @@ export default {
 .header-horizontal {
   flex-direction: row;
   justify-content: space-between;
-  margin-horizontal: 12;
-  margin-top: 20;
+  margin-top: 10;
+  padding-vertical: 10;
 }
 
 .drawer {
@@ -156,6 +166,7 @@ export default {
   height: 44;
   align-items: center;
   justify-content: center;
+  margin-left: 12;
 }
 
 .categories-empty {

@@ -8,7 +8,7 @@ export default {
     dateTime: '',
     greeting: '',
   }),
-  
+
   methods: {
     getDateTime() {
       dayjs.extend(localizedFormat)
@@ -24,10 +24,10 @@ export default {
         this.greeting = 'Good Noon!'
       } else if (currentHour >= 12 && currentHour <= 18) {
         this.greeting = 'Good Afternoon!'
-      } else { 
+      } else {
         this.greeting = 'Good Evening!'
       }
-    }
+    },
   },
 
   computed: {
@@ -41,24 +41,22 @@ export default {
     setInterval(() => {
       this.getDateTime(), 
       this.getGreeting()
-    },
-    3000)
+    }, 3000)
   },
 }
 </script>
 
 <template>
-    <view class="header">
+  <view class="header">
     <text class="header-greeting">{{ greeting }}</text>
     <text class="header-name">{{ !user.name ? 'User' : user.name }}</text>
     <text class="header-datetime">{{ dateTime }}</text>
-    </view> 
+  </view>
 </template>
 
 <style>
 .header {
   margin-left: 26;
-  margin-top: 10;
 }
 
 .header-greeting {

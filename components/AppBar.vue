@@ -6,6 +6,7 @@ import TextAvatar from 'react-native-text-avatar'
 export default {
   props: {
     navigation: Object,
+    elevation: Boolean
   },
   
   components: { Icon, TextAvatar },
@@ -17,7 +18,9 @@ export default {
 </script>
 
 <template>
-  <view class="appbar-container">
+  <view class="appbar-container"
+    :style="[{ borderBottomWidth: elevation ? 0.6 : 0, borderColor: '#bebebe' }]"
+  >
     <view class="appbar-horizontal">
       <!-- Drawer Button -->
       <ripple
@@ -66,6 +69,7 @@ export default {
 <style>
 .appbar-container {
   background-color: #f7f6ff;
+  padding-vertical: 5;
 }
 
 .appbar-horizontal {

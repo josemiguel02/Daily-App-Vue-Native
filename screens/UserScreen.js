@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import {
   View,
@@ -6,33 +6,55 @@ import {
   StyleSheet,
   Image,
   ScrollView,
-  useWindowDimensions
+  useWindowDimensions,
+  Animated
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import LoginScreen from './LoginScreen.vue'
 import RegisterScreen from './RegisterScreen.vue'
 import Ripple from 'react-native-material-ripple'
 
-export default function UserScreen ({ navigation, doLogin }) {
-  const [indexTab, setIndexTab] = useState(0)
+export default function UserScreen ({ doLogin }) {
   const { height, width } = useWindowDimensions()
-  const windowHeight = (height * 6) / 100
+  const windowHeight = (height * 8) / 100
   const scrollview = useRef()
+  const animation = useRef(new Animated.Value(0)).current
+
+  const leftOpacity = animation.interpolate({
+    inputRange: [0, width],
+    outputRange: [1, 0]
+  })
+
+  const rightOpacity = animation.interpolate({
+    inputRange: [0, width],
+    outputRange: [0, 1]
+  })
+
+  const loginColor = animation.interpolate({
+    inputRange: [0, width],
+    outputRange: ['#4385f5', '#1b1b3366']
+  })
+
+  const singUpColor = animation.interpolate({
+    inputRange: [0, width],
+    outputRange: ['#1b1b3366', '#4385f5']
+  })
 
   const switchTab = (index) => {
-    setIndexTab(index)
-    scrollview.current.scrollTo({ x: index, animated: true })
+    scrollview.current.scrollTo(
+      { x: index, animated: true }
+    )
   }
+
+  const Tabs = [
+    { key: '1', label: 'Login', opacity: leftOpacity, color: loginColor, press: 0 },
+    { key: '2', label: 'Sign Up', opacity: rightOpacity, color: singUpColor, press: width }
+  ]
 
   return (
     <>
       <StatusBar backgroundColor='transparent' style='dark' />
-      <SafeAreaView
-        style={{
-          flex: 1,
-          backgroundColor: '#f7f6ff'
-        }}
-      >
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#f7f6ff' }}>
 
         <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
           <View style={[styles.header, { marginTop: windowHeight }]}>
@@ -44,62 +66,36 @@ export default function UserScreen ({ navigation, doLogin }) {
           </View>
 
           <View style={styles.tabContainer}>
-            <Ripple
-              style={styles.tabItem}
-              rippleContainerBorderRadius={8}
-              onPress={() => switchTab(0)}
-            >
-              <Text
-                style={[
-                  styles.tabText,
-                  {
-                    color: indexTab === 0 ? '#4385f5' : 'black',
-                    fontFamily: indexTab === 0 ? 'balooBhai2Medium' : 'balooBhai2',
-                    marginBottom: 7,
-                    letterSpacing: 0.6
-                  }
-                ]}
+            {Tabs.map(({ label, key, opacity, color, press }) => (
+              <Ripple
+                key={key}
+                style={styles.tabItem}
+                rippleContainerBorderRadius={8}
+                onPress={() => switchTab(press)}
               >
-                Login
-              </Text>
+                <Animated.Text style={[styles.tabText, { color }]}>
+                  {label}
+                </Animated.Text>
 
-              {indexTab === 0 && <View style={styles.tabDot} />}
-            </Ripple>
-
-            <Ripple
-              style={[styles.tabItem, { marginLeft: 0 }]}
-              rippleContainerBorderRadius={8}
-              onPress={() => switchTab(width)}
-            >
-              <Text
-                style={[
-                  styles.tabText,
-                  {
-                    color: indexTab !== 0 ? '#4385f5' : 'black',
-                    fontFamily: indexTab !== 0 ? 'balooBhai2Medium' : 'balooBhai2',
-                    marginBottom: 7,
-                    letterSpacing: 0.6
-                  }
-                ]}
-              >
-                Sign Up
-              </Text>
-              {indexTab !== 0 && <View style={styles.tabDot} />}
-            </Ripple>
+                <Animated.View style={[styles.tabDot, {
+                  opacity,
+                  width: label.length * 10
+                }]}
+                />
+              </Ripple>
+            ))}
           </View>
+
           <ScrollView
             ref={scrollview}
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}
-            onScroll={({ nativeEvent }) => {
-              const { x } = nativeEvent.contentOffset
-              if (x === 0) {
-                setIndexTab(0)
-              } else if (x >= 360) {
-                setIndexTab(x)
-              }
-            }}
+            scrollEventThrottle={16}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { x: animation } } }],
+              { useNativeDriver: false }
+            )}
           >
             <LoginScreen style={{ width }} doLogin={doLogin} />
             <RegisterScreen style={{ width }} />
@@ -139,7 +135,9 @@ const styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 22,
-    fontFamily: 'balooBhai2'
+    fontFamily: 'balooBhai2Medium',
+    marginBottom: 7,
+    letterSpacing: 0.6
   },
 
   tabDot: {

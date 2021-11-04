@@ -8,6 +8,7 @@ import { ToastAndroid } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { validateEmail } from '../utils/validate_email'
 import * as Animatable from 'react-native-animatable'
+import Snackbar from 'react-native-snackbar'
 
 export default {
   props: {
@@ -101,7 +102,16 @@ export default {
         )
 
         if (!statusResponse) {
-          ToastAndroid.show(error, ToastAndroid.SHORT, ToastAndroid.CENTER)
+          Snackbar.show({
+            text: error,
+            duration: Snackbar.LENGTH_LONG,
+            backgroundColor: 'red',
+            fontFamily: 'BalooBhai2-Medium',
+            action: {
+              text: 'UNDO',
+              textColor: '#fff'
+            }
+          })
           this.loadingBtn = false
           return
         }
@@ -281,6 +291,7 @@ export default {
 .validation-container {
   padding-horizontal: 10;
   margin-top: 5;
+  flex-wrap: wrap;
 }
 
 .validation-text {

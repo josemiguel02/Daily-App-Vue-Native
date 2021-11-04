@@ -10,6 +10,8 @@ import Categories from '../components/Categories.vue'
 import Header from '../components/Header.vue'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FloatingDropdown from '../components/FloatingDropdown.vue'
+import * as Animatable from 'react-native-animatable'
+
 
 export default {
   props: {
@@ -25,6 +27,7 @@ export default {
     SafeAreaView,
     FloatingDropdown,
     Header,
+    Animatable
   },
 
   data: () => ({
@@ -78,7 +81,7 @@ export default {
     }
   },
 
-  async created() {
+  created() {
     store.commit('setTasks')
   },
 }
@@ -131,8 +134,8 @@ export default {
     <bottom-sheet
       :visible="sheetVisible"
       :closeSheet="() => {
-        showFab = !showFab
         sheetVisible = false
+        $refs.btnRef.slideInUp(300)
       }"
     />
 
@@ -142,19 +145,18 @@ export default {
       :style="{ height: '26%' }"
     />
 
-    <view :style="{ position: 'absolute', bottom: 20, right: 20 }">
-      <mb-fab
-        animated
-        :visible="showFab"
-        backgroundColor="#4385f5"
-        icon="add"
-        :style="{ elevation: 2 }"
+    <animatable:view v-if="showFab" ref="btnRef" class="floating-btn-container">
+      <ripple 
+        :rippleContainerBorderRadius="50"
+        class="floating-btn"
         :onPress="() => {
-          showFab = !showFab
+          $refs.btnRef.slideOutDown(300)
           sheetVisible = !sheetVisible
         }"
-      />
-    </view>
+      >
+        <icon name="plus" :size="30" :style="{ color: '#fff' }" />
+      </ripple>
+    </animatable:view>
   </SafeAreaView>
 </template>
 
@@ -184,5 +186,21 @@ export default {
   font-size: 23;
   font-family: balooBhai2Medium;
   letter-spacing: 0.6;
+}
+
+.floating-btn-container {
+  position: absolute;
+  bottom: 20;
+  right: 20;
+}
+
+.floating-btn {
+  width: 55;
+  height: 55;
+  border-radius: 50;
+  background-color: #4385f5;
+  align-items: center;
+  justify-content: center;
+  elevation: 2;
 }
 </style>

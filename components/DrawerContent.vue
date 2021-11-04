@@ -10,7 +10,6 @@ export default {
   },
 
   data: () => ({
-    // selectIndex: 0,
     routes: [
       { label: 'Home', icon: 'home', route: 'HomeScreen' },
       { label: 'Profile', icon: 'user-alt', route: 'ProfileScreen' },
@@ -87,9 +86,8 @@ export default {
           class="drawer-section-item"
           :onPress="() => {
             navigation.navigate(item.route)
-            // selectIndex = index
             setIndex(index)
-          }"  
+          }"
           :style="[{ 
             backgroundColor: selectIndex == index ? '#d2e7fa' : '#f7f6ff',
           }]"

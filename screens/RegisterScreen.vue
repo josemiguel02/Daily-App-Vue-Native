@@ -4,6 +4,7 @@ import { registerUser } from '../services/auth_actions.js'
 import { ToastAndroid } from 'react-native'
 import { validateEmail } from '../utils/validate_email'
 import * as Animatable from 'react-native-animatable'
+import Snackbar from 'react-native-snackbar'
 
 export default {
   data: () => ({
@@ -124,7 +125,16 @@ export default {
         )
 
         if (!statusResponse) {
-          ToastAndroid.show(error, ToastAndroid.SHORT, ToastAndroid.CENTER)
+          Snackbar.show({
+            text: error,
+            duration: Snackbar.LENGTH_LONG,
+            backgroundColor: 'red',
+            fontFamily: 'BalooBhai2-Medium',
+            action: {
+              text: 'UNDO',
+              textColor: '#fff'
+            }
+          })
           this.loadingBtn = false
           return
         }
@@ -135,11 +145,16 @@ export default {
           password: '',
         }
 
-        ToastAndroid.show(
-          'User Register successfuly',
-          ToastAndroid.SHORT,
-          ToastAndroid.CENTER
-        )
+        Snackbar.show({
+          text: 'User Register successfuly',
+          duration: Snackbar.LENGTH_LONG,
+          backgroundColor: '#28ca1a',
+          fontFamily: 'BalooBhai2-Medium',
+          action: {
+            text: 'UNDO',
+            textColor: '#fff'
+          }
+        })
         this.loadingBtn = false
       }
     },
@@ -313,6 +328,7 @@ export default {
 .validation-container {
   padding-horizontal: 10;
   margin-top: 5;
+  flex-wrap: wrap;
 }
 
 .validation-text {

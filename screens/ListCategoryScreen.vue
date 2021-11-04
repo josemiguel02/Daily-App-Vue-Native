@@ -6,6 +6,7 @@ import TaskItem from '../components/TaskItem.vue'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import FloatingInput from '../components/FloatingInput.vue'
 import { BackHandler, RefreshControl } from 'react-native'
+import * as Animatable from 'react-native-animatable'
 
 export default {
   props: {
@@ -25,6 +26,7 @@ export default {
     TaskItem,
     Icon,
     FloatingInput,
+    Animatable
   },
 
   computed: {
@@ -64,9 +66,8 @@ export default {
 
   created() {
     BackHandler.addEventListener('hardwareBackPress', () => {
-      this.navigation.navigate('HomeScreen')
+      this.navigation.replace('HomeScreen')
       store.commit('changeIndex', 0)
-      return true
     })
   },
 }
@@ -137,25 +138,25 @@ export default {
     <floating-input
       :visible="showInput"
       :closeSheet="() => {
-        showFab = !showFab
         showInput = false
+        $refs.btnRef.slideInUp(300)
       }"
       :itemColor="route.params.color"
     />
 
-    <view :style="{ position: 'absolute', bottom: 20, right: 20 }">
-      <mb-fab
-        animated
-        :visible="showFab"
+    <animatable:view v-if="showFab" ref="btnRef" class="floating-btn-container">
+      <ripple 
+        :rippleContainerBorderRadius="50"
+        class="floating-btn"
+        :style="{ backgroundColor: route.params.color }"
         :onPress="() => {
-          showFab = !showFab
+          $refs.btnRef.slideOutDown(300)
           showInput = !showInput
         }"
-        :backgroundColor="route.params.color"
-        icon="add"
-        :style="{ elevation: 2 }"
-      />
-    </view>
+      >
+        <icon name="plus" :size="30" :style="{ color: '#fff' }" />
+      </ripple>
+    </animatable:view>
   </safe-area-view>
 </template>
 
@@ -222,5 +223,21 @@ export default {
 .task-container {
   padding-horizontal: 20;
   margin-top: 18;
+}
+
+.floating-btn-container {
+  position: absolute;
+  bottom: 20;
+  right: 20;
+}
+
+.floating-btn {
+  width: 55;
+  height: 55;
+  border-radius: 50;
+  align-items: center;
+  justify-content: center;
+  background-color: #28ca1a;
+  elevation: 2;
 }
 </style>

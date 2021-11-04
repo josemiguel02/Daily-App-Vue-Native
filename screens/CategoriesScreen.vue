@@ -32,9 +32,8 @@ export default {
 
   created() {
     BackHandler.addEventListener('hardwareBackPress', () => {
-      this.navigation.navigate('HomeScreen')
+      this.navigation.replace('HomeScreen')
       store.commit('changeIndex', 0)
-      return true
     })
   },
 }

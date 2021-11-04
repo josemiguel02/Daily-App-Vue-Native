@@ -12,12 +12,12 @@ export default {
   },
   
   components: { 
-    Swipeable, 
-    Icon,
+    Swipeable,
+    Icon
   },
 
   data: () => ({
-    width: (Dimensions.get('window').width * 80) / 100,
+    width: (Dimensions.get('window').width * 64) / 100
   }),
 
   methods: {
@@ -45,7 +45,7 @@ export default {
     editAction(progress, dragX) {
       const scale = dragX.interpolate({
         inputRange: [0, 50],
-        outputRange: [0, 1],
+        outputRange: [0, 1]
       })
 
       return (
@@ -59,7 +59,7 @@ export default {
             marginRight: -10,
             marginTop: 2,
             borderTopLeftRadius: 15,
-            borderBottomLeftRadius: 15,
+            borderBottomLeftRadius: 15
           }}
         >
           <Animated.View style={{transform: [{ scale }]}}>
@@ -72,7 +72,7 @@ export default {
     deleteAction(progress, dragX) {
       const scale = dragX.interpolate({
         inputRange: [0, 80],
-        outputRange: [1, 0],
+        outputRange: [1, 0]
       })
 
       return (
@@ -86,7 +86,7 @@ export default {
             marginLeft: -10,
             marginTop: 2,
             borderTopRightRadius: 15,
-            borderBottomRightRadius: 15,
+            borderBottomRightRadius: 15
           }}
         >
           <Animated.View style={{transform: [{ scale }]}}>
@@ -100,12 +100,12 @@ export default {
       const { id, done } = item
       store.commit('makeDone', {
         id,
-        itsDone: !done,
+        itsDone: !done
       })
 
       this.closeSwipe()
     },
-  },
+  }
 }
 </script>
 
@@ -127,14 +127,14 @@ export default {
             class="square-check"
             :onPress="() => makeDone(item)"
             :style="[{
-              backgroundColor: item.done ? item.color : '#d9d9da',
+              backgroundColor: item.done ? item.color : '#d9d9da'
             }]"
           >
             <icon v-if="item.done" name="check" :size="18" color="#fff" />
           </touchableOpacity>
 
           <text
-            :style="{ maxWidth: '80%' }"
+            :style="{ maxWidth: width }"
             :class="[item.done ? 'task-done' : 'item-text']"
             :numberOfLines="1"
           >
@@ -164,6 +164,7 @@ export default {
 .item-left {
   flex-direction: row;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
 .square-check {

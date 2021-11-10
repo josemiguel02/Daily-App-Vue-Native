@@ -27,7 +27,8 @@ export const SplashScreen = () => {
           marginTop: 22,
           fontSize: 30,
           fontFamily: 'balooBhai2SemiBold',
-          letterSpacing: 1.5
+          letterSpacing: 1.5,
+          color: '#424242'
         }}
         >
           JS.Do App!

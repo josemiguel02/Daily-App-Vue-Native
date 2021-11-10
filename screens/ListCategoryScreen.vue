@@ -5,7 +5,7 @@ import store from '../store'
 import TaskItem from '../components/TaskItem.vue'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import FloatingInput from '../components/FloatingInput.vue'
-import { BackHandler, RefreshControl } from 'react-native'
+import { RefreshControl } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 
 export default {
@@ -33,7 +33,6 @@ export default {
     tasksForCategory: () => store.state.tasksForCategory,
     toggleDropdown: () => store.state.toggleDropdown,
     loading: () => store.state.loadingTaskCateg,
-    emptyTask: () => store.state.emptyTaskCateg
   },
 
   methods: {
@@ -62,14 +61,7 @@ export default {
         />
       )
     }
-  },
-
-  created() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.navigation.replace('HomeScreen')
-      store.commit('changeIndex', 0)
-    })
-  },
+  }
 }
 </script>
 

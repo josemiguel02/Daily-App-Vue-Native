@@ -3,7 +3,6 @@ import store from '../store'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import DialogCategory from '../components/DialogCategory.vue'
-import { BackHandler } from 'react-native'
 
 export default {
   props: {
@@ -31,11 +30,10 @@ export default {
   },
 
   created() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.navigation.replace('HomeScreen')
-      store.commit('changeIndex', 0)
+    this.navigation.addListener('focus', () => {
+      store.commit('changeIndex', this.navigation.getState().index)
     })
-  },
+  }
 }
 </script>
 

@@ -12,7 +12,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import FloatingDropdown from '../components/FloatingDropdown.vue'
 import * as Animatable from 'react-native-animatable'
 
-
 export default {
   props: {
     navigation: Object,
@@ -76,13 +75,16 @@ export default {
 
     handlerScroll({ nativeEvent }) {
       const { contentOffset } = nativeEvent
-      let { y } = contentOffset
+      const { y } = contentOffset
       this.elevation = y > 0
     }
   },
 
   created() {
     store.commit('setTasks')
+    this.navigation.addListener('focus', () => {
+      store.commit('changeIndex', this.navigation.getState().index)
+    })
   },
 }
 </script>
@@ -117,7 +119,7 @@ export default {
 
         <view class="tasks-empty" v-if="!getTask.length && !isLoading">
           <icon name="check-circle" :size="80" :style="{ color: '#17E179' }" />
-          <text class="tasks-empty_text"> You don't have new tasks </text>
+          <text class="tasks-empty_text">You don't have new tasks</text>
         </view>
 
         <view v-if="getTask.length">
@@ -146,7 +148,7 @@ export default {
     />
 
     <animatable:view v-if="showFab" ref="btnRef" class="floating-btn-container">
-      <ripple 
+      <ripple
         :rippleContainerBorderRadius="50"
         class="floating-btn"
         :onPress="() => {

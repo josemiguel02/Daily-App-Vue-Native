@@ -2,6 +2,8 @@
 import store from '../store'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { StackActions } from '@react-navigation/native'
+import { BackHandler } from 'react-native'
 
 export default {
   props: {

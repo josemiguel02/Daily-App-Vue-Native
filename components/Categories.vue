@@ -62,7 +62,7 @@ export default {
           >
             <icon name="plus" :size="24" :style="{ color: '#4385f5' }" />
           </ripple>
-          <text :style="{ marginTop: 12, fontFamily: 'balooBhai2' }">New category</text>
+          <text :style="{ marginTop: 12, fontFamily: 'balooBhai2', color: '#424242' }">New category</text>
         </view>
       </view>
     </scroll-view>

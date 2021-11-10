@@ -55,7 +55,6 @@ export default {
             class="user-img-ripple"
             :rippleContainerBorderRadius="50"
             :onPress="() => {
-              // selectIndex = 1
               setIndex(1)
               navigation.navigate('ProfileScreen')
             }">
@@ -73,8 +72,8 @@ export default {
             />
           </ripple>
         </view>
-        <text class="user-name" :numberOfLines="1"> {{ user.name }} </text>
-        <text class="user-email"> {{ user.email }} </text>
+        <text class="user-name" :numberOfLines="1">{{ user.name }}</text>
+        <text class="user-email">{{ user.email }}</text>
       </view>
       
       <mb-divider :style="{ borderWidth: 0.5, borderColor: '#bbb', marginTop: 15 }" />

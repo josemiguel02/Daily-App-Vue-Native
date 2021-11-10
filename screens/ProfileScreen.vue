@@ -1,7 +1,5 @@
 <script>
 import React from 'react'
-import { BackHandler } from 'react-native'
-import { CommonActions } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import MaterialCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import F5Icon from 'react-native-vector-icons/FontAwesome5'
@@ -18,6 +16,7 @@ import DialogEditProfile from '../components/DialogEditProfile.vue'
 import { logoutSession } from '../services/auth_persistent'
 import TextAvatar from 'react-native-text-avatar'
 import DeleteAccount from '../components/DeleteAccount.vue'
+import About from '../components/About.vue'
 
 export default {
   props: {
@@ -33,7 +32,8 @@ export default {
     TextAvatar,
     F5Icon,
     MIcon,
-    DeleteAccount
+    DeleteAccount,
+    About
   },
 
   data: () => ({
@@ -43,16 +43,15 @@ export default {
       avatar: null,
       phone: '',
     },
-
     btnLoading: false,
     dialogVisible: false,
     modalPicker: false,
     progressBar: false,
     modalDeleteAccount: false,
+    showAbout: false,
   }),
 
   computed: {
-    tasks: () => store.state.tasks,
     user: () => store.state.users,
     totalTasK: () => store.state.totalTasK,
     doneTask: () => store.state.doneTask,
@@ -125,9 +124,8 @@ export default {
 
   created() {
     store.commit('getUserDataOfFireStore')
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.navigation.replace('HomeScreen')
-      store.commit('changeIndex', 0)
+    this.navigation.addListener('focus', () => {
+      store.commit('changeIndex', this.navigation.getState().index)
     })
   }
 }
@@ -173,11 +171,9 @@ export default {
           <image
             v-else
             class="profile-img"
-            :source="
-              !userUpdate.avatar
-                ? { uri: user.photo }
-                : { uri: userUpdate.avatar }
-            "
+            :source="!userUpdate.avatar
+            ? { uri: user.photo }
+            : { uri: userUpdate.avatar }"
           />
         </view>
 
@@ -275,26 +271,30 @@ export default {
           <text class="listview-item_text" :numberOfLines="1"> Logout </text>
         </ripple>
 
-        <ripple class="listview-item" :rippleContainerBorderRadius="20">
+        <ripple 
+          class="listview-item" 
+          :rippleContainerBorderRadius="20"
+          :onPress="() => showAbout = true"
+        >
           <view class="icon-container">
             <f5-icon name="info-circle" :size="20" color="#4385f5" />
           </view>
           <text class="listview-item_text" :numberOfLines="1">
-            Information to App
+            About
           </text>
         </ripple>
 
         <ripple
           class="listview-item"
-          :rippleContainerBorderRadius="20"
-          rippleColor="#ef4c4c"
-          :style="{ borderWidth: 0.5, borderColor: '#ef4c4c' }"
+          :rippleContainerBorderRadius="20"          
           :onPress="() => (modalDeleteAccount = !modalDeleteAccount)"
         >
           <view class="icon-container">
             <f5-icon name="trash" :size="20" color="#ef4c4c" />
           </view>
-          <text class="listview-item_text">Delete Account</text>
+          <text class="listview-item_text"
+            :style="{ color: '#ef4c4c' }"
+          >Delete Account</text>
         </ripple>
       </view>
     </scroll-view>
@@ -351,6 +351,11 @@ export default {
       :visible="modalDeleteAccount"
       :closeDialog="() => (modalDeleteAccount = false)"
       :doLogout="doLogout"
+    />
+
+    <about
+      :visible="showAbout"
+      :closeDialog="() => (showAbout = false)"
     />
   </SafeAreaView>
 </template>
@@ -476,8 +481,7 @@ export default {
   padding: 15;
   border-radius: 20;
   margin-bottom: 14;
-  border-width: 0.5;
-  border-color: #c7c7c7c7;
+  elevation: 0.3;
 }
 
 .icon-container {

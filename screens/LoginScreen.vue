@@ -154,7 +154,7 @@ export default {
             borderColor: emailErrors.show ? 'red' : ''
           }]"
         >
-          <icon name="at" :style="{ marginRight: 10 }" :size="15" />
+          <icon name="at" :style="{ marginRight: 10, color: '#424242' }" :size="15" />
           <text-input
             :defaultValue="email"
             :onChangeText="input => (email = input)"
@@ -184,7 +184,7 @@ export default {
             borderColor: passwordErrors.show ? 'red' : null
           }]"
         >
-          <icon name="lock" :style="{ marginRight: 10 }" :size="15" />
+          <icon name="lock" :style="{ marginRight: 10, color: '#424242' }" :size="15" />
           <text-input
             :defaultValue="password"
             :onChangeText="input => (password = input)"
@@ -198,7 +198,9 @@ export default {
             :rippleContainerBorderRadius="20"
             class="ripple"
           >
-            <icon :name="[showPassword ? 'eye' : 'eye-slash']" :size="15" />
+            <icon :name="[showPassword ? 'eye' : 'eye-slash']" :size="15"
+              :style="{ color: '#424242' }"  
+            />
           </ripple>
         </view>
 
@@ -251,6 +253,7 @@ export default {
                 marginLeft: 10,
                 fontFamily: 'balooBhai2SemiBold',
                 letterSpacing: 0.6,
+                color: '#424242'
               }"
             >
               Continue with Google

@@ -177,7 +177,7 @@ export default {
               borderColor: nameErrors.show ? 'red' : null,
             }]"
           >
-            <icon name="user-alt" :style="{ marginRight: 10 }" :size="15" />
+            <icon name="user-alt" :style="{ marginRight: 10, color: '#424242' }" :size="15" />
             <text-input
               :defaultValue="newUser.name"
               :onChangeText="input => {
@@ -208,7 +208,7 @@ export default {
               borderColor: emailErrors.show ? 'red' : null,
             }]"
           >
-            <icon name="at" :style="{ marginRight: 10 }" :size="15" />
+            <icon name="at" :style="{ marginRight: 10, color: '#424242' }" :size="15" />
             <text-input
               :defaultValue="newUser.email"
               :onChangeText="input => {
@@ -241,7 +241,7 @@ export default {
               borderColor: passwordErrors.show ? 'red' : null,
             }]"
           >
-            <icon name="lock" :style="{ marginRight: 10 }" :size="15" />
+            <icon name="lock" :style="{ marginRight: 10, color: '#424242' }" :size="15" />
             <text-input
               :defaultValue="newUser.password"
               :onChangeText="input => {
@@ -258,7 +258,9 @@ export default {
               :rippleContainerBorderRadius="20"
               class="ripple"
             >
-              <icon :name="[showPassword ? 'eye' : 'eye-slash']" :size="15" />
+              <icon :name="[showPassword ? 'eye' : 'eye-slash']" :size="15" 
+                :style="{ color: '#424242' }"
+              />
             </ripple>
           </view>
 

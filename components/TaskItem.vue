@@ -159,6 +159,7 @@ export default {
   height: 52;
   border-width: 0.2;
   border-color: #bbbbbb3d;
+  elevation: 0.3;
 }
 
 .item-left {

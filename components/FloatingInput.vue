@@ -60,7 +60,7 @@ export default {
   <modal
     :isOpen="visible"
     :onClosed="closeSheet"
-    class="modal"
+    class="container"
     position="bottom"
     :animationDuration="200"
     :backdropOpacity="0.3"
@@ -73,7 +73,7 @@ export default {
         placeholder="Write new taks for today..."
         returnKeyType="next"
         :onSubmitEditing="_addTask"
-        :style="{ fontFamily: 'balooBhai2', flex: 1 }"
+        :style="{ fontFamily: 'balooBhai2', flex: 1, paddingHorizontal: 10 }"
       />
       <ripple 
         :onPress="_addTask"
@@ -88,7 +88,7 @@ export default {
 </template>
 
 <style>
-.modal {
+.container {
   background-color: #f7f6ff;
   height: 50;
   top: -20;
@@ -96,17 +96,20 @@ export default {
   border-radius: 20;
   align-items: center;
   justify-content: center;
+  padding-horizontal: 5;
 }
 
 .form-container {
-  width: 90%;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  border-radius: 20;
 }
 
 .icon-container {
   width: 40;
   height: 40;
+  border-radius: 20;
   align-items: center;
   justify-content: center;
 }

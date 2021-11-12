@@ -26,7 +26,7 @@ export default {
   <modal
     :isOpen="visible"
     :onClosed="closeSheet"
-    class="modal"
+    class="container"
     position="bottom"
     :animationDuration="200"
     :backdropOpacity="0"
@@ -38,12 +38,9 @@ export default {
       <text class="categories-empty_text">You don't have new categories</text>
     </view>
 
-    <scroll-view
-      :showsVerticalScrollIndicator="true"
-      :style="{ marginBottom: 5 }"
-    >
+    <scroll-view :style="{ marginBottom: 5, marginTop: 15 }">
       <ripple
-        :rippleContainerBorderRadius="8"
+        :rippleContainerBorderRadius="15"
         v-for="(item, index) in categories"
         :key="index"
         :onPress="() => handlerSelect(item)"
@@ -52,7 +49,7 @@ export default {
         <view class="dropdown-item">
           <view :style="{ borderColor: item.color }" class="circle" />
           <text
-            :style="{ maxWidth: '90%' }"
+            :style="{ maxWidth: '92%' }"
             :numberOfLines="1"
             class="dropdown-item_text"
           >
@@ -65,13 +62,11 @@ export default {
 </template>
 
 <style>
-.modal {
+.container {
   background-color: #f7f6ff;
   border-radius: 15;
   justify-content: center;
-  padding: 12;
   width: 95%;
-  margin-bottom: 0;
 }
 
 .categories-empty {
@@ -89,15 +84,14 @@ export default {
 
 .dropdown-container {
   margin-bottom: 10;
+  margin-horizontal: 14;
+  border-radius: 15;
 }
 
 .dropdown-item {
   flex-direction: row;
   align-items: center;
-  margin: 8;
-  border-radius: 15;
-  padding: 8;
-  padding-horizontal: 15;
+  padding: 6;
 }
 
 .circle {
@@ -105,7 +99,7 @@ export default {
   height: 12;
   border-width: 2.7;
   border-radius: 5;
-  margin-right: 15;
+  margin-right: 14;
 }
 
 .dropdown-item_text {

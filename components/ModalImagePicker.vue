@@ -1,5 +1,4 @@
 <script>
-import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Dimensions } from 'react-native'
 
 export default {
@@ -7,11 +6,9 @@ export default {
     visible: Boolean,
     closeDialog: Function,
   },
-  components: { Icon },
 
   data: () => ({
-    width: (Dimensions.get('window').width * 80) / 100,
-    height: (Dimensions.get('window').height * 20) / 100,
+    width: (Dimensions.get('window').width * 80) / 100
   }),
 }
 </script>

@@ -2,8 +2,6 @@
 import store from '../store'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { StackActions } from '@react-navigation/native'
-import { BackHandler } from 'react-native'
 
 export default {
   props: {
@@ -22,9 +20,8 @@ export default {
 
   computed: {
     item() {
-      const { id, title, done, userID, description, id_category } =
-        this.route.params
-      return { id, title, done, userID, description, id_category }
+      const { id, title, description } = this.route.params
+      return { id, title, description }
     },
   },
 

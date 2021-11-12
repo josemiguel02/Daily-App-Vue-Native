@@ -11,10 +11,7 @@ export default {
     navigation: Object,
   },
   
-  components: { 
-    Swipeable,
-    Icon
-  },
+  components: { Swipeable, Icon },
 
   data: () => ({
     width: (Dimensions.get('window').width * 64) / 100

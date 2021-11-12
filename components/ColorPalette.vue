@@ -10,8 +10,7 @@ export default {
   components: { Icon },
 
   data: () => ({
-    width: (Dimensions.get('window').width * 90) / 100,
-    height: (Dimensions.get('window').height * 30) / 100,
+    width: (Dimensions.get('window').width * 90) / 100
   }),
 }
 </script>

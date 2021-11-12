@@ -30,7 +30,6 @@ export default {
   },
 
   data: () => ({
-    myDrawer: null,
     sheetVisible: false,
     showFab: true,
     refreshing: false,

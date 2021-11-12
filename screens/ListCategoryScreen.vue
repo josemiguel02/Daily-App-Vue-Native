@@ -31,15 +31,10 @@ export default {
 
   computed: {
     tasksForCategory: () => store.state.tasksForCategory,
-    toggleDropdown: () => store.state.toggleDropdown,
     loading: () => store.state.loadingTaskCateg,
   },
 
   methods: {
-    closeDropdown() {
-      store.commit('switchToggleDropdown', false)
-    },
-
     onRefresh() {
       this.refreshing = true
       store.commit('getSingleTasksForCategory')

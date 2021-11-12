@@ -1,5 +1,4 @@
 <script>
-import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Dimensions, ToastAndroid } from 'react-native'
 import store from '../store'
 
@@ -8,17 +7,13 @@ export default {
     visible: Boolean,
     closeDialog: Function,
   },
-  components: { Icon },
 
   data: () => ({
     width: (Dimensions.get('window').width * 80) / 100,
-    height: (Dimensions.get('window').height * 30) / 100,
     updateData: {
       name: '',
       phone: '',
     },
-    showDialog: true,
-    btnDisabled: false,
     isFocused: false,
     isFocused2: false,
   }),
@@ -60,13 +55,11 @@ export default {
     :isOpen="visible"
     class="dialog"
     :animationDuration="200"
-    :onClosed="
-      () => {
-        closeDialog()
-        isFocused = false
-        isFocused2 = false
-      }
-    "
+    :onClosed="() => {
+      closeDialog()
+      isFocused = false
+      isFocused2 = false
+    }"
   >
     <view class="line" />
 
@@ -84,9 +77,7 @@ export default {
         placeholder="Name"
         :onFocus="() => (isFocused = true)"
         :onBlur="() => (isFocused = false)"
-        :style="[
-          { marginBottom: 20, borderColor: isFocused ? '#4385f5' : '#c7c7c7' },
-        ]"
+        :style="[{ marginBottom: 20, borderColor: isFocused ? '#4385f5' : '#c7c7c7' }]"
       />
 
       <text-input
@@ -97,11 +88,9 @@ export default {
         keyboardType="numeric"
         :onFocus="() => (isFocused2 = true)"
         :onBlur="() => (isFocused2 = false)"
-        :style="[
-          {
-            borderColor: isFocused2 ? '#4385f5' : '#c7c7c7',
-          },
-        ]"
+        :style="[{
+          borderColor: isFocused2 ? '#4385f5' : '#c7c7c7',
+        }]"
       />
       <view class="profile-form_submit">
         <mb-button

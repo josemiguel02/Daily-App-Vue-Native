@@ -48,13 +48,11 @@ export default {
 
 <style>
 .modal {
-  /* justify-content: center; */
   height: 140;
   width: 80%;
   border-radius: 20;
   padding: 12;
   background-color: #F7F6FF;
-  /* align-items: center; */
 }
 
 .line {

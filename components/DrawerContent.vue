@@ -58,7 +58,8 @@ export default {
               setIndex(1)
               navigation.navigate('ProfileScreen')
             }">
-            <text-avatar v-if="!user.photo"
+            <text-avatar
+              v-if="!user.photo"
               :size="75"
               backgroundColor="#4385f5"
               type="circle"
@@ -66,8 +67,9 @@ export default {
               {{ user.name }}
             </text-avatar>
 
-            <image class="user-img"
+            <image
               v-else
+              class="user-img"
               :source="{ uri: user.photo }"
             />
           </ripple>

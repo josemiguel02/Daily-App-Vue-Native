@@ -108,7 +108,6 @@ export default {
         </ripple>
       </view>
 
-
       <view class="add-category-container_horizontal"
         :style="{ marginTop: 16 }"
       >

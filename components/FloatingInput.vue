@@ -10,10 +10,8 @@ export default {
     closeSheet: Function,
     itemColor: String
   },
-
-  components: {
-    Icon,
-  },
+  
+  components: { Icon },
 
   data: () => ({
     newTask: '',

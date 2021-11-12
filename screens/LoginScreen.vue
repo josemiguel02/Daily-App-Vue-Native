@@ -3,7 +3,6 @@ import store from '../store'
 import { loginEmailPassword } from '../services/auth_actions.js'
 import { setCredentials } from '../services/auth_persistent'
 import { loginWithGoogle } from '../services/auth_google'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { ToastAndroid } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { validateEmail } from '../utils/validate_email'
@@ -20,23 +19,17 @@ export default {
     password: '',
     showPassword: true,
     loadingBtn: false,
-
     emailErrors: {
       show: false,
       message: '',
     },
-
     passwordErrors: {
       show: false,
       message: '',
     },
   }),
 
-  components: {
-    Icon,
-    SafeAreaView,
-    Animatable,
-  },
+  components: { Icon, Animatable },
 
   watch: {
     email(val) {
@@ -105,7 +98,7 @@ export default {
           Snackbar.show({
             text: error,
             duration: Snackbar.LENGTH_LONG,
-            backgroundColor: 'red',
+            backgroundColor: '#ef4c4c',
             fontFamily: 'BalooBhai2-Medium',
             action: {
               text: 'UNDO',

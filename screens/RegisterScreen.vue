@@ -1,7 +1,6 @@
 <script>
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { registerUser } from '../services/auth_actions.js'
-import { ToastAndroid } from 'react-native'
 import { validateEmail } from '../utils/validate_email'
 import * as Animatable from 'react-native-animatable'
 import Snackbar from 'react-native-snackbar'
@@ -15,17 +14,14 @@ export default {
       password: '',
     },
     showPassword: true,
-
     nameErrors: {
       show: false,
       message: '',
     },
-
     emailErrors: {
       show: false,
       message: '',
     },
-
     passwordErrors: {
       show: false,
       message: '',
@@ -128,7 +124,7 @@ export default {
           Snackbar.show({
             text: error,
             duration: Snackbar.LENGTH_LONG,
-            backgroundColor: 'red',
+            backgroundColor: '#ef4c4c',
             fontFamily: 'BalooBhai2-Medium',
             action: {
               text: 'UNDO',
@@ -164,7 +160,6 @@ export default {
 
 <template>
   <view class="container">
-    <!-- Register View -->
     <view class="register-view">
       <view :style="{ padding: 30 }">
         <!-- Register Form View -->

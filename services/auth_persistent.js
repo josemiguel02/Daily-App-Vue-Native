@@ -41,11 +41,10 @@ export async function getUserDataLoggedIn () {
 
 // User Logout Session
 export async function logoutSession () {
-  const user = auth().currentUser
-  const userProvider = user.providerData[0].providerId
+  const { userData } = await getUserDataLoggedIn()
 
   try {
-    if (userProvider === 'google.com') {
+    if (userData.id) {
       await GoogleSignin.signOut()
     } else {
       await auth().signOut()

@@ -1,6 +1,6 @@
 import { dbCategories, dbUsers, firestore } from './firebase'
 import auth from '@react-native-firebase/auth'
-import { getCredentials, saveUserLogIn } from './auth_persistent'
+import { getCredentials, saveUserLogIn, getUserDataLoggedIn } from './auth_persistent'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
 
 // Register User
@@ -73,9 +73,9 @@ export async function deleteUser () {
 
   try {
     const user = getCurrentUser()
-    const userProvider = user.providerData[0].providerId
+    const { userData } = await getUserDataLoggedIn()
 
-    if (userProvider === 'google.com') {
+    if (userData.id) {
       const { idToken } = await GoogleSignin.signInSilently()
       const googleCredential = auth.GoogleAuthProvider.credential(idToken)
       await auth().signInWithCredential(googleCredential)

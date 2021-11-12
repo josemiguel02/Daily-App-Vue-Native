@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Dimensions } from 'react-native'
 import { deleteDataOfUser } from '../services/auth_data_delete'
 import { ToastAndroid } from 'react-native'
+import { logoutSession } from '../services/auth_persistent'
 
 export default {
   props: {
@@ -22,6 +23,7 @@ export default {
       this.btnLoading = true
       const { statusResponse, error } = await deleteUser()
       if (statusResponse) {
+        await logoutSession()
         this.doLogout()
         await AsyncStorage.clear()
         setTimeout(() => {

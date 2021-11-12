@@ -53,7 +53,6 @@ export default {
   },
 
   computed: {
-    categories: () => store.state.tasksCategory,
     toggleDropdown: () => store.state.toggleDropdown,
     selectCategory: () => store.state.selectCategory,
   }
@@ -94,7 +93,7 @@ export default {
           />
           <text class="dropdown-name" :numberOfLines="1">
             {{ !selectCategory.name_category 
-                ? 'No list'
+                ? 'Select a category...'
                 : selectCategory.name_category
             }}
           </text>

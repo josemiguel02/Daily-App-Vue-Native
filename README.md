@@ -1,5 +1,7 @@
 # Daily App Vue Native 💚🚀
 
+# ToDo App
+
 ## Project setup
 ```
 npm install

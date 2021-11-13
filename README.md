@@ -14,7 +14,7 @@ npm run start
 
 ### Compiles for android
 ```
-npm run android c
+npm run android with emulator
 ```
 
 ### Compiles and minifies for production

@@ -12,7 +12,7 @@ export default {
   methods: {
     getDateTime() {
       dayjs.extend(localizedFormat)
-      let date = dayjs().format('dddd, MMM D YYYY')
+      const date = dayjs().format('dddd, MMMM D, YYYY')
       this.dateTime = date
     },
 
@@ -70,7 +70,7 @@ export default {
   font-size: 22;
   color: #1d1d1d;
   font-family: balooBhai2Medium;
-  letter-spacing: 1.5;
+  letter-spacing: 1;
 }
 
 .header-datetime {
